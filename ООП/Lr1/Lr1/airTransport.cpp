@@ -5,14 +5,15 @@ using namespace std;
 
 int airTransport::Count = 0;
 
-int airTransport::get_count() {
+int airTransport::get_count() 
+{
 	return airTransport::Count;
 }
 
-airTransport::airTransport() {
+airTransport::airTransport() 
+{
 	if (airTransport::Count > airTransport::max_count_airTransport) {
-		cout << "Лимит по созданию объектов данного класса" << endl;
-		return;
+		throw exception("Лимит по созданию объектов данного класса");
 	}
 	Engine_power = 10;
 	Color_transport = color::Red;
@@ -23,10 +24,10 @@ airTransport::airTransport() {
 	airTransport::Count++;
 }
 
-airTransport::airTransport(int power, color colorTransport, const char* m, int capactity_transport) {
+airTransport::airTransport(int power, color colorTransport, const char* m, int capactity_transport) 
+{
 	if (airTransport::Count > airTransport::max_count_airTransport) {
-		cout << "Лимит по созданию объектов данного класса" << endl;
-		return;
+		throw exception("Лимит по созданию объектов данного класса");
 	}
 	Engine_power = power;
 	Color_transport = colorTransport;
@@ -35,41 +36,78 @@ airTransport::airTransport(int power, color colorTransport, const char* m, int c
 	Capacity = capactity_transport;
 }
 
-airTransport::~airTransport() {
+airTransport::~airTransport() 
+{
 	Count--;
 	cout << this->Model << " уничтожен" << endl;
-	delete[] Model;
+	delete this->Model;
 }
 
-int airTransport::get_engine_power() {
+airTransport::airTransport(const airTransport& transport)
+{
+	Engine_power = transport.Engine_power;
+	Color_transport = transport.Color_transport;
+	Model = transport.Model;
+	Capacity = transport.Capacity;
+}
+
+int airTransport::get_engine_power() 
+{
 	return Engine_power;
 }
 
-void airTransport::set_engine_power(int power) {
+void airTransport::set_engine_power(int power) 
+{
 	Engine_power = power;
 }
 
-int airTransport::get_capacity() {
+int airTransport::get_capacity() 
+{
 	return Capacity;
 }
 
-void airTransport::set_capacity(int capacityTranport) {
+void airTransport::set_capacity(int capacityTranport) 
+{
 	Capacity = capacityTranport;
 }
 
-char* airTransport::get_model() {
+char* airTransport::get_model() 
+{
 	return Model;
 }
 
-void airTransport::set_model(const char* m) {
+void airTransport::set_model(const char* m) 
+{
 	strcpy(Model, m);
 }
 
-color airTransport::get_color_transport() {
+color airTransport::get_color_transport() 
+{
 	return Color_transport;
 }
 
-void airTransport::set_color_transport(color colorTranport) {
+void airTransport::set_color_transport(color colorTranport) 
+{
 	Color_transport = colorTranport;
 }
 
+ostream& operator<<(ostream& out, const airTransport& transport) 
+{
+	out << "Engine power: " << transport.Engine_power << endl;
+	out << "Color: " << static_cast<int>(transport.Color_transport) << endl;
+	out << "Model: " << transport.Model << endl;
+	out << "Capacity: " << transport.Capacity << endl;
+	return out;
+}
+
+airTransport& airTransport::operator=(const airTransport& transport)
+{
+	if (&transport != this)
+	{
+		this->Engine_power = transport.Engine_power;
+		this->Capacity = transport.Capacity;
+		this->Color_transport = transport.Color_transport;
+		this->Model = transport.Model;
+	}
+	return *this;
+}

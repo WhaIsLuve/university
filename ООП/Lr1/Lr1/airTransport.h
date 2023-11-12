@@ -1,4 +1,5 @@
 #include "color.cpp"
+#include <iostream>
 #pragma once
 class airTransport
 {
@@ -12,7 +13,8 @@ class airTransport
 		static const int max_count_airTransport = 10; // максимальное кол-во созданных объектов класса airTransport
 		airTransport(); // конструктор по-умолчанию
 		airTransport(int power, color colorTranport, const char* m, int capactity_transport); // конструктор класса
-		~airTransport(); // деструктор класса
+		airTransport(const airTransport& transport); // копирующий контсруктор
+		~airTransport(); // деструктор классаефк
 
 		int get_engine_power(); // получить значение engine_power
 		void set_engine_power(int power); // задать значение engine_power
@@ -26,6 +28,10 @@ class airTransport
 		int get_capacity(); // получить значение capacity
 		void set_capacity(int capacityTranport); // задать значение capacity
 
-		int get_count(); // получить сколько создано объектов класса 
+		
+		int get_count(); // получить сколько создано объектов класса
+
+		friend std::ostream& operator<<(std::ostream& out, const airTransport& transport);
+		airTransport& operator=(const airTransport& transport);
 };
 

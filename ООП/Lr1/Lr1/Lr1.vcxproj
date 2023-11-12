@@ -21,10 +21,12 @@
   <ItemGroup>
     <ClCompile Include="airTransport.cpp" />
     <ClCompile Include="color.cpp" />
+    <ClCompile Include="List.cpp" />
     <ClCompile Include="source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="airTransport.h" />
+    <ClInclude Include="List.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

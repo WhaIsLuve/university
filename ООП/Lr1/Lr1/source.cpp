@@ -1,27 +1,24 @@
 #include "airTransport.h"
+#include "List.h"
 #include <iostream>
 
 using namespace std;
-
-
-int main() {
+int main() 
+{
 	setlocale(LC_ALL,"rus");
-	airTransport plane;
-	airTransport plae;
-	airTransport plne;
-	airTransport clane;
-	airTransport dne;
-	airTransport sne;
-	airTransport p;
-	airTransport pl;
-	airTransport plaxe;
-	airTransport plnre;
-	airTransport pwlne;
-	airTransport plan;
-	airTransport plane3;
-	airTransport plane2;
-	cout << plane.get_capacity() << endl;
-	airTransport helicopter(100, color::Black, "helicopter", 8);
-	cout << helicopter.get_capacity() << endl;
+	airTransport a;
+	airTransport x(500, color::White, "rocket", 20);
+	airTransport b(23, color::Black, "helicopter", 8);
+	List lst;
+	lst.add(a);
+	lst.add(x);
+	lst.add(b);
+
+	lst.show();
+
+	lst.sort_by_engine_power();
+
+	lst.show();
+
 	return 1;
 }
