@@ -86,6 +86,16 @@ void List::sort_by_engine_power()
 	}
 }
 
+int List::search(airTransport& transport)
+{
+	for (int i = 0; i < this->length(); i++)
+	{
+		if (this->operator[](i) == transport)
+			return i;
+	}
+	return -1;
+}
+
 airTransport& List::operator[](const int index)
 {
 	int counter = 0;

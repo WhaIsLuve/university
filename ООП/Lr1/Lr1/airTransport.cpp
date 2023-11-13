@@ -40,7 +40,7 @@ airTransport::~airTransport()
 {
 	Count--;
 	cout << this->Model << " уничтожен" << endl;
-	delete this->Model;
+	this->Model = nullptr;
 }
 
 airTransport::airTransport(const airTransport& transport)
@@ -110,4 +110,9 @@ airTransport& airTransport::operator=(const airTransport& transport)
 		this->Model = transport.Model;
 	}
 	return *this;
+}
+
+bool airTransport::operator==(const airTransport& transport)
+{
+	return this->Engine_power == transport.Engine_power && this->Capacity == transport.Capacity && this->Color_transport == transport.Color_transport && this->Model == transport.Model;
 }

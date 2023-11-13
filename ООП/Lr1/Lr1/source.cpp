@@ -13,12 +13,11 @@ int main()
 	lst.add(a);
 	lst.add(x);
 	lst.add(b);
-
 	lst.show();
+	
 
+	cout << lst.search(a) <<endl<<a.get_count() << endl;
 	lst.sort_by_engine_power();
-
 	lst.show();
-
 	return 1;
 }

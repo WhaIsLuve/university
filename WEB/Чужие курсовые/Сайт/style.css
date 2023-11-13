@@ -1,0 +1,213 @@
+/* CSS is how you can add style to your website, such as colors, fonts, and positioning of your
+   HTML content. To learn how to do something, just try searching Google for questions like
+   "how to change link color." */
+
+body {
+  background-color: grey;
+  color: black;
+  font-family: Verdana;
+  margin:0;
+  padding: 0;
+  min-height:100vh;
+}
+
+.background {
+  background-image: url(image/bg1.webp); 
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  backdrop-filter: blur(50px); // This be the blur
+}
+
+div {
+  font-family: 'Oswald', sans-serif;
+  color: black;
+  font-size: 20px;
+}
+
+header {
+  
+  background-color:	#4671D5;
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  color: black;
+  
+  width:100%;
+  
+}
+
+.header_logo {
+  font-family: 'Lobster', cursive;
+  font-size: 30px;
+  margin-left: 20px;
+  padding-top: 20px;
+  color:black;
+}
+
+.header_logo p{
+  
+  margin:0;
+}
+
+.header_link {
+  margin-right:50px;
+  
+}
+
+.header_link > ul{
+  list-style-type: none;
+  display: flex;
+  padding:0;
+  height: 45px;
+  
+}
+
+.header_link > ul li{
+  position: relative;
+  padding: 0;
+  margin-right: 10px;
+  border: 6px solid black;
+  justify-content: center;
+  background-color: white;
+  
+}
+
+.header_link li{
+  width: 250px;  
+  display: flex;
+  justify-content: center;
+}
+
+.header_link li a{
+  text-align: center;
+  min-width: 100%;
+  min-height: 100%;
+  font-family: 'Oswald', sans-serif;
+  text-decoration: none;
+  color: black;
+  font-size: 20px;
+  transition: all 0.3s ease;
+}
+
+.header_link li > a:hover{
+  color:white;
+  background-color:#3E94D1;
+  transition: all 0.3s ease;
+}
+
+.header_link li ul{
+  position: absolute;
+  top: 40px;
+  list-style-type: none;
+  padding:0;
+  display:none;
+}
+
+.header_link > ul li > ul li{
+  margin-top:5px;
+  border: 1px solid black;
+}
+
+.header_link > ul li > ul li a{
+  font-size: 15px;
+}
+
+.header_link li:hover > ul{
+  display:table;
+  
+}
+
+/* центральный контент */
+
+.center_content{
+  display: flex;
+  margin: 0;
+  width:100%;
+}
+
+.main_form {
+  
+  width: 85%;
+}
+
+.main_form_text{
+  min-height:63.744vh;
+  margin: 10px;
+  padding: 50px;
+  text-indent: 20px;
+  background-color:rgba(255,255,255,0.3);
+}
+
+.form_text_part {
+  text-indent: 0;
+}
+
+.news_form {
+  background-color: #8BA8DA;
+  width: 15%;
+}
+
+.dis_flex {
+  display:flex;
+}
+
+.con_between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.text_tittle {
+  font-size:40px;
+  font-weight:bold;
+  color: #9240D5;
+}
+
+table {
+  border-spacing: 0;
+  border: solid;
+}
+
+td {
+  border: 1px solid;
+  text-align: center;
+  padding: 10px;
+}
+
+
+
+/* подвал */
+
+footer {
+  background-color: #938bda;
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  min-height: 10vh;
+  
+  padding:10px;
+}
+
+.footer_logo {
+  font-family: 'Oswald', sans-serif;
+  font-size: 20px;
+}
+
+.topbutton {
+  
+  border:0;
+  
+  text-align:center;
+  padding:0;
+  position:fixed;
+  bottom:20px;
+  left:40%;
+  cursor:pointer;
+  color:#333;
+  font-family:verdana;
+  font-size:12px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -khtml-border-radius: 5px;
+}
+
