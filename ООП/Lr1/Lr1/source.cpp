@@ -16,10 +16,5 @@ int main()
 	lst.add(b);
 	lst.add(a);
 	lst.show();
-	
-
-	cout << lst.search(a) << endl << endl;
-	lst.sort_by_engine_power();
-	lst.show();
 	return 1;
 }
