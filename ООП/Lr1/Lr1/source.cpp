@@ -1,5 +1,7 @@
 #include "airTransport.h"
 #include "List.h"
+#include "List.cpp"
+
 #include <iostream>
 
 using namespace std;
@@ -9,14 +11,14 @@ int main()
 	airTransport a;
 	airTransport x(500, color::White, "rocket", 20);
 	airTransport b(23, color::Black, "helicopter", 8);
-	List lst;
-	lst.add(a);
+	List<airTransport> lst;
 	lst.add(x);
 	lst.add(b);
+	lst.add(a);
 	lst.show();
 	
 
-	cout << lst.search(a) <<endl<<a.get_count() << endl;
+	cout << lst.search(a) << endl << endl;
 	lst.sort_by_engine_power();
 	lst.show();
 	return 1;

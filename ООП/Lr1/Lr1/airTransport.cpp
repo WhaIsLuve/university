@@ -116,3 +116,23 @@ bool airTransport::operator==(const airTransport& transport)
 {
 	return this->Engine_power == transport.Engine_power && this->Capacity == transport.Capacity && this->Color_transport == transport.Color_transport && this->Model == transport.Model;
 }
+
+bool airTransport::operator>(const airTransport& transport)
+{
+	return this->Engine_power > transport.Engine_power;
+}
+
+bool airTransport::operator>=(const airTransport& transport)
+{
+	return this->Engine_power >= transport.Engine_power;
+}
+
+bool airTransport::operator<(const airTransport& transport)
+{
+	return this->Engine_power < transport.Engine_power;
+}
+
+bool airTransport::operator<=(const airTransport& transport)
+{
+	return this->Engine_power <= transport.Engine_power;
+}

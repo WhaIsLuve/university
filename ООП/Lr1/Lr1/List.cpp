@@ -3,58 +3,62 @@
 
 using namespace std;
 
-
-List::List() 
+template <typename T>
+List<T>::List() 
 {
 	size = 0;
 	head = nullptr;
 }
 
-List::~List()
+template <typename T>
+List<T>::~List()
 {
 	clear();
 }
 
-void List::add(const airTransport& transport)
+template <typename T>
+void List<T>::add(const T& value)
 {
   size++;
   if (head == nullptr) 
   {
-    head = new Node;
-    head->data = transport;
+    head = new Node<T>;
+    head->data = value;
     head->next = nullptr;
   }
   else {
-    Node *current = this->head;
+    Node<T> *current = this->head;
     while (current->next != nullptr)
     {
       current = current->next;
     }
-    current->next = new Node;
-    current->next->data = transport;
+    current->next = new Node<T>;
+    current->next->data = value;
     current->next->next = nullptr;
   }
 }
 
-
-void List::pop_front()
+template <typename T>
+void List<T>::pop_front()
 {
 	if (head == nullptr) {
 		// обработка ошибки или возврат из метода
 		return;
 	}
-	Node* temp = head;
+	Node<T>* temp = head;
 	head = head->next;
 	delete temp;
 	size--;
 }
 
-int List::length()
+template <typename T>
+int List<T>::length()
 {
 	return size;
 }
 
-void List::clear()
+template <typename T>
+void List<T>::clear()
 {
 	while (size) 
 	{
@@ -62,20 +66,22 @@ void List::clear()
 	}
 }
 
-void List::show()
+template <typename T>
+void List<T>::show()
 {
 	for (int i = 0; i < this->size; i++) {
 		cout << this->operator[](i) << endl << endl;
 	}
 }
 
-void List::sort_by_engine_power()
+template <typename T>
+void List<T>::sort_by_engine_power()
 {
 	for (int i = 0; i < this->length(); i++) 
 	{
 		bool flag = true;
 		for (int j = 0; j < this->length() - (i + 1); j++) {
-			if (this->operator[](j).get_engine_power() > this->operator[](j + 1).get_engine_power()) {
+			if (this->operator[](j) > this->operator[](j + 1)) {
 				flag = false;
 				std::swap(this->operator[](j), this->operator[](j + 1));
 			}
@@ -86,20 +92,22 @@ void List::sort_by_engine_power()
 	}
 }
 
-int List::search(airTransport& transport)
+template <typename T>
+int List<T>::search(T value)
 {
 	for (int i = 0; i < this->length(); i++)
 	{
-		if (this->operator[](i) == transport)
+		if (this->operator[](i) == value)
 			return i;
 	}
 	return -1;
 }
 
-airTransport& List::operator[](const int index)
+template <typename T>
+T& List<T>::operator[](const int index)
 {
 	int counter = 0;
-	Node* current = this->head;
+	Node<T>* current = this->head;
 	while (current->next != nullptr) 
 	{
 		if (counter == index)

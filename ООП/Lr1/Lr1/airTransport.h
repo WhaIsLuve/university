@@ -34,5 +34,9 @@ class airTransport
 		friend std::ostream& operator<<(std::ostream& out, const airTransport& transport);
 		airTransport& operator=(const airTransport& transport);
 		bool operator==(const airTransport& transport);
+		bool operator>(const airTransport& transport);
+		bool operator>=(const airTransport& transport);
+		bool operator<(const airTransport& transport);
+		bool operator<=(const airTransport& transport);
 };
 
