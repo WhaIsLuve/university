@@ -3,20 +3,20 @@
 
 using namespace std;
 
-template <typename T>
+template <class T>
 List<T>::List() 
 {
 	size = 0;
 	head = nullptr;
 }
 
-template <typename T>
+template <class T>
 List<T>::~List()
 {
 	clear();
 }
 
-template <typename T>
+template <class T>
 void List<T>::add(const T& value)
 {
   size++;
@@ -38,7 +38,7 @@ void List<T>::add(const T& value)
   }
 }
 
-template <typename T>
+template <class T>
 void List<T>::pop_front()
 {
 	if (head == nullptr) {
@@ -51,13 +51,13 @@ void List<T>::pop_front()
 	size--;
 }
 
-template <typename T>
+template <class T>
 int List<T>::length()
 {
 	return size;
 }
 
-template <typename T>
+template <class T>
 void List<T>::clear()
 {
 	while (size) 
@@ -66,7 +66,7 @@ void List<T>::clear()
 	}
 }
 
-template <typename T>
+template <class T>
 void List<T>::show()
 {
 	for (int i = 0; i < this->size; i++) {
@@ -74,7 +74,7 @@ void List<T>::show()
 	}
 }
 
-template <typename T>
+template <class T>
 void List<T>::sort_by_engine_power()
 {
 	for (int i = 0; i < this->length(); i++) 
@@ -92,7 +92,7 @@ void List<T>::sort_by_engine_power()
 	}
 }
 
-template <typename T>
+template <class T>
 int List<T>::search(T value)
 {
 	for (int i = 0; i < this->length(); i++)
@@ -103,7 +103,7 @@ int List<T>::search(T value)
 	return -1;
 }
 
-template <typename T>
+template <class T>
 T& List<T>::operator[](const int index)
 {
 	int counter = 0;

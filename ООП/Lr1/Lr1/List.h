@@ -2,12 +2,12 @@
 #include "airTransport.h"
 
 
-template <typename T>
+template <class T>
 class List // Линейный односвязный список
 {
 	private:
 		#pragma region Node
-		template <typename T>
+		template <class T>
 		struct Node // Узел, в котором хранятся данные и указатель на следующий элемент, если он есть
 		{
 			T data;
