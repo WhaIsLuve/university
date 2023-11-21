@@ -100,6 +100,11 @@ ostream& operator<<(ostream& out, const airTransport& transport)
 	return out;
 }
 
+bool operator!=(airTransport& transport, airTransport& transport2)
+{
+	return !(transport == transport2);
+}
+
 airTransport& airTransport::operator=(const airTransport& transport)
 {
 	if (&transport != this)

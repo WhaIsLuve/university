@@ -12,9 +12,10 @@ int main()
 	airTransport x(500, color::White, "rocket", 20);
 	airTransport b(23, color::Black, "helicopter", 8);
 	List<airTransport> lst;
+	
 	lst.add(x);
 	lst.add(b);
 	lst.add(a);
-	lst.show();
+	lst.show(); // Сделать шаблонную дружественную функцию.
 	return 1;
 }

@@ -38,5 +38,6 @@ class airTransport
 		bool operator>=(const airTransport& transport);
 		bool operator<(const airTransport& transport);
 		bool operator<=(const airTransport& transport);
+		friend bool operator!=(airTransport& transport, airTransport& transport2);
 };
 
