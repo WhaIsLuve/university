@@ -1,0 +1,33 @@
+.image {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.image h1 {
+  margin-bottom: 20px;
+}
+
+#icon {
+  border-radius: 30px;
+  width: 550px;
+  height: 400px;
+}
+
+.termins {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.termins table,
+th,
+td {
+  border: 0.5px solid;
+}
+
+.termins td {
+  padding: 3px;
+}
