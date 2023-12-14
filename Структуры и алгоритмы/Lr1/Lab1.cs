@@ -18,6 +18,12 @@ namespace Lr1
 			{
 				stackElement.Add(stack.Pop());
 			}
+			if (queueElement.Count == 0 || stackElement.Count == 0)
+			{
+                Console.WriteLine("сформировать новый стек невозможно.");
+				return;
+            }
+				
 			var minElementInQueue = queueElement.Min();
             Console.WriteLine($"Минимальный элемент: {minElementInQueue}");
 

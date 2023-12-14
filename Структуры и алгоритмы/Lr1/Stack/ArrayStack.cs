@@ -46,10 +46,8 @@
         {
             if (!IsEmpty)
             {
-                foreach(int element in data)
-                {
-                    Console.Write($"{element} ");
-                }
+                for(int i = top; i >= 0; i--)
+                    Console.Write($"{data[i]} ");
             }
 			Console.WriteLine("\n\n");
 			Console.WriteLine("\n\n");

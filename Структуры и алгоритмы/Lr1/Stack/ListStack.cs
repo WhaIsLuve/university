@@ -40,18 +40,19 @@ namespace Lr1.Stack
             data.Clear();
         }
 
-		/// <inheritdoc/>
-		public void Print()
-		{
-			if (!IsEmpty)
-			{
-				foreach (int element in data)
-				{
-					Console.Write($"{element} ");
-				}
-			}
-			Console.WriteLine("\n\n");
-			Console.WriteLine("\n\n");
-		}
+        /// <inheritdoc/>
+        public void Print()
+        {
+            if (!IsEmpty)
+            {
+                if (!IsEmpty)
+                {
+                    for (int i = data.Count - 1; i >= 0; i--)
+                        Console.Write($"{data[i]} ");
+                }
+                Console.WriteLine("\n\n");
+                Console.WriteLine("\n\n");
+            }
+        }
 	}
 }

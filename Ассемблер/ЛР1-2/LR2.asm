@@ -1,0 +1,36 @@
+CODE SEGMENT
+    ASSUME CS:CODE
+    ORG 100h
+Start:  
+; 8.(a | 3 - (b ^ 4) * (c & 9)) / (!d + 5)
+MOV AL, B
+OR AL, 4
+MOV BL, C
+AND BL, 9
+IMUL BL
+MOV E, 3
+SUB E, AL
+MOV AL, A
+XOR AL, E
+MOV E, AL
+MOV AL, D
+NOT AL
+ADD AL, 5   
+MOV BL, AL
+MOV AL, E
+IDIV BL
+INT 21h
+
+  
+A DB 8
+B DB 1
+C DB 6
+D DB 5
+E DB ?
+
+CODE ENDS
+END Start
+
+
+
+

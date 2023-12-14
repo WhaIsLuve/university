@@ -9,39 +9,48 @@
         /// </summary>
         private readonly int[] data = new int[capacity];
 
-        private int tail = 0;
+        private int tail = capacity;
         private int head = 0;
+        private int size = capacity + 1;
 
         /// <inheritdoc/>
-        public bool IsEmpty => tail == head;
+        public bool IsEmpty => Next(tail) == head;
+
+        private int Next(int n) => (n + 1) % size;
 
         /// <inheritdoc/>
         public int Dequeue()
         {
             if (IsEmpty)
                 throw new IndexOutOfRangeException("Очередь пуста");
-            return data[head++];
+            int d = data[head];
+            head = Next(head);
+            return d;
         }
 
         /// <inheritdoc/>
         public void Enqueue(int value)
         {
-            if (tail >= data.Length)
+            if (Next(Next(tail)) == head)
                 throw new IndexOutOfRangeException("Очередь переполнена");
-            data[tail++] = value;
+            tail = Next(tail);
+            data[tail] = value;
         }
 
         /// <inheritdoc/>
         public void ToNull()
         {
-            tail = head = 0;
+            head = 0;
+            size = tail = -1;
+
         }
 
         /// <inheritdoc/>
         public void Print() 
         {
-            for(int i = 0; i < tail; i++)
-                Console.Write($"{data[i]} ");
+            if (!IsEmpty)
+                for(int i = head; i < tail + 1; i++)
+                    Console.Write($"{data[i]} ");
 			Console.WriteLine("\n\n");
 			Console.WriteLine("\n\n");
 		}
