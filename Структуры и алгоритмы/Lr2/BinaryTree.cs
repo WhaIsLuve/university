@@ -1,17 +1,18 @@
 ﻿using System.Threading.Channels;
+using System.Xml.Linq;
 
 namespace Lr2
 {
 	public class BinaryTree
 	{
-		private class NodeTree(int data)
+		public class NodeTree(int data)
 		{
 			public int value = data;
 			public NodeTree? left;
 			public NodeTree? right;
 		}
 
-		private NodeTree head;
+		public NodeTree? head;
 
 		public void Add(int data) => head = Add(head, data);
 
@@ -58,8 +59,8 @@ namespace Lr2
 		{
 			if (tree == null)
 				return;
-			PrintTreeS(tree.left);
-			PrintTreeS(tree.right);
+			PrintTreeR(tree.left);
+			PrintTreeR(tree.right);
 			Console.Write($"{tree.value} ");
 		}
 
@@ -73,9 +74,28 @@ namespace Lr2
 		{
 			if (tree == null)
 				return;
-			PrintTreeS(tree.left);
+			PrintTreeC(tree.left);
 			Console.Write($"{tree.value} ");
-			PrintTreeS(tree.right);
+			PrintTreeC(tree.right);
+		}
+
+		public BinaryTree Copy()
+		{
+			var copy = Copy(head);
+			var result = new BinaryTree();
+			result.head = copy;
+			return result;
+		}
+
+		private NodeTree? Copy(NodeTree? node)
+		{
+			if (node == null)
+				return null;
+			NodeTree result = new(node.value);
+			result.left = Copy(node.left);
+			result.right = Copy(node.right);
+
+			return result;
 		}
 	}
 }

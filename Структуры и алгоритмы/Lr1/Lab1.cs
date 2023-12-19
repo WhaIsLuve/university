@@ -7,24 +7,27 @@ namespace Lr1
 	{
 		public static void Variant17(IQueue queue, IStack stack)
 		{
-			var queueElement = new List<int>();
+			if (queue.IsEmpty || stack.IsEmpty)
+			{
+                Console.WriteLine("сформировать новый стек невозможно.");
+				return;
+            }
 			var stackElement = new List<int>();
 			var newStackElement = new List<int>();
-			while(!queue.IsEmpty)
+			var minElementInQueue = int.MaxValue;
+			while (!queue.IsEmpty)
 			{
-				queueElement.Add(queue.Dequeue());
+				var tmp = queue.Dequeue();
+				if (tmp < minElementInQueue)
+				{
+					minElementInQueue = tmp;
+				}
 			}
 			while(!stack.IsEmpty)
 			{
 				stackElement.Add(stack.Pop());
 			}
-			if (queueElement.Count == 0 || stackElement.Count == 0)
-			{
-                Console.WriteLine("сформировать новый стек невозможно.");
-				return;
-            }
 				
-			var minElementInQueue = queueElement.Min();
             Console.WriteLine($"Минимальный элемент: {minElementInQueue}");
 
             foreach (var element in stackElement) 

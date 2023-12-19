@@ -6,21 +6,20 @@ jmp while
 
 
 while:
+mov al, zero
+mov ah, zero
 mov al, b
-div c
+div ten
 add al, ah
 cmp al, k
 jnz condition
 inc ch
-jmp conditon2
+jmp condition
 
 condition:
-inc b
-jmp conditon2
-
-conditon2:
 mov al, a
 mov bl, b
+inc b
 cmp bl, al
 jnz while
 jmp final
@@ -31,8 +30,9 @@ int 21h
 
 a db 99
 b db 10
-c db 10
-k db 3
+ten db 10
+k db 12
+zero db 0
            
 MySegment ENDS
 END Start

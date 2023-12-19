@@ -7,7 +7,7 @@
         /// <summary>
         /// Данные хранящиеся в массиве.
         /// </summary>
-        private readonly int[] data = new int[capacity];
+        private readonly int[] data = new int[capacity+1];
 
         private int tail = capacity;
         private int head = 0;
@@ -41,16 +41,20 @@
         public void ToNull()
         {
             head = 0;
-            size = tail = -1;
+            tail = size - 1;
 
         }
 
         /// <inheritdoc/>
         public void Print() 
         {
+            var tmp = head;
             if (!IsEmpty)
-                for(int i = head; i < tail + 1; i++)
-                    Console.Write($"{data[i]} ");
+                while(tmp != tail + 1)
+                {
+                    Console.Write($"{data[tmp]} ");
+                    tmp = Next(tmp);
+                }
 			Console.WriteLine("\n\n");
 			Console.WriteLine("\n\n");
 		}
