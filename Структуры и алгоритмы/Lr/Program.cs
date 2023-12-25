@@ -3,12 +3,13 @@ using Lr1.Stack;
 using Lr1.Queue;
 using Lr2;
 using Lr4;
+using Lr5;
 
 namespace Lr
 {
 	internal class Program
 	{
-		static void Main()
+		static void Main1()
 		{
 			var q = new ArrayQueue(5);
 			q.Enqueue(1); q.Enqueue(2); q.Enqueue(3); q.Enqueue(4); q.Enqueue(5);
@@ -62,11 +63,17 @@ namespace Lr
 			copyTree.PrintTreeC();
 		}
 
-		static void Main3()
+		static void Main4()
 		{
-			Lab4.Variant1(2, 2, "");
-            Console.WriteLine();
-			Lab4.var1(3);
+            Console.WriteLine("Введите натуральное число:");
+            var input = int.Parse(Console.ReadLine());
+            Lab4.var1(input);
         }
+
+		static void Main() 
+		{
+			int[,] ints = { { 1, -4, 5, 30 }, { 10, -7, -5, 4 }, { 0, 2, 17, 24 }, { -2, 5, 1, 3 } };
+			Lab5.Variant5(ints);
+		}
 	}
 }

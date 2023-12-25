@@ -1,15 +1,12 @@
 #pragma once
 #include "State.cpp"
-
 namespace CoffeeMachine {
-
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-
 	/// <summary>
 	/// Сводка для MainWindow
 	/// </summary>
@@ -23,7 +20,6 @@ namespace CoffeeMachine {
 			//TODO: добавьте код конструктора
 			//
 		}
-
 	protected:
 		/// <summary>
 		/// Освободить все используемые ресурсы.
@@ -74,54 +70,16 @@ namespace CoffeeMachine {
 	private: System::Windows::Forms::Label^ label10;
 	private: System::Windows::Forms::Button^ clearInputs;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	private: System::ComponentModel::IContainer^ components;
 	protected:
-
 	protected:
-
 	protected:
-
 	protected:
-
-
 	private:
 		/// <summary>
 		/// Обязательная переменная конструктора.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -541,6 +499,7 @@ namespace CoffeeMachine {
 	private: static System::Drawing::Image^ fourthPicture = System::Drawing::Image::FromFile("C:\\Users\\Влад\\Desktop\\Университет\\Теория автоматов\\Project1\\automat.png");
 	private: static int step = 0;
 	private: static State currentState = State::S0;
+	private: static bool isCorrectSymbol;
 	private: System::Void MainWindow_Load(System::Object^ sender, System::EventArgs^ e) {
 		initPictures();
 		initExit();
@@ -596,14 +555,12 @@ namespace CoffeeMachine {
 			this->exit->Rows[0]->Cells[i]->Value = rows[i];
 		}
 	}
-	
 	private: void initPictures() {
 		this->Xin->Image = firstPicture;
 		this->Yin->Image = secondPicture;
 		this->Sin->Image = thirdPicture;
 		this->imgAuto->Image = fourthPicture;
 	}
-
 	private: void writeStateInTable(String^ input, String^ oldState, String^ newState, String^ output) {
 		this->exit->Rows[1]->Cells[step]->Value = input;
 		this->exit->Rows[2]->Cells[step]->Value = oldState;
@@ -611,11 +568,11 @@ namespace CoffeeMachine {
 			this->exit->Rows[2]->Cells[step+1]->Value = newState;
 		this->exit->Rows[3]->Cells[step]->Value = output;
 	}
-
 	private: bool changeState(String^ xInput) {
 		switch (currentState)
 		{
 			case State::S0:
+				isCorrectSymbol = true;
 				if (xInput->ToLower() == "x10") {
 					writeStateInTable("x10", "S0", "S10", "y10");
 					currentState = State::S10;
@@ -626,9 +583,14 @@ namespace CoffeeMachine {
 					currentState = State::S5;
 					return true;
 				}
+				else if (xInput->ToLower() != "") {
+					MessageBox::Show("Неправильный входной сигнал.");
+					isCorrectSymbol = false;
+				}
 				return false;
 				break;
 			case State::S5:
+				isCorrectSymbol = true;
 				if (xInput->ToLower() == "x10") {
 					writeStateInTable("x10", "S5", "S15", "y10");
 					currentState = State::S15;
@@ -639,9 +601,13 @@ namespace CoffeeMachine {
 					currentState = State::S10;
 					return true;
 				}
+				else if (xInput->ToLower() != "") {
+					MessageBox::Show("Неправильный входной сигнал.");
+				}
 				return false;
 				break;
 			case State::S10:
+				isCorrectSymbol = true;
 				if (xInput->ToLower() == "x10") {
 					writeStateInTable("x10", "S10", "S20", "y10");
 					currentState = State::S20;
@@ -652,9 +618,14 @@ namespace CoffeeMachine {
 					currentState = State::S15;
 					return true;
 				}
+				else if (xInput->ToLower() != "") {
+					MessageBox::Show("Неправильный входной сигнал.");
+					isCorrectSymbol = false;
+				}
 				return false;
 				break;
 			case State::S15:
+				isCorrectSymbol = true;
 				if (xInput->ToLower() == "x10") {
 					writeStateInTable("x10", "S15", "S25", "y10");
 					currentState = State::S25;
@@ -665,9 +636,14 @@ namespace CoffeeMachine {
 					currentState = State::S20;
 					return true;
 				}
+				else if (xInput->ToLower() != "") {
+					MessageBox::Show("Неправильный входной сигнал.");
+					isCorrectSymbol = false;
+				}
 				return false;
 				break;
 			case State::S20:
+				isCorrectSymbol = true;
 				if (xInput->ToLower() == "x10") {
 					writeStateInTable("x10", "S20", "S30", "y10");
 					currentState = State::S30;
@@ -678,9 +654,14 @@ namespace CoffeeMachine {
 					currentState = State::S25;
 					return true;
 				}
+				else if (xInput->ToLower() != "") {
+					MessageBox::Show("Неправильный входной сигнал.");
+					isCorrectSymbol = false;
+				}
 				return false;
 				break;
 			case State::S25:
+				isCorrectSymbol = true;
 				if (xInput->ToLower() == "x10") {
 					writeStateInTable("x10", "S25", "S35", "y10");
 					currentState = State::S35;
@@ -691,9 +672,14 @@ namespace CoffeeMachine {
 					currentState = State::S30;
 					return true;
 				}
+				else if (xInput->ToLower() != "") {
+					MessageBox::Show("Неправильный входной сигнал.");
+					isCorrectSymbol = false;
+				}
 				return false;
 				break;
 			case State::S30:
+				isCorrectSymbol = true;
 				if (xInput->ToLower() == "x10") {
 					writeStateInTable("x10", "S30", "S40", "y10");
 					currentState = State::S40;
@@ -704,9 +690,14 @@ namespace CoffeeMachine {
 					currentState = State::S35;
 					return true;
 				}
+				else if (xInput->ToLower() != "") {
+					MessageBox::Show("Неправильный входной сигнал.");
+					isCorrectSymbol = false;
+				}
 				return false;
 				break;
 			case State::S35:
+				isCorrectSymbol = true;
 				if (xInput->ToLower() == "x10") {
 					writeStateInTable("x10", "S35", "S45", "y10");
 					currentState = State::S45;
@@ -717,9 +708,14 @@ namespace CoffeeMachine {
 					currentState = State::S40;
 					return true;
 				}
+				else if (xInput->ToLower() != "") {
+					MessageBox::Show("Неправильный входной сигнал.");
+					isCorrectSymbol = false;
+				}
 				return false;
 				break;
 			case State::S40:
+				isCorrectSymbol = true;
 				if (xInput->ToLower() == "x10") {
 					writeStateInTable("x10", "S40", "S50", "y10");
 					currentState = State::S50;
@@ -740,9 +736,14 @@ namespace CoffeeMachine {
 					currentState = State::Sorg;
 					return true;
 				}
+				else if (xInput->ToLower() != "") {
+					MessageBox::Show("Неправильный входной сигнал.");
+					isCorrectSymbol = false;
+				}
 				return false;
 				break;
 			case State::S45:
+				isCorrectSymbol = true;
 				if (xInput->ToLower() == "x10") {
 					writeStateInTable("x10", "S45", "S0", "y10");
 					currentState = State::S0;
@@ -763,9 +764,14 @@ namespace CoffeeMachine {
 					currentState = State::Sorg;
 					return true;
 				}
+				else if (xInput->ToLower() != "") {
+					MessageBox::Show("Неправильный входной сигнал.");
+					isCorrectSymbol = false;
+				}
 				return false;
 				break;
 			case State::S50:
+				isCorrectSymbol = true;
 				if (xInput->ToLower() == "x10") {
 					writeStateInTable("x10", "S50", "S0", "y10");
 					currentState = State::S0;
@@ -786,9 +792,14 @@ namespace CoffeeMachine {
 					currentState = State::Sorg;
 					return true;
 				}
+				else if (xInput->ToLower() != "") {
+					MessageBox::Show("Неправильный входной сигнал.");
+					isCorrectSymbol = false;
+				}
 				return false;
 				break;
 			case State::Sorg:
+				isCorrectSymbol = true;
 				if (xInput->ToLower() == "xsugarplus") {
 					writeStateInTable("xSugarPlus", "SOrg", "SOrg", "ySugarPlus");
 					currentState = State::Sorg;
@@ -803,6 +814,10 @@ namespace CoffeeMachine {
 					writeStateInTable("xChancge", "SOrg", "S0", "y3");
 					currentState = State::S0;
 					return true;
+				}
+				else if (xInput->ToLower() != "") {
+					MessageBox::Show("Неправильный входной сигнал.");
+					isCorrectSymbol = false;
 				}
 				return false;
 				break;
@@ -829,15 +844,24 @@ private: System::Void clearInputs_Click(System::Object^ sender, System::EventArg
 }
 private: System::Void autoStep_Click(System::Object^ sender, System::EventArgs^ e) {
 	stepButton_Click(sender, e);
-	stepButton_Click(sender, e);
-	stepButton_Click(sender, e);
-	stepButton_Click(sender, e);
-	stepButton_Click(sender, e);
-	stepButton_Click(sender, e);
-	stepButton_Click(sender, e);
-	stepButton_Click(sender, e);
-	stepButton_Click(sender, e);
-	stepButton_Click(sender, e);
+	if(isCorrectSymbol)
+		stepButton_Click(sender, e);
+	if (isCorrectSymbol)
+		stepButton_Click(sender, e);
+	if (isCorrectSymbol)
+		stepButton_Click(sender, e);
+	if (isCorrectSymbol)
+		stepButton_Click(sender, e);
+	if (isCorrectSymbol)
+		stepButton_Click(sender, e);
+	if (isCorrectSymbol)
+		stepButton_Click(sender, e);
+	if (isCorrectSymbol)
+		stepButton_Click(sender, e);
+	if (isCorrectSymbol)
+		stepButton_Click(sender, e);
+	if (isCorrectSymbol)
+		stepButton_Click(sender, e);
 }
 };
 }

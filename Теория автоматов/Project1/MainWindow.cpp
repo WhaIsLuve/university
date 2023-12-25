@@ -1,4 +1,5 @@
 #include "MainWindow.h"
+#include "Error.h"
 
 using namespace System;
 using namespace System::Windows::Forms;
