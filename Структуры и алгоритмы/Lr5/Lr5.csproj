@@ -6,8 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Include="C:\Users\Влад\Desktop\Университет\Структуры и алгоритмы\Lr5\Lab5.cs" Link="Lab5.cs" />
-  </ItemGroup>
-
 </Project>

@@ -11,35 +11,19 @@
             "id": "7784c5cddc434be6",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "image",
               "state": {
-                "file": "Ассемблер/ЛР1-2/Ответы на контрольные вопросы.md",
-                "mode": "source",
-                "source": false
+                "file": "Pasted image 20240104183425.png"
               }
             }
           },
           {
-            "id": "4913922958e020c9",
+            "id": "bbc0d594c5ddd6a9",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "image",
               "state": {
-                "file": "Ассемблер/Лекции/Лекция 2.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "d06a17e407e80ec4",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Ассемблер/Лекции/Лекция 1.md",
-                "mode": "source",
-                "source": false
+                "file": "1.png"
               }
             }
           }
@@ -109,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Ассемблер/ЛР1-2/Ответы на контрольные вопросы.md",
+                "file": "Pasted image 20240104183425.png",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -126,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Ассемблер/ЛР1-2/Ответы на контрольные вопросы.md",
+                "file": "Pasted image 20240104183425.png",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -149,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Ассемблер/ЛР1-2/Ответы на контрольные вопросы.md"
+                "file": "Pasted image 20240104183425.png"
               }
             }
           }
@@ -173,6 +157,19 @@
   },
   "active": "7784c5cddc434be6",
   "lastOpenFiles": [
+    "Ассемблер/Гайд по DOSBOX.md",
+    "Ассемблер/Ассемблер.md",
+    "1.png",
+    "Pasted image 20240104183425.png",
+    "Pasted image 20240104190153.png",
+    "Pasted image 20240104185922.png",
+    "Pasted image 20240104185507.png",
+    "Pasted image 20240104185417.png",
+    "Ассемблер/~$стемное программирование_Виноградова.doc",
+    "Pasted image 20240104184733.png",
+    "Pasted image 20240104183913.png",
+    "Гайд.md",
+    "Ассемблер/ЛР1-2/Ответы на контрольные вопросы.md",
     "Тех. пракатика/~$tech-pracrtise.xlsx",
     "Тех. пракатика/~$х. практика.docx",
     "Ассемблер/Курсач",
@@ -182,23 +179,13 @@
     "Прикладная статистика/статистика.xlsx",
     "Прикладная статистика/~$КурсоваяСтатистика.xlsx",
     "Ассемблер/Лекции/Лекция 2.md",
-    "Ассемблер/ЛР1-2/Ответы на контрольные вопросы.md",
     "Ассемблер/Лекции/Лекция 1.md",
     "Ассемблер/ЛР3-4/LR4.com.symbol",
-    "Ассемблер/ЛР3-4/LR4.com.list",
-    "Ассемблер/ЛР3-4/LR4.com.debug",
-    "Ассемблер/Ассемблер.md",
     "Без названия.canvas",
     "Без названия 1.canvas",
     "Ассемблер/Структура Папки.md",
     "Untitled 1.jpeg",
     "Untitled.jpeg",
-    "Untitled 2.png",
-    "Untitled 1.png",
-    "README.MD",
-    "Untitled.png",
-    "photo_2023-10-09_09-28-07.jpg",
-    "photo_2023-10-09_09-44-13.jpg",
-    "Без названия.md"
+    "README.MD"
   ]
 }
