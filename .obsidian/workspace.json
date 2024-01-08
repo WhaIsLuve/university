@@ -4,27 +4,15 @@
     "type": "split",
     "children": [
       {
-        "id": "e91b1c1e512f868a",
+        "id": "9d217da6044de36e",
         "type": "tabs",
         "children": [
           {
-            "id": "7784c5cddc434be6",
+            "id": "8bbe8e65fd2523e2",
             "type": "leaf",
             "state": {
-              "type": "image",
-              "state": {
-                "file": "Pasted image 20240104183425.png"
-              }
-            }
-          },
-          {
-            "id": "bbc0d594c5ddd6a9",
-            "type": "leaf",
-            "state": {
-              "type": "image",
-              "state": {
-                "file": "1.png"
-              }
+              "type": "empty",
+              "state": {}
             }
           }
         ]
@@ -93,7 +81,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Pasted image 20240104183425.png",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -110,7 +97,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Pasted image 20240104183425.png",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -132,9 +118,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "Pasted image 20240104183425.png"
-              }
+              "state": {}
             }
           }
         ],
@@ -155,12 +139,12 @@
       "command-palette:Открыть палитру команд": false
     }
   },
-  "active": "7784c5cddc434be6",
+  "active": "8bbe8e65fd2523e2",
   "lastOpenFiles": [
-    "Ассемблер/Гайд по DOSBOX.md",
-    "Ассемблер/Ассемблер.md",
     "1.png",
     "Pasted image 20240104183425.png",
+    "Ассемблер/Гайд по DOSBOX.md",
+    "Ассемблер/Ассемблер.md",
     "Pasted image 20240104190153.png",
     "Pasted image 20240104185922.png",
     "Pasted image 20240104185507.png",
