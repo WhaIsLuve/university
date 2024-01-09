@@ -9,7 +9,7 @@ namespace Lr
 {
 	internal class Program
 	{
-		static void Main1()
+		static void Main()
 		{
 			var q = new ListQueue();
 			q.Enqueue(1); q.Enqueue(2); q.Enqueue(3); q.Enqueue(4); q.Enqueue(5);
@@ -70,7 +70,7 @@ namespace Lr
 			Lab4.var1(input);
 		}
 
-		static void Main() 
+		static void Main5() 
 		{
 			var path = @"C:\Users\Влад\Desktop\Университет\Структуры и алгоритмы\input.txt";
 			var input = File.ReadAllText(path);

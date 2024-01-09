@@ -1,7 +1,4 @@
-﻿using System.Threading.Channels;
-using System.Xml.Linq;
-
-namespace Lr2
+﻿namespace Lr2
 {
 	public class BinaryTree
 	{
@@ -45,10 +42,10 @@ namespace Lr2
 		{
 			if (tree == null)
 				return;
-            Console.Write($"{tree.value} ");
+			Console.Write($"{tree.value} ");
 			PrintTreeS(tree.left);
 			PrintTreeS(tree.right);
-        }
+		}
 		public void PrintTreeR()
 		{
 			PrintTreeR(head);

@@ -23,14 +23,14 @@ namespace Lr4
 				OutputInFile(bracketsList);
 			else
 				OutputInCosole(bracketsList);
-        }
+		}
 
 		private static void OutputInCosole(List<string> bracketsList)
 		{
 			foreach (var bracket in bracketsList)
-                Console.WriteLine(bracket);
-            Console.WriteLine($"Кол-во скобочек: {bracketsList.Count}");
-        }
+				Console.WriteLine(bracket);
+			Console.WriteLine($"Кол-во скобочек: {bracketsList.Count}");
+		}
 
 		private static void OutputInFile(List<string> bracketsList)
 		{

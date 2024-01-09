@@ -1,6 +1,4 @@
-﻿
-
-namespace Lr5
+﻿namespace Lr5
 {
 	public static class Lab5
 	{
@@ -8,7 +6,7 @@ namespace Lr5
 		{
 			var direction = new int[ints.GetLength(0), ints.GetLength(1)];
 			var path = new int[ints.GetLength(0), ints.GetLength(1)];
-			FillLastString(ints, direction);
+			FillLastRow(ints, direction);
 			for(int i = direction.GetLength(0)-1; i >= 0 ; i--)
 			{
 				for(int j = 0; j < direction.GetLength(1); j++)
@@ -30,16 +28,16 @@ namespace Lr5
 					}
 				}
 			}
-			var maxPathAndIndex = MaxInFirstString(direction);
+			var maxPathAndIndex = MaxInFirstRow(direction);
 			Console.ForegroundColor = ConsoleColor.White;
 			Console.WriteLine($"Максимальная сумма чисел: {maxPathAndIndex[0]}");
-			int n1 = 0, n2 = maxPathAndIndex[1]; // Начинаем снизу с финальной колонки
-			path[n1,n2] = 100;
+			int n1 = 0, n2 = maxPathAndIndex[1];
+			path[n1,n2] = 100;  
 			var N1 = direction.GetLength(0);
 			var N2 = direction.GetLength(1);
-			while (n1 < direction.GetLength(0) - 1)
+			while (n1 < N1 - 1)
 			{
-				int down = (n1 > N1 - 2) ? direction[n1 + 2, n2] : int.MinValue;
+				int down = (n1 < N1 - 2) ? direction[n1 + 2, n2] : int.MinValue;
 				int left_down = (n2 > 0) ? direction[n1 + 1, n2 - 1] : int.MinValue;
 				int right_down = (n2 < N2 - 1) ? direction[n1 + 1, n2 + 1] : int.MinValue;
 
@@ -77,12 +75,12 @@ namespace Lr5
 					else 
 						Console.Write($"{ints[i, j]} ");
 				}
-                Console.WriteLine();
-            }
+				Console.WriteLine();
+			}
 			Console.ForegroundColor = ConsoleColor.White;
 		}
 
-		private static int[] MaxInFirstString(int[,] direction)
+		private static int[] MaxInFirstRow(int[,] direction)
 		{
 			var max = int.MinValue;
 			var index = 0;
@@ -97,7 +95,7 @@ namespace Lr5
 			return [max, index];
 		}
 
-		private static void FillLastString(int[,] ints, int[,] direction)
+		private static void FillLastRow(int[,] ints, int[,] direction)
 		{
 			for (int i = direction.GetLength(0) - 1; i >= 0; i--)
 			{

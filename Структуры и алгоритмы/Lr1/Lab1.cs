@@ -3,15 +3,15 @@ using Lr1.Stack;
 
 namespace Lr1
 {
-    public static class Lab1
+	public static class Lab1
 	{
 		public static void Variant17(IQueue queue, IStack stack)
 		{
 			if (queue.IsEmpty || stack.IsEmpty)
 			{
-                Console.WriteLine("сформировать новый стек невозможно.");
+				Console.WriteLine("сформировать новый стек невозможно.");
 				return;
-            }
+			}
 			var stackElement = new List<int>();
 			var newStackElement = new List<int>();
 			var minElementInQueue = int.MaxValue;
@@ -28,9 +28,9 @@ namespace Lr1
 				stackElement.Add(stack.Pop());
 			}
 				
-            Console.WriteLine($"Минимальный элемент: {minElementInQueue}");
+			Console.WriteLine($"Минимальный элемент: {minElementInQueue}");
 
-            foreach (var element in stackElement) 
+			foreach (var element in stackElement) 
 			{
 				if (element < minElementInQueue)
 				{
@@ -42,8 +42,8 @@ namespace Lr1
 
 			foreach (var element in newStackElement)
 				newStack.Push(element);
-            Console.Write("Новый стек: ");
-            newStack.Print();
-        }
+			Console.Write("Новый стек: ");
+			newStack.Print();
+		}
 	}
 }
