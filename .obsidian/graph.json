@@ -8,10 +8,59 @@
   "collapse-color-groups": false,
   "colorGroups": [
     {
-      "query": "tag:Ассемблер",
+      "query": "tag:#Ассемблер  ",
       "color": {
         "a": 1,
-        "rgb": 14701138
+        "rgb": 5513505
+      }
+    },
+    {
+      "query": "tag:#ООП  ",
+      "color": {
+        "a": 1,
+        "rgb": 3869883
+      }
+    },
+    {
+      "query": "tag:#Программирование_графики_и_цифровая_обработка_изображений  ",
+      "color": {
+        "a": 1,
+        "rgb": 10409518
+      }
+    },
+    {
+      "query": "tag:#Структуры_и_алгоритмы  ",
+      "color": {
+        "a": 1,
+        "rgb": 15073280
+      }
+    },
+    {
+      "query": "tag:#Основы_Data_Science  ",
+      "color": {
+        "a": 1,
+        "rgb": 582298
+      }
+    },
+    {
+      "query": "tag:#Теория_автоматов  ",
+      "color": {
+        "a": 1,
+        "rgb": 14083584
+      }
+    },
+    {
+      "query": "file:README",
+      "color": {
+        "a": 1,
+        "rgb": 0
+      }
+    },
+    {
+      "query": "file:Второй курс",
+      "color": {
+        "a": 1,
+        "rgb": 16777215
       }
     }
   ],
@@ -20,11 +69,11 @@
   "textFadeMultiplier": 0,
   "nodeSizeMultiplier": 1,
   "lineSizeMultiplier": 1,
-  "collapse-forces": true,
-  "centerStrength": 0.518713248970312,
-  "repelStrength": 10,
-  "linkStrength": 1,
-  "linkDistance": 250,
-  "scale": 1.0922238084240405,
+  "collapse-forces": false,
+  "centerStrength": 0.233887733887734,
+  "repelStrength": 15.1559251559252,
+  "linkStrength": 0.691268191268191,
+  "linkDistance": 30,
+  "scale": 0.27082138010183054,
   "close": true
 }
