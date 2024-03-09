@@ -6,32 +6,33 @@ using namespace std;
 
 struct AEROFLOT {
     string destination;
-    string dateTimeDeparture;
-    string dateTimeArrival;
+    string time;
+    string date;
 };
 
 
 int main()
 {
     setlocale(LC_ALL, "rus");
-    AEROFLOT arrayAeroflot[5];
-    AEROFLOT arrayNeed[5];
+    const int n = 5;
+    AEROFLOT arrayAeroflot[n];
+    AEROFLOT arrayNeed[n];
     int indexArrayNeed = 0;
-    string dateTimeDeparturee;
-    for (int i = 0; i < 5; i++)
+    string dateDeparturee;
+    for (int i = 0; i < n; i++)
     {
         cout << "Введите пункт назначение" << endl;
         cin >> arrayAeroflot[i].destination;
-        cout << "Введите время отправления в формате DD.MM.YYYY" << endl;
-        cin >> arrayAeroflot[i].dateTimeDeparture;
-        cout << "Введите время прибытия в формате DD.MM.YYYY" << endl;
-        cin >> arrayAeroflot[i].dateTimeArrival;
+        cout << "Введите время отправления в формате HH.MM" << endl;
+        cin >> arrayAeroflot[i].time;
+        cout << "Введите дату отправления в формате DD.MM.YYYY" << endl;
+        cin >> arrayAeroflot[i].date;
     }
-    cout << "Введите нужное время отправления в формате DD.MM.YYYY" << endl;
-    cin >> dateTimeDeparturee;
-    for (int i = 0; i < 5; i++) 
+    cout << "Введите нужную дату отправления в формате DD.MM.YYYY" << endl;
+    cin >> dateDeparturee;
+    for (int i = 0; i < n; i++) 
     {
-        if (dateTimeDeparturee == arrayAeroflot[i].dateTimeDeparture)
+        if (dateDeparturee == arrayAeroflot[i].date)
         {
             arrayNeed[indexArrayNeed] = arrayAeroflot[i];
             indexArrayNeed++;
@@ -45,7 +46,7 @@ int main()
         for (int i = 0; i < indexArrayNeed; i++)
         {
             cout << arrayNeed[i].destination << endl;
-            cout << arrayNeed[i].dateTimeDeparture << endl;
+            cout << arrayNeed[i].time << endl;
         }
     }
 }
