@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="mars-once" action="/apply/" method="POST">
+        <label>
+          Ваше имя:
+          <input type="text" name="name" id="name" placeholder="Иван Иванов" required autofocus>
+        </label>
+        <br>
+        <label>
+            Почта:
+            <input type="email" name="email" id="email" placeholder="whatever@mail.ru" required>
+        </label>
+        <br>
+        <label>
+            Возраст:
+            <input type="number" name="age" required>
+        </label>
+        <br>
+        <label>
+            Профессия:
+            <select name="specialization" required>
+                <option value="engineer" selected>Инженер</option>
+                <option value="scientist">Учёный</option>
+                <option value="psychologist">Психолог</option>
+                <option value="other">Другая</option>
+            </select>
+        </label>
+        <br>
+        <label>
+          Фото:
+          <input type="file" accept="image/jpeg" name="photo" required>
+        </label>
+        <br>
+        <label>
+            Эссе о себе
+            <br>
+            <textarea cols="30" rows="10"></textarea>
+        </label>
+        <br>
+        <button type="submit">Отправить заявку</button>
+      </form>
+      
+</body>
+</html>

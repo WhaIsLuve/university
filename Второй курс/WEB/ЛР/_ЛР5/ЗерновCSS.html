@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЗерновCSS</title>
+    <style>
+	#head:hover {
+	  color: white;
+	}
+	#img:hover {
+	  transform: scale(200%);
+  	  transition: background-color 3s, transform 2.5s;
+	}
+	#head {
+	  color: #457dd6
+	}
+	td:hover {
+	  color: rgb(150, 120, 200)
+	}
+    </style>
+</head>
+<body>
+    <table style="border: 1px solid black; background-color: rgb(223, 183, 183); border-radius: 4px">
+        <thead id='head'>
+        <tr>
+        <th style="border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black;
+       background-color: rgb(223, 183, 183);"></th>
+        <th style="border-top: 1px solid black; border-bottom: 1px solid black; background-color: rgb(223, 183,
+       183);">Модель OSI</th>
+        <th style="border-top: 1px solid black; border-bottom: 1px solid black; border-right: 1px solid black;
+       background-color: rgb(223, 183, 183);"></th>
+        </tr>
+        <tr>
+        <th style="border: 1px solid black; background-color: rgb(223, 183, 183);">Тип данных</th>
+        <th style="border: 1px solid black; background-color: rgb(223, 183, 183);">Уровень</th>
+        <th style="border: 1px solid black; background-color: rgb(223, 183, 183);">Функции</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr style="background-color: rgb(75, 209, 99);">
+        <td style="border: 1px solid black;">Данные</td>
+        <td>
+        <table>
+        <tbody style="border: 1px solid black;">
+        <tr>
+        <td style="border: 1px solid black;">7. Прикладной уровень</td>
+        </tr>
+        <tr>
+        <td style="border: 1px solid black;">6. Уровень представления</td>
+        </tr>
+        <tr>
+        <td style="border: 1px solid black;">5. Сеансовый уровень</td>
+        </tr>
+        </tbody>
+        </table>
+        </td>
+        <td>
+        <table>
+        <tbody style="border: 1px solid black;">
+        <tr>
+        <td style="border: 1px solid black;">Доступ к сетевым службам</td>
+        </tr>
+        <tr>
+        <td style="border: 1px solid black;">Представления и кодирование данных</td>
+        </tr>
+        <tr>
+        <td style="border: 1px solid black;">Управление сеансом связи</td>
+        </tr>
+        </tbody>
+        </table>
+        </td>
+        </tr>
+        <tr style="background-color: rgb(197, 233, 113);">
+        <td style="border: 1px solid black;">Сегменты</td>
+        <td style="border: 1px solid black;">4. Транспортный</td>
+        <td style="border: 1px solid black;">Прямая связь между <br>конечными пунктами и надежность</td>
+        </tr>
+        <tr style="background-color: rgb(255, 195, 126);">
+        <td style="border: 1px solid black;">Пакеты</td>
+        <td style="border: 1px solid black;">3. Сетевой</td>
+        <td style="border: 1px solid black;">Определение маршрута <br> и логическая маршрутизация</td>
+        </tr>
+        <tr style="background-color: rgb(229, 160, 81);">
+        <td style="border: 1px solid black;">Кадры</td>
+        <td style="border: 1px solid black;">2. Канальный</td>
+        <td style="border: 1px solid black;">Физическая адресация</td>
+        </tr>
+        <tr style="background-color: rgb(229, 81, 81);">
+        <td style="border: 1px solid black;">Биты</td>
+        <td style="border: 1px solid black;">1. Физический уровень</td>
+        <td style="border: 1px solid black;"><img src="../_ЛР3/Табл/1.bmp" alt="1.bmp" width="200px"
+       height="100px" id='img'></td>
+        </tr>
+        </tbody>
+        </table>
+</body>
+</html>
