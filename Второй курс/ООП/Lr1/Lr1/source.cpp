@@ -75,7 +75,7 @@ public:
 		countBug = count;
 	}
 	int working(Programmer& programmer);
-	State findBug(Programmer& programmer);
+	State notifyError(Programmer& programmer);
 };
 
 void StateToString(State mood) {
@@ -112,7 +112,7 @@ int Computer::working(Programmer& programmer) {
 	programmer.setAlertness(programmer.getAlertness() - 1);
 	return programmer.getAlertness();
 }
-State Computer::findBug(Programmer& programmer) {
+State Computer::notifyError(Programmer& programmer) {
 	if (countBug > 5) {
 		programmer.setMood(State::Depresion);
 	}
@@ -136,12 +136,12 @@ int main()
 
 	cout << "Начали работать: " << programmer.startWork(computer) << endl;
 	cout << "Бдительность программиста на работе: " << computer.working(programmer) << endl;
-	computer.findBug(programmer);
-	computer.findBug(programmer);
-	computer.findBug(programmer);
-	computer.findBug(programmer);
+	computer.notifyError(programmer);
+	computer.notifyError(programmer);
+	computer.notifyError(programmer);
+	computer.notifyError(programmer);
 	cout << "Настроение после нахождения бага: ";
-	StateToString(computer.findBug(programmer));
+	StateToString(computer.notifyError(programmer));
 	cout << computer.getCountBug() << endl;
 	cout << programmer.fixBug(computer, 3) << endl;
 

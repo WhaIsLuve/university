@@ -4,12 +4,14 @@ using Lr1.Queue;
 using Lr2;
 using Lr4;
 using Lr5;
+using Lr6;
+using Sort;
 
 namespace Lr
 {
 	internal class Program
 	{
-		static void Main()
+		static void Main1()
 		{
 			var q = new ListQueue();
 			q.Enqueue(1); q.Enqueue(2); q.Enqueue(3); q.Enqueue(4); q.Enqueue(5);
@@ -26,7 +28,7 @@ namespace Lr
 			s.Push(6);s.Push(7);
 			s.Print();
 			var rnd = new Random();
-			var lenQueue =  rnd.Next(0, 100);
+			var lenQueue = rnd.Next(0, 100);
 			var lenStack = rnd.Next(0, 100);
 			var queue = new ArrayQueue(lenQueue);
 			while (lenQueue-- > 1)
@@ -63,7 +65,7 @@ namespace Lr
 			copyTree.PrintTreeC();
 		}
 
-		static void Main4()
+		static void Mai4()
 		{
 			Console.WriteLine("Введите натуральное число:");
 			var input = int.Parse(Console.ReadLine());
@@ -72,7 +74,7 @@ namespace Lr
 
 		static void Main5() 
 		{
-			var path = @"C:\Users\Влад\Desktop\Университет\Структуры и алгоритмы\input.txt";
+			var path = @"C:\Users\Влад\Desktop\Университет\Второй курс\Структуры и алгоритмы\input.txt";
 			var input = File.ReadAllText(path);
 			string[] lines = File.ReadAllLines(path);
 			var size = lines[0].Split().Select(i => int.Parse(i)).ToArray();
@@ -98,6 +100,13 @@ namespace Lr
 				Console.WriteLine();
 			}
 			Lab5.Variant5(array);
+		}
+
+		static void Main()
+		{
+			int[] array = [4, 7, 1, 3, 0, -1];
+			Sort.Sort.InclusionSort(array);
+			Console.WriteLine("Готово");
 		}
 	}
 }

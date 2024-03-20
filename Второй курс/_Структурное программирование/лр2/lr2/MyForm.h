@@ -63,7 +63,7 @@ namespace lr2 {
 			// 
 			this->textBox1->Location = System::Drawing::Point(270, 162);
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(506, 22);
+			this->textBox1->Size = System::Drawing::Size(564, 22);
 			this->textBox1->TabIndex = 0;
 			// 
 			// genarate

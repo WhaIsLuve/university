@@ -3,23 +3,24 @@
 
 using namespace std;
 
-double randomFloat()
+double randomDouble()
 {
     return (double)(rand()) / (double)(rand());
 }
 
 void var17num1() {
     fstream file;
-    double numbers[10];
     const char* name = "file.bin";
-    for (int i = 0; i < 10; i++) {
-        numbers[i] = randomFloat();
-    }
+    int countNumbers;
+    cout << "Введите сколько вы хотите записанных чисел в файл?" << endl;
+    cin >> countNumbers;
+    double randomNumber = randomDouble();
     file.open(name, ios::binary | ios::out);
     if (file.is_open())
     {
-        for (int i = 1; i < 10; i++) {
-            file.write((char*)&numbers[i], sizeof(double));
+        for (int i = 1; i <= countNumbers; i++) {
+            file.write((char*)&randomNumber, sizeof(double));
+            randomNumber = randomDouble();
         }
     }
     file.close();
@@ -34,9 +35,10 @@ void var17num1() {
     file.open(name, ios::binary | ios::in);
     if (file.is_open())
     {
-        for (int i = 1; i < 10; i++) {
+        while(true) {
             file.read((char*)&x, sizeof(double));
             if (x < number) count++;
+            if (file.eof()) break;
         }
     }
     file.close();
@@ -102,6 +104,6 @@ void var17num2() {
 int main()
 {
     setlocale(LC_ALL, "rus");
-    var17num2();
+    var17num1();
 }
 

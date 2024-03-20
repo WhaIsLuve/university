@@ -34,7 +34,7 @@ namespace Lr4
 
 		private static void OutputInFile(List<string> bracketsList)
 		{
-			using (StreamWriter sw = File.CreateText(@"C:\Users\Влад\Desktop\Университет\Структуры и алгоритмы\lr4.txt"))
+			using (StreamWriter sw = File.CreateText(@"C:\Users\Влад\Desktop\Университет\Второй курс\Структуры и алгоритмы\lr4.txt"))
 			{
 				foreach(var bracket in bracketsList)
 					sw.WriteLine(bracket);

@@ -3,18 +3,17 @@
 using namespace std;
 
 
-float area(float a, float b)
+float area(float a, float b, float h)
 {
-	float s;
-	s = 2 * (a + b);
-	return s;
+	float sbok = 2 * (a + b) * h;
+	float spol = sbok * 2 * (a * b);
+	return spol;
 }
 
 
 float volume(float a, float b, float h)
 {
-	float v;
-	v = a * b * h;
+	float v = a * b * h;
 	return v;
 }
 
@@ -35,6 +34,22 @@ void output(float* array, int length) {
 
 
 int main()
+{
+	setlocale(LC_ALL, "rus");
+	float a, b, h;
+	cout << "Введите длину сторон прямоугольника через пробел: ";
+	cin >> a >> b;
+	cout << "Введите высоту прямоугольной призмы: ";
+	cin >> h;
+	float s, v;
+	s = area(a, b, h);
+	v = volume(a, b, h);
+	cout << "Площадь поверхности прямоугольной призмы: " << s << endl;
+	cout << "Объем прямоугольной призмы: " << v << endl;
+	return 0;
+}
+
+int main2()
 {
 	setlocale(LC_ALL, "rus");
 	int n;

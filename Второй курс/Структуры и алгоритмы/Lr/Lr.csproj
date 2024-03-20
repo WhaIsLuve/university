@@ -12,6 +12,8 @@
     <ProjectReference Include="..\Lr1\Lr1.csproj" />
     <ProjectReference Include="..\Lr2\Lr2.csproj" />
     <ProjectReference Include="..\Lr4\Lr4.csproj" />
+    <ProjectReference Include="..\Lr6\Lr6.csproj" />
+    <ProjectReference Include="..\Sort\Sort.csproj" />
   </ItemGroup>
 
 </Project>

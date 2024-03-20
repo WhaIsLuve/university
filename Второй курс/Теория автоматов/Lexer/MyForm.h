@@ -1,5 +1,5 @@
 #pragma once
-#include "States.cpp"
+#include "LexerStates.cpp"
 
 namespace Lexer {
 
@@ -11,7 +11,7 @@ namespace Lexer {
 	using namespace System::Drawing;
 
 	/// <summary>
-	/// Сводка для MyForm
+	/// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ MyForm
 	/// </summary>
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
@@ -20,13 +20,13 @@ namespace Lexer {
 		{
 			InitializeComponent();
 			//
-			//TODO: добавьте код конструктора
+			//TODO: пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 			//
 		}
 
 	protected:
 		/// <summary>
-		/// Освободить все используемые ресурсы.
+		/// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 		/// </summary>
 		~MyForm()
 		{
@@ -41,17 +41,23 @@ namespace Lexer {
 	private: System::Windows::Forms::Button^ startProcessing;
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ label2;
+	private: System::Windows::Forms::DataGridView^ keyWordsTable;
+
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Id;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ KeyWord;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Pseudocode;
+	private: System::Windows::Forms::Label^ label3;
 
 	private:
-        /// <summary>
-        /// Обязательная переменная конструктора.
-        /// </summary>
+		/// <summary>
+		/// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
+		/// </summary>
 		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// Требуемый метод для поддержки конструктора — не изменяйте 
-		/// содержимое этого метода с помощью редактора кода.
+		/// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 
+		/// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ.
 		/// </summary>
 		void InitializeComponent(void)
 		{
@@ -60,11 +66,18 @@ namespace Lexer {
 			this->startProcessing = (gcnew System::Windows::Forms::Button());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->keyWordsTable = (gcnew System::Windows::Forms::DataGridView());
+			this->Id = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->KeyWord = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Pseudocode = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->label3 = (gcnew System::Windows::Forms::Label());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->keyWordsTable))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// input
 			// 
 			this->input->Location = System::Drawing::Point(12, 31);
+			this->input->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->input->Multiline = true;
 			this->input->Name = L"input";
 			this->input->Size = System::Drawing::Size(535, 511);
@@ -73,6 +86,7 @@ namespace Lexer {
 			// result
 			// 
 			this->result->Location = System::Drawing::Point(697, 31);
+			this->result->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->result->Multiline = true;
 			this->result->Name = L"result";
 			this->result->ReadOnly = true;
@@ -82,10 +96,11 @@ namespace Lexer {
 			// startProcessing
 			// 
 			this->startProcessing->Location = System::Drawing::Point(45, 560);
+			this->startProcessing->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->startProcessing->Name = L"startProcessing";
-			this->startProcessing->Size = System::Drawing::Size(112, 61);
+			this->startProcessing->Size = System::Drawing::Size(112, 62);
 			this->startProcessing->TabIndex = 2;
-			this->startProcessing->Text = L"Начать";
+			this->startProcessing->Text = L"start";
 			this->startProcessing->UseVisualStyleBackColor = true;
 			this->startProcessing->Click += gcnew System::EventHandler(this, &MyForm::startProcessing_Click);
 			// 
@@ -94,84 +109,211 @@ namespace Lexer {
 			this->label1->AutoSize = true;
 			this->label1->Location = System::Drawing::Point(83, 9);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(89, 16);
+			this->label1->Size = System::Drawing::Size(35, 16);
 			this->label1->TabIndex = 3;
-			this->label1->Text = L"Введите код";
+			this->label1->Text = L"input";
 			// 
 			// label2
 			// 
 			this->label2->AutoSize = true;
 			this->label2->Location = System::Drawing::Point(917, 9);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(77, 16);
+			this->label2->Size = System::Drawing::Size(39, 16);
 			this->label2->TabIndex = 4;
-			this->label2->Text = L"Результат";
+			this->label2->Text = L"result";
+			// 
+			// keyWordsTable
+			// 
+			this->keyWordsTable->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->keyWordsTable->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(3) {
+				this->Id, this->KeyWord,
+					this->Pseudocode
+			});
+			this->keyWordsTable->Location = System::Drawing::Point(1279, 31);
+			this->keyWordsTable->Name = L"keyWordsTable";
+			this->keyWordsTable->RowHeadersWidth = 51;
+			this->keyWordsTable->RowTemplate->Height = 24;
+			this->keyWordsTable->Size = System::Drawing::Size(549, 175);
+			this->keyWordsTable->TabIndex = 5;
+			// 
+			// Id
+			// 
+			this->Id->HeaderText = L"Id";
+			this->Id->MinimumWidth = 6;
+			this->Id->Name = L"Id";
+			this->Id->Width = 125;
+			// 
+			// KeyWord
+			// 
+			this->KeyWord->HeaderText = L"KeyWord";
+			this->KeyWord->MinimumWidth = 6;
+			this->KeyWord->Name = L"KeyWord";
+			this->KeyWord->Width = 125;
+			// 
+			// Pseudocode
+			// 
+			this->Pseudocode->HeaderText = L"Pseudocode";
+			this->Pseudocode->MinimumWidth = 6;
+			this->Pseudocode->Name = L"Pseudocode";
+			this->Pseudocode->Width = 125;
+			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Location = System::Drawing::Point(1386, 9);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(63, 16);
+			this->label3->TabIndex = 6;
+			this->label3->Text = L"KeyWord";
 			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::HotTrack;
-			this->ClientSize = System::Drawing::Size(1262, 656);
+			this->ClientSize = System::Drawing::Size(1895, 656);
+			this->Controls->Add(this->label3);
+			this->Controls->Add(this->keyWordsTable);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->startProcessing);
 			this->Controls->Add(this->result);
 			this->Controls->Add(this->input);
+			this->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->Name = L"MyForm";
 			this->Text = L"MyForm";
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->keyWordsTable))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
 
-	private: States currentState = States::S1;
+	private: LexerStates currentLexerState = LexerStates::S0;
+	private: String^ keyWords = "int float double if else string for return switch case";
 	private: System::Void startProcessing_Click(System::Object^ sender, System::EventArgs^ e) {
-		this->result->Text = "";
+		LexerAnalyze();
+		readingKeyWords();
+	}
+
+	private: void readingKeyWords() {
+		auto keyWordArray = keyWords->Split();
+		int dataGridCount = 0;
+		keyWordsTable->RowCount = keyWordArray->Length;
 		for (int i = 0; i < this->input->Text->Length; i++) {
-			switch (currentState) {
-			case States::S0:
-				if (this->input->Text == "/") {
-					currentState = States::S1;
+			switch (switch_on)
+			{
+			default:
+				break;
+			}
+		}
+	}
+
+	private: void LexerAnalyze() {
+		this->result->Text = "";
+		String^ str = "";
+		currentLexerState = LexerStates::S0;
+		for (int i = 0; i < this->input->Text->Length; i++) {
+			switch (currentLexerState) {
+			case LexerStates::S0:
+				if (this->input->Text[i] == '/') {
+					currentLexerState = LexerStates::S1;
 				}
-				else if (this->input->Text == " ") {
-					currentState = States::S5;
+				else if (this->input->Text[i] == ' ') {
+					currentLexerState = LexerStates::S5;
 				}
-				else if (this->input->Text == "\t") {
-					currentState = States::S6;
+				else if (this->input->Text[i] == '\t') {
+					currentLexerState = LexerStates::S6;
 				}
-				else if (this->input->Text == "\r") {
-					currentState = States::S7;
+				else if (this->input->Text[i] == '\n') {
+					str += this->input->Text[i];
+					currentLexerState = LexerStates::S7;
 				}
 				else {
-					this->result->Text += this->input->Text[i];
+					str += this->input->Text[i];
 				}
 				break;
-			case States::S1:
-				if (this->input->Text == "/") {
-					currentState = States::S2;
+			case LexerStates::S1:
+				if (this->input->Text[i] == '/') {
+					currentLexerState = LexerStates::S2;
 				}
-				else if (this->input->Text == "*") {
-					currentState = States::S3;
+				else if (this->input->Text[i] == '*') {
+					currentLexerState = LexerStates::S3;
 				}
-				break;
-			case States::S2:
-				if (this->input->Text == "\n") {
-					this->result->Text += "\r\n";
-					currentState = States::S0;
+				else {
+					str += "/" + this->input->Text[i];
+					currentLexerState = LexerStates::S0;
 				}
 				break;
-			case States::S3:
+			case LexerStates::S2:
+				if (this->input->Text[i] == '\n') {
+					str += "\r\n";
+					currentLexerState = LexerStates::S0;
+				}
 				break;
-			case States::S4:
+			case LexerStates::S3:
+				if (this->input->Text[i] == '*') {
+					currentLexerState = LexerStates::S4;
+				}
 				break;
-			case States::S5:
+			case LexerStates::S4:
+				if (this->input->Text[i] == '/') {
+					currentLexerState = LexerStates::S0;
+				}
+				else {
+					currentLexerState = LexerStates::S3;
+				}
 				break;
-			case States::S6:
+			case LexerStates::S5:
+				if (this->input->Text[i] == '/') {
+					currentLexerState = LexerStates::S1;
+				}
+				else if (this->input->Text[i] != ' ') {
+					currentLexerState = LexerStates::S0;
+					str += " ";
+					str += this->input->Text[i];
+				}
 				break;
-			case States::S7:
+			case LexerStates::S6:
+				if (this->input->Text[i] == '/') {
+					currentLexerState = LexerStates::S1;
+				}
+				else if (this->input->Text[i] != '\t') {
+					currentLexerState = LexerStates::S0;
+					str += this->input->Text[i];
+				}
 				break;
+			case LexerStates::S7:
+				if (this->input->Text[i] == '\n' || this->input->Text[i] == '\r') {
+					currentLexerState = LexerStates::S7;
+				}
+				else if (this->input->Text[i] == '/')
+					currentLexerState = LexerStates::S1;
+				else if (this->input->Text[i] == '\t') {
+					currentLexerState = LexerStates::S6;
+				}
+				else if (this->input->Text[i] == ' ') {
+					currentLexerState = LexerStates::S5;
+				}
+				else {
+					str += this->input->Text[i];
+					currentLexerState = LexerStates::S0;
+				}
+				break;
+			}
+		}
+		int numberString = 1;
+		for (int i = 0; i < str->Length; i++) {
+			if (i == 0) {
+				this->result->Text += numberString.ToString() + " " + str[i];
+				numberString++;
+			}
+			else if (str[i] == '\n') {
+				this->result->Text += str[i] + numberString.ToString() + " ";
+				numberString++;
+			}
+			else {
+				this->result->Text += str[i];
 			}
 		}
 	}

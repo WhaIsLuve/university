@@ -5,7 +5,6 @@ using namespace std;
 
 int main()
 {
-
    const int len = 100;
 
     char string[len];
@@ -19,4 +18,3 @@ int main()
         word = strtok(NULL, ",");
     }
 }
-
