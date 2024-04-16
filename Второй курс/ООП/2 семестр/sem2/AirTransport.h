@@ -3,11 +3,12 @@
 
 class AirTransport : public IAirTransport
 {
+	private:
+		bool _isFlying;
+		bool _isLanding;
 	protected:
 		int _capacity;
 		double _weight;
-		bool _isFlying;
-		bool _isLanding;
 	public:
 		AirTransport();
 		/// <summary>Создание объекта AirTransport.</summary>
@@ -43,5 +44,12 @@ class AirTransport : public IAirTransport
 
 		/// <summary>Приземлиться.</summary>
 		void Land();
+
+		bool operator==(const AirTransport& transport);
+		bool operator>(const AirTransport& transport);
+		bool operator>=(const AirTransport& transport);
+		bool operator<(const AirTransport& transport);
+		bool operator<=(const AirTransport& transport);
+		bool operator!=(AirTransport& transport);
 };
 

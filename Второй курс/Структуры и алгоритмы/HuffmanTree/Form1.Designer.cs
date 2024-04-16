@@ -50,6 +50,7 @@
 			// openFileDialog1
 			// 
 			openFileDialog1.FileName = "openFileDialog1";
+			openFileDialog1.Filter = "Txt Files|*.txt|Vlad files|*.vlad|BMPFiles|*.bmp";
 			// 
 			// inputFile
 			// 
@@ -67,6 +68,11 @@
 			Acrchive.Text = "Архивировать";
 			Acrchive.UseVisualStyleBackColor = true;
 			Acrchive.Click += Acrchive_Click;
+			// 
+			// saveFileDialog1
+			// 
+			saveFileDialog1.DefaultExt = "vlad";
+			saveFileDialog1.InitialDirectory = "C:\\Users\\Влад\\Desktop";
 			// 
 			// decode
 			// 

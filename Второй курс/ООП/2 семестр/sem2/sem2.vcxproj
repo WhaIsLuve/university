@@ -108,6 +108,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -130,7 +132,9 @@
     <ClCompile Include="AirTransport.cpp" />
     <ClCompile Include="BallonTransport.cpp" />
     <ClCompile Include="CheckValidation.cpp" />
+    <ClCompile Include="Dragonyd.cpp" />
     <ClCompile Include="EngineAirTransport.cpp" />
+    <ClCompile Include="FantasyAirTransport.cpp" />
     <ClCompile Include="ManualAirTransport.cpp" />
     <ClCompile Include="Rotorcraft.cpp" />
     <ClCompile Include="sem2.cpp" />
@@ -140,7 +144,9 @@
     <ClInclude Include="AirTransport.h" />
     <ClInclude Include="BallonTransport.h" />
     <ClInclude Include="CheckValidation.h" />
+    <ClInclude Include="Dragonyd.h" />
     <ClInclude Include="EngineAirTransport.h" />
+    <ClInclude Include="FantasyAirTransport.h" />
     <ClInclude Include="IAirTransport.h" />
     <ClInclude Include="ManualAirTransport.h" />
     <ClInclude Include="Rotorcraft.h" />

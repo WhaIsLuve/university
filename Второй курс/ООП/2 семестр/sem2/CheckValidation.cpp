@@ -1,19 +1,25 @@
-#include <exception>
 #include "CheckValidation.h"
+#include <stdexcept>
 using namespace std;
 
-double CheckValidation::CheckNegative(double number)
+int CheckValidation::CheckNumber(int number)
 {
 	if (number < 0) {
-		throw exception("Число не может быть отрицательным!!!");
+		throw invalid_argument("Число не может быть отрицательным!!!");
+	}
+	else if (number > 100) {
+		throw overflow_error("Транспорт переполнен");
 	}
 	return number;
 }
 
-int CheckValidation::CheckNegative(int number)
+double CheckValidation::CheckNumber(double number)
 {
 	if (number < 0) {
-		throw exception("Число не может быть отрицательным!!!");
+		throw invalid_argument("Число не может быть отрицательным!!!");
+	}
+	else if (number > 100) {
+		throw overflow_error("Транспорт переполнен");
 	}
 	return number;
 }

@@ -13,5 +13,5 @@ int ManualAirTransport::GetTimeInAir()
 
 void ManualAirTransport::SetTimeInAir(int timeInAirInSeconds)
 {
-    _timeInAirInSeconds = CheckValidation::CheckNegative(timeInAirInSeconds);
+    _timeInAirInSeconds = CheckValidation::CheckNumber(timeInAirInSeconds);
 }

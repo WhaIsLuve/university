@@ -1,6 +1,6 @@
 #pragma once
 class CheckValidation {
 public:
-	static double CheckNegative(double number);
-	static int CheckNegative(int number);
+	static int CheckNumber(int number);
+	static double CheckNumber(double number);
 };

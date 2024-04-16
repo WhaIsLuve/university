@@ -13,5 +13,5 @@ int WingyTransport::GetCountEngines()
 
 void WingyTransport::SetCountEngines(int countEngines)
 {
-    _countEngines = CheckValidation::CheckNegative(countEngines);
+    _countEngines = CheckValidation::CheckNumber(countEngines);
 }

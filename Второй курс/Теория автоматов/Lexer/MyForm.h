@@ -1,5 +1,7 @@
 #pragma once
 #include "LexerStates.cpp"
+#include "KeyWordStates.cpp"
+#include <set>
 
 namespace Lexer {
 
@@ -190,25 +192,170 @@ namespace Lexer {
 #pragma endregion
 
 	private: LexerStates currentLexerState = LexerStates::S0;
-	private: String^ keyWords = "int float double if else string for return switch case";
+	private: KeyWordStates currentsKeyWordState = KeyWordStates::S1;
 	private: System::Void startProcessing_Click(System::Object^ sender, System::EventArgs^ e) {
 		LexerAnalyze();
-		readingKeyWords();
+		ReadingKeyWords();
 	}
 
-	private: void readingKeyWords() {
-		auto keyWordArray = keyWords->Split();
-		int dataGridCount = 0;
-		keyWordsTable->RowCount = keyWordArray->Length;
-		for (int i = 0; i < this->input->Text->Length; i++) {
-			switch (switch_on)
+	private: void ReadingKeyWords() {
+		keyWordsTable->Rows->Clear();
+		keyWordsTable->RowCount = 60;
+		currentsKeyWordState = KeyWordStates::S1;
+		String^ str = this->result->Text;
+		String^ keyWord = "";
+		int keyWordIndex = 0;
+		for(int i = 0; i < str->Length; i++) {
+			switch (currentsKeyWordState)
 			{
+			case KeyWordStates::S1:
+				if (str[i] == 'i') {
+					currentsKeyWordState = KeyWordStates::S2;
+					keyWord += str[i];
+				}
+				if (str[i] == 'f') {
+					currentsKeyWordState = KeyWordStates::S5;
+					keyWord += str[i];
+				}
+				if (str[i] == 's') {
+					currentsKeyWordState = KeyWordStates::S7;
+					keyWord += str[i];
+				}
+				if (str[i] == 'e') {
+					currentsKeyWordState = KeyWordStates::S12;
+					keyWord += str[i];
+				}
+				break;
+			case KeyWordStates::S2:
+				if (str[i] == 'f') {
+					keyWord += str[i];
+					currentsKeyWordState = KeyWordStates::S3;
+				}
+				if (str[i] == 'n') {
+					keyWord += str[i];
+					currentsKeyWordState = KeyWordStates::S4;
+				}
+				else{ currentsKeyWordState = KeyWordStates::S1; keyWord = "";}
+				break;
+			case KeyWordStates::S4:
+				if (str[i] == 't') {
+					keyWord += str[i];
+					currentsKeyWordState = KeyWordStates::S3;
+				}
+				else{ currentsKeyWordState = KeyWordStates::S1; keyWord = "";}
+				break;
+			case KeyWordStates::S5:
+				if (str[i] == 'o') {
+					keyWord += str[i];
+					currentsKeyWordState = KeyWordStates::S6;
+				}
+				else{ currentsKeyWordState = KeyWordStates::S1; keyWord = "";}
+				break;
+			case KeyWordStates::S6:
+				if (str[i] == 'r') {
+					keyWord += str[i];
+					currentsKeyWordState = KeyWordStates::S3;
+				}
+				else{ currentsKeyWordState = KeyWordStates::S1; keyWord = "";}
+				break;
+			case KeyWordStates::S7:
+				if (str[i] == 't') {
+					keyWord += str[i];
+					currentsKeyWordState = KeyWordStates::S8;
+				}
+				else{ currentsKeyWordState = KeyWordStates::S1; keyWord = "";}
+				break;
+			case KeyWordStates::S8:
+				if (str[i] == 'r') {
+					keyWord += str[i];
+					currentsKeyWordState = KeyWordStates::S9;
+				}
+				else{ currentsKeyWordState = KeyWordStates::S1; keyWord = "";}
+				break;
+			case KeyWordStates::S9:
+				if (str[i] == 'i') {
+					keyWord += str[i];
+					currentsKeyWordState = KeyWordStates::S10;
+				}
+				else{ currentsKeyWordState = KeyWordStates::S1; keyWord = "";}
+				break;
+			case KeyWordStates::S10:
+				if (str[i] == 'n') {
+					keyWord += str[i];
+					currentsKeyWordState = KeyWordStates::S11;
+				}
+				else{ currentsKeyWordState = KeyWordStates::S1; keyWord = "";}
+				break;
+			case KeyWordStates::S11:
+				if (str[i] == 'g') {
+					keyWord += str[i];
+					currentsKeyWordState = KeyWordStates::S3;
+				}
+				else{ currentsKeyWordState = KeyWordStates::S1; keyWord = "";}
+				break;
+			case KeyWordStates::S12:
+				if (str[i] == 'l') {
+					keyWord += str[i];
+					currentsKeyWordState = KeyWordStates::S13;
+				}
+				else{ currentsKeyWordState = KeyWordStates::S1; keyWord = "";}
+				break;
+			case KeyWordStates::S13:
+				if (str[i] == 's') {
+					keyWord += str[i];
+					currentsKeyWordState = KeyWordStates::S14;
+				}
+				else{ currentsKeyWordState = KeyWordStates::S1; keyWord = "";}
+				break;
+			case KeyWordStates::S14:
+				if (str[i] == 'e') {
+					keyWord += str[i];
+					currentsKeyWordState = KeyWordStates::S3;
+				}
+				else{ currentsKeyWordState = KeyWordStates::S1; keyWord = "";}
+				break;
 			default:
 				break;
 			}
+			if (currentsKeyWordState == KeyWordStates::S3) {
+				if(i + 1 != str->Length) {
+					if (isNextSplit(str[i + 1]) && isContainInTable(keyWord) && isWordNext(str[i+1])) {
+						keyWordsTable->Rows[keyWordIndex]->Cells[0]->Value = keyWordIndex + 1;
+						keyWordsTable->Rows[keyWordIndex]->Cells[1]->Value = keyWord;
+						keyWordsTable->Rows[keyWordIndex]->Cells[2]->Value = keyWord;
+						keyWordIndex++;
+					}
+				}
+				else {
+					if (isContainInTable(keyWord)) {
+						keyWordsTable->Rows[keyWordIndex]->Cells[0]->Value = keyWordIndex + 1;
+						keyWordsTable->Rows[keyWordIndex]->Cells[1]->Value = keyWord;
+						keyWordsTable->Rows[keyWordIndex]->Cells[2]->Value = keyWord;
+						keyWordIndex++;
+					}
+				}
+				keyWord = "";
+				currentsKeyWordState = KeyWordStates::S1;
+			}
 		}
 	}
-
+	private: bool isWordNext(char ch) {
+		std::set<char> st = { ' ', '(', ')', '[', ']', '{', '}', ':', '\r', '\n', '\t' };
+		bool bl = st.count(ch);
+		return !bl;
+	}
+	private: bool isNextSplit(char ch) {
+		std::set<char> st = { ' ', '(', ')', '[', ']', '{', '}', ':', '\r', '\n', '\t'};
+		bool bl = st.count(ch);
+		return bl;
+   }
+	private: bool isContainInTable(String^ keyWord) {
+		for (int i = 0; i < keyWordsTable->Rows->Count; i++) {
+			if (keyWordsTable->Rows[i]->Cells[1]->Value == nullptr) return true;
+			if (keyWordsTable->Rows[i]->Cells[1]->Value->ToString() == keyWord) return false;
+		}
+		return true;
+	}
 	private: void LexerAnalyze() {
 		this->result->Text = "";
 		String^ str = "";

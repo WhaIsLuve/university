@@ -1,5 +1,6 @@
 #include "airTransport.h"
 #include <exception>
+#include <stdexcept>
 #include "CheckValidation.h"
 
 using namespace std;
@@ -8,16 +9,16 @@ using namespace std;
 
 AirTransport::AirTransport()
 {
-	_weight = 100;
-	_capacity = 100;
+	_weight = 50;
+	_capacity = 50;
 	_isFlying = false;
 	_isLanding = true;
 }
 
 AirTransport::AirTransport(int capacity, double weight)
 {
-	_capacity = CheckValidation::CheckNegative(capacity);
-	_weight = CheckValidation::CheckNegative(weight);
+	_capacity = CheckValidation::CheckNumber(capacity);
+	_weight = CheckValidation::CheckNumber(weight);
 	_isFlying = false;
 	_isLanding = true;
 }
@@ -29,7 +30,7 @@ int AirTransport::GetCapacity()
 
 void AirTransport::SetCapacity(int capacity)
 {
-	_capacity = CheckValidation::CheckNegative(capacity);
+	_capacity = CheckValidation::CheckNumber(capacity);
 }
 
 double AirTransport::GetWeight()
@@ -39,7 +40,7 @@ double AirTransport::GetWeight()
 
 void AirTransport::SetWeight(double weight)
 {
-	_weight = CheckValidation::CheckNegative(weight);
+	_weight = CheckValidation::CheckNumber(weight);
 }
 
 bool AirTransport::GetIsFlying()
@@ -54,12 +55,48 @@ bool AirTransport::GetIsLanding()
 
 void AirTransport::Fly()
 {
+	if (_isFlying && _isLanding) {
+		throw runtime_error("Такого не может быть!!!!");
+	}
 	_isFlying = true;
 	_isLanding = false;
 }
 
 void AirTransport::Land()
 {
+	if (_isFlying && _isLanding) {
+		throw logic_error("Такого не может быть!!!!");
+	}
 	_isFlying = false;
 	_isLanding = true;
+}
+
+bool AirTransport::operator==(const AirTransport& transport)
+{
+	return this->_weight == transport._weight && this->_capacity == transport._capacity;
+}
+
+bool AirTransport::operator>(const AirTransport& transport)
+{
+	return this->_weight > transport._weight && this->_capacity > transport._capacity;
+}
+
+bool AirTransport::operator>=(const AirTransport& transport)
+{
+	return this->_weight >= transport._weight && this->_capacity >= transport._capacity;
+}
+
+bool AirTransport::operator<(const AirTransport& transport)
+{
+	return this->_weight < transport._weight && this->_capacity < transport._capacity;
+}
+
+bool AirTransport::operator<=(const AirTransport& transport)
+{
+	return this->_weight <= transport._weight && this->_capacity <= transport._capacity;
+}
+
+bool AirTransport::operator!=(AirTransport& transport)
+{
+	return this->_weight != transport._weight && this->_capacity != transport._capacity;
 }

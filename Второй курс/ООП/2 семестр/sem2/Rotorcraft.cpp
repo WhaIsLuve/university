@@ -13,5 +13,5 @@ int Rotorcraft::GetCountRotor()
 
 void Rotorcraft::SetCountRotor(int countRotor)
 {
-    _countRotor = CheckValidation::CheckNegative(countRotor);
+    _countRotor = CheckValidation::CheckNumber(countRotor);
 }

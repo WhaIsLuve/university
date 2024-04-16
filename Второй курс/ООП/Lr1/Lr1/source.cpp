@@ -126,26 +126,8 @@ State Computer::notifyError(Programmer& programmer) {
 int main() 
 {
 	setlocale(LC_ALL,"rus");
-	Programmer programmer(State::Happy, 20);
-	Computer computer;
-	cout << "Бдительность программиста до работы: " << programmer.getAlertness() << endl;
-	cout << "Компьютер включен?" << computer.getIsWork() << endl;
-	cout << "Настроение программиста до работы: ";
-	StateToString(programmer.getMood());
-	
 
-	cout << "Начали работать: " << programmer.startWork(computer) << endl;
-	cout << "Бдительность программиста на работе: " << computer.working(programmer) << endl;
-	computer.notifyError(programmer);
-	computer.notifyError(programmer);
-	computer.notifyError(programmer);
-	computer.notifyError(programmer);
-	cout << "Настроение после нахождения бага: ";
-	StateToString(computer.notifyError(programmer));
-	cout << computer.getCountBug() << endl;
-	cout << programmer.fixBug(computer, 3) << endl;
-
-	/*airTransport a;
+	airTransport a;
 	airTransport x(500, color::White, "rocket", 20);
 	airTransport b(23, color::Black, "helicopter", 8);
 	List<airTransport> lst;
@@ -153,6 +135,6 @@ int main()
 	lst.add(x);
 	lst.add(b);
 	lst.add(a);
-	lst.show();*/
+	lst.show();
 	return 1;
 }

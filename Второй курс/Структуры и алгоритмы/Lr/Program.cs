@@ -6,6 +6,7 @@ using Lr4;
 using Lr5;
 using Lr6;
 using Sort;
+using System.Diagnostics;
 
 namespace Lr
 {
@@ -105,8 +106,45 @@ namespace Lr
 		static void Main()
 		{
 			int[] array = [4, 7, 1, 3, 0, -1];
-			Sort.Sort.InclusionSort(array);
-			Console.WriteLine("Готово");
+			int[] array2 = [4, 7, 1, 3, 0, -1];
+			int[] array3 = [4, 7, 1, 3, 0, -1];
+			Console.WriteLine("Insert Sort:");
+			Sort.Sort.PrintArray(array);
+			Sort.Sort.InsertSort(array);
+			Sort.Sort.PrintArray(array);
+			Console.WriteLine("Shaker Sort:");
+			Sort.Sort.PrintArray(array2);
+			Sort.Sort.ShakerSort(array2);
+			Sort.Sort.PrintArray(array2);
+			Console.WriteLine("Shell sort:");
+			Sort.Sort.PrintArray(array3);
+			Sort.Sort.ShellSort(array3);
+			Sort.Sort.PrintArray(array3);
+			Console.WriteLine();
+			Console.WriteLine();
+			Console.WriteLine("Введите длину массива");
+
+			int length = int.Parse(Console.ReadLine());
+			var rand = new Random();
+			int[] ints = new int[length];
+			for (int i = 0; i < length; i++)
+			{
+				ints[i] = rand.Next(-1999, 2000);
+
+			}
+			Sort.Sort.SetTimer([..ints], Sort.Sort.ShellSort, "Shell Sort");
+			Sort.Sort.SetTimer([..ints], Sort.Sort.InsertSort, "Insert Sort");
+			Sort.Sort.SetTimer(ints, Sort.Sort.ShakerSort, "Shaker Sort");
+			Console.WriteLine();
+
+			Sort.Sort.SetTimer(ints, Sort.Sort.ShellSort, "Sorted Shell Sort");
+			Sort.Sort.SetTimer(ints, Sort.Sort.InsertSort, "Sorted Insert Sort");
+			Sort.Sort.SetTimer(ints, Sort.Sort.ShakerSort, "Sorted Shaker Sort");
+			Console.WriteLine();
+			
+			Sort.Sort.SetTimer([.. ints.Reverse().ToArray()], Sort.Sort.ShellSort, "Reverse Shell Sort");
+			Sort.Sort.SetTimer([.. ints.Reverse().ToArray()], Sort.Sort.InsertSort, "Reverse Insert Sort");
+			Sort.Sort.SetTimer([.. ints.Reverse().ToArray()], Sort.Sort.ShakerSort, "Reverse Shaker Sort");
 		}
 	}
 }
