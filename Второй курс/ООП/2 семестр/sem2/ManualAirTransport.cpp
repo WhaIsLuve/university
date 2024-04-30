@@ -1,7 +1,7 @@
 #include "ManualAirTransport.h"
 #include "CheckValidation.h"
 
-ManualAirTransport::ManualAirTransport() : AirTransport()
+ManualAirTransport::ManualAirTransport() : AirTransport(4, 25)
 {
     _timeInAirInSeconds = 25;
 }

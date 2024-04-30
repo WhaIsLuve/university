@@ -1,7 +1,7 @@
 #include "WingyTransport.h"
 #include "CheckValidation.h"
 
-WingyTransport::WingyTransport() : EngineAirTransport()
+WingyTransport::WingyTransport() : EngineAirTransport(60, 70, 100, 46)
 {
     _countEngines = 4;
 }

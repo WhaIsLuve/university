@@ -4,7 +4,7 @@
 #include "WingyTransport.h"
 #include "Rotorcraft.h"
 #include "BallonTransport.h"
-#include "Dragonyd.h"
+#include "Stack.h"
 
 using namespace std;
 
@@ -22,11 +22,14 @@ int main()
     WingyTransport wingy;
     Rotorcraft helicopter;
     BallonTransport ballon;
-    Dragonyd dragon;
-    getCapacity(wingy);
+    Stack st;
+    st.Push(wingy);
+    st.Push(helicopter);
+    st.Push(ballon);
+    st.ToNull();
+    /*getCapacity(wingy);
     getCapacity(helicopter);
     getCapacity(ballon);
-    getCapacity(dragon);
     getEnginePower(wingy);
     getEnginePower(helicopter);
     try {
@@ -34,5 +37,5 @@ int main()
     }
     catch (exception ex) {
         cout << "ПОЙМАНО ИСКЛЮЧЕНИЕ:" << ex.what() << endl;
-    }
+    }*/
 }

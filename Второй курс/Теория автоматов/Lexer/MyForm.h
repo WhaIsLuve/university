@@ -1,6 +1,6 @@
 #pragma once
 #include "LexerStates.cpp"
-#include "KeyWordStates.cpp"
+#include "KeyWordAndRelationsSignsStates.cpp"
 #include <set>
 
 namespace Lexer {
@@ -49,6 +49,11 @@ namespace Lexer {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ KeyWord;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Pseudocode;
 	private: System::Windows::Forms::Label^ label3;
+	private: System::Windows::Forms::Label^ label4;
+	private: System::Windows::Forms::DataGridView^ relationsSignsTable;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ dataGridViewTextBoxColumn1;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ RelationsSigns;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ dataGridViewTextBoxColumn3;
 
 	private:
 		/// <summary>
@@ -73,7 +78,13 @@ namespace Lexer {
 			this->KeyWord = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Pseudocode = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->relationsSignsTable = (gcnew System::Windows::Forms::DataGridView());
+			this->dataGridViewTextBoxColumn1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->RelationsSigns = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->dataGridViewTextBoxColumn3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->keyWordsTable))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->relationsSignsTable))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// input
@@ -168,12 +179,58 @@ namespace Lexer {
 			this->label3->TabIndex = 6;
 			this->label3->Text = L"KeyWord";
 			// 
+			// label4
+			// 
+			this->label4->AutoSize = true;
+			this->label4->Location = System::Drawing::Point(1386, 220);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(98, 16);
+			this->label4->TabIndex = 8;
+			this->label4->Text = L"RelationsSigns";
+			// 
+			// relationsSignsTable
+			// 
+			this->relationsSignsTable->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->relationsSignsTable->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(3) {
+				this->dataGridViewTextBoxColumn1,
+					this->RelationsSigns, this->dataGridViewTextBoxColumn3
+			});
+			this->relationsSignsTable->Location = System::Drawing::Point(1279, 242);
+			this->relationsSignsTable->Name = L"relationsSignsTable";
+			this->relationsSignsTable->RowHeadersWidth = 51;
+			this->relationsSignsTable->RowTemplate->Height = 24;
+			this->relationsSignsTable->Size = System::Drawing::Size(549, 175);
+			this->relationsSignsTable->TabIndex = 7;
+			// 
+			// dataGridViewTextBoxColumn1
+			// 
+			this->dataGridViewTextBoxColumn1->HeaderText = L"Id";
+			this->dataGridViewTextBoxColumn1->MinimumWidth = 6;
+			this->dataGridViewTextBoxColumn1->Name = L"dataGridViewTextBoxColumn1";
+			this->dataGridViewTextBoxColumn1->Width = 125;
+			// 
+			// RelationsSigns
+			// 
+			this->RelationsSigns->HeaderText = L"RelationsSigns";
+			this->RelationsSigns->MinimumWidth = 6;
+			this->RelationsSigns->Name = L"RelationsSigns";
+			this->RelationsSigns->Width = 125;
+			// 
+			// dataGridViewTextBoxColumn3
+			// 
+			this->dataGridViewTextBoxColumn3->HeaderText = L"Pseudocode";
+			this->dataGridViewTextBoxColumn3->MinimumWidth = 6;
+			this->dataGridViewTextBoxColumn3->Name = L"dataGridViewTextBoxColumn3";
+			this->dataGridViewTextBoxColumn3->Width = 125;
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::HotTrack;
 			this->ClientSize = System::Drawing::Size(1895, 656);
+			this->Controls->Add(this->label4);
+			this->Controls->Add(this->relationsSignsTable);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->keyWordsTable);
 			this->Controls->Add(this->label2);
@@ -185,6 +242,7 @@ namespace Lexer {
 			this->Name = L"MyForm";
 			this->Text = L"MyForm";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->keyWordsTable))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->relationsSignsTable))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -192,7 +250,7 @@ namespace Lexer {
 #pragma endregion
 
 	private: LexerStates currentLexerState = LexerStates::S0;
-	private: KeyWordStates currentsKeyWordState = KeyWordStates::S1;
+	private: KeyWordAndRelationsSignsStates currentsKeyWordState = KeyWordAndRelationsSignsStates::S1;
 	private: System::Void startProcessing_Click(System::Object^ sender, System::EventArgs^ e) {
 		LexerAnalyze();
 		ReadingKeyWords();
@@ -201,143 +259,356 @@ namespace Lexer {
 	private: void ReadingKeyWords() {
 		keyWordsTable->Rows->Clear();
 		keyWordsTable->RowCount = 60;
-		currentsKeyWordState = KeyWordStates::S1;
+		relationsSignsTable->Rows->Clear();
+		relationsSignsTable->RowCount = 15;
+		currentsKeyWordState = KeyWordAndRelationsSignsStates::S1;
 		String^ str = this->result->Text;
-		String^ keyWord = "";
+		String^ word = "";
 		int keyWordIndex = 0;
+		int relationsSignsIndex = 0;
 		for(int i = 0; i < str->Length; i++) {
 			switch (currentsKeyWordState)
 			{
-			case KeyWordStates::S1:
-				if (str[i] == 'i') {
-					currentsKeyWordState = KeyWordStates::S2;
-					keyWord += str[i];
+			case KeyWordAndRelationsSignsStates::S1:
+				if (str[i] == 'i' && isNewWord(str, i)) {
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S2;
+					word += str[i];
 				}
-				if (str[i] == 'f') {
-					currentsKeyWordState = KeyWordStates::S5;
-					keyWord += str[i];
+				else if (str[i] == 'f' && isNewWord(str, i)) {
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S5;
+					word += str[i];
 				}
-				if (str[i] == 's') {
-					currentsKeyWordState = KeyWordStates::S7;
-					keyWord += str[i];
+				else if (str[i] == 's' && isNewWord(str, i)) {
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S7;
+					word += str[i];
 				}
-				if (str[i] == 'e') {
-					currentsKeyWordState = KeyWordStates::S12;
-					keyWord += str[i];
+				else if (str[i] == 'e' && isNewWord(str, i)) {
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S12;
+					word += str[i];
+				}
+				else if (str[i] == 'r' && isNewWord(str, i)) {
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S19;
+					word += str[i];
+				}
+				else if (str[i] == 'w' && isNewWord(str, i)) {
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S24;
+					word += str[i];
+				}
+				else if (str[i] == 'c' && isNewWord(str, i)) {
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S31;
+					word += str[i];
+				}
+				else if (str[i] == '=') {
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S34;
+					word += str[i];
+				}
+				else if (str[i] == '>') {
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S36;
+					word += str[i];
+				}
+				else if (str[i] == '<') {
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S37;
+					word += str[i];
+				}
+				else if (str[i] == '!') {
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S38;
+					word += str[i];
 				}
 				break;
-			case KeyWordStates::S2:
+			case KeyWordAndRelationsSignsStates::S2:
 				if (str[i] == 'f') {
-					keyWord += str[i];
-					currentsKeyWordState = KeyWordStates::S3;
+					word += str[i];
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S3;
 				}
-				if (str[i] == 'n') {
-					keyWord += str[i];
-					currentsKeyWordState = KeyWordStates::S4;
+				else if (str[i] == 'n') {
+					word += str[i];
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S4;
 				}
-				else{ currentsKeyWordState = KeyWordStates::S1; keyWord = "";}
+				else{ currentsKeyWordState = KeyWordAndRelationsSignsStates::S1; word = "";}
 				break;
-			case KeyWordStates::S4:
+			case KeyWordAndRelationsSignsStates::S4:
 				if (str[i] == 't') {
-					keyWord += str[i];
-					currentsKeyWordState = KeyWordStates::S3;
+					word += str[i];
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S3;
 				}
-				else{ currentsKeyWordState = KeyWordStates::S1; keyWord = "";}
+				else{ currentsKeyWordState = KeyWordAndRelationsSignsStates::S1; word = "";}
 				break;
-			case KeyWordStates::S5:
+			case KeyWordAndRelationsSignsStates::S5:
 				if (str[i] == 'o') {
-					keyWord += str[i];
-					currentsKeyWordState = KeyWordStates::S6;
+					word += str[i];
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S6;
 				}
-				else{ currentsKeyWordState = KeyWordStates::S1; keyWord = "";}
+				else if (str[i] == 'l') {
+					word += str[i];
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S28;
+				}
+				else{ currentsKeyWordState = KeyWordAndRelationsSignsStates::S1; word = "";}
 				break;
-			case KeyWordStates::S6:
+			case KeyWordAndRelationsSignsStates::S6:
 				if (str[i] == 'r') {
-					keyWord += str[i];
-					currentsKeyWordState = KeyWordStates::S3;
+					word += str[i];
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S3;
 				}
-				else{ currentsKeyWordState = KeyWordStates::S1; keyWord = "";}
+				else{ currentsKeyWordState = KeyWordAndRelationsSignsStates::S1; word = "";}
 				break;
-			case KeyWordStates::S7:
+			case KeyWordAndRelationsSignsStates::S7:
 				if (str[i] == 't') {
-					keyWord += str[i];
-					currentsKeyWordState = KeyWordStates::S8;
+					word += str[i];
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S8;
 				}
-				else{ currentsKeyWordState = KeyWordStates::S1; keyWord = "";}
+				else if (str[i] == 'w') {
+					word += str[i];
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S15;
+				}
+				else{ currentsKeyWordState = KeyWordAndRelationsSignsStates::S1; word = "";}
 				break;
-			case KeyWordStates::S8:
+			case KeyWordAndRelationsSignsStates::S8:
 				if (str[i] == 'r') {
-					keyWord += str[i];
-					currentsKeyWordState = KeyWordStates::S9;
+					word += str[i];
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S9;
 				}
-				else{ currentsKeyWordState = KeyWordStates::S1; keyWord = "";}
+				else{ currentsKeyWordState = KeyWordAndRelationsSignsStates::S1; word = "";}
 				break;
-			case KeyWordStates::S9:
+			case KeyWordAndRelationsSignsStates::S9:
 				if (str[i] == 'i') {
-					keyWord += str[i];
-					currentsKeyWordState = KeyWordStates::S10;
+					word += str[i];
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S10;
 				}
-				else{ currentsKeyWordState = KeyWordStates::S1; keyWord = "";}
+				else{ currentsKeyWordState = KeyWordAndRelationsSignsStates::S1; word = "";}
 				break;
-			case KeyWordStates::S10:
+			case KeyWordAndRelationsSignsStates::S10:
 				if (str[i] == 'n') {
-					keyWord += str[i];
-					currentsKeyWordState = KeyWordStates::S11;
+					word += str[i];
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S11;
 				}
-				else{ currentsKeyWordState = KeyWordStates::S1; keyWord = "";}
+				else{ currentsKeyWordState = KeyWordAndRelationsSignsStates::S1; word = "";}
 				break;
-			case KeyWordStates::S11:
+			case KeyWordAndRelationsSignsStates::S11:
 				if (str[i] == 'g') {
-					keyWord += str[i];
-					currentsKeyWordState = KeyWordStates::S3;
+					word += str[i];
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S3;
 				}
-				else{ currentsKeyWordState = KeyWordStates::S1; keyWord = "";}
+				else{ currentsKeyWordState = KeyWordAndRelationsSignsStates::S1; word = "";}
 				break;
-			case KeyWordStates::S12:
+			case KeyWordAndRelationsSignsStates::S12:
 				if (str[i] == 'l') {
-					keyWord += str[i];
-					currentsKeyWordState = KeyWordStates::S13;
+					word += str[i];
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S13;
 				}
-				else{ currentsKeyWordState = KeyWordStates::S1; keyWord = "";}
+				else{ currentsKeyWordState = KeyWordAndRelationsSignsStates::S1; word = "";}
 				break;
-			case KeyWordStates::S13:
+			case KeyWordAndRelationsSignsStates::S13:
 				if (str[i] == 's') {
-					keyWord += str[i];
-					currentsKeyWordState = KeyWordStates::S14;
+					word += str[i];
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S14;
 				}
-				else{ currentsKeyWordState = KeyWordStates::S1; keyWord = "";}
+				else{ currentsKeyWordState = KeyWordAndRelationsSignsStates::S1; word = "";}
 				break;
-			case KeyWordStates::S14:
+			case KeyWordAndRelationsSignsStates::S14:
 				if (str[i] == 'e') {
-					keyWord += str[i];
-					currentsKeyWordState = KeyWordStates::S3;
+					word += str[i];
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S3;
 				}
-				else{ currentsKeyWordState = KeyWordStates::S1; keyWord = "";}
+				else{ currentsKeyWordState = KeyWordAndRelationsSignsStates::S1; word = "";}
+				break;
+			case KeyWordAndRelationsSignsStates::S15:
+				if (str[i] == 'i') {
+					word += str[i];
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S16;
+				}
+				else { currentsKeyWordState = KeyWordAndRelationsSignsStates::S1; word = ""; }
+				break;
+			case KeyWordAndRelationsSignsStates::S16:
+				if (str[i] == 't') {
+					word += str[i];
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S17;
+				}
+				else { currentsKeyWordState = KeyWordAndRelationsSignsStates::S1; word = ""; }
+				break;
+			case KeyWordAndRelationsSignsStates::S17:
+				if (str[i] == 'c') {
+					word += str[i];
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S18;
+				}
+				else { currentsKeyWordState = KeyWordAndRelationsSignsStates::S1; word = ""; }
+				break;
+			case KeyWordAndRelationsSignsStates::S18:
+				if (str[i] == 'h') {
+					word += str[i];
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S3;
+				}
+				else { currentsKeyWordState = KeyWordAndRelationsSignsStates::S1; word = ""; }
+				break;
+			case KeyWordAndRelationsSignsStates::S19:
+				if (str[i] == 'e') {
+					word += str[i];
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S20;
+				}
+				else { currentsKeyWordState = KeyWordAndRelationsSignsStates::S1; word = ""; }
+				break;
+			case KeyWordAndRelationsSignsStates::S20:
+				if (str[i] == 't') {
+					word += str[i];
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S21;
+				}
+				else { currentsKeyWordState = KeyWordAndRelationsSignsStates::S1; word = ""; }
+				break;
+			case KeyWordAndRelationsSignsStates::S21:
+				if (str[i] == 'u') {
+					word += str[i];
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S22;
+				}
+				else { currentsKeyWordState = KeyWordAndRelationsSignsStates::S1; word = ""; }
+				break;
+			case KeyWordAndRelationsSignsStates::S22:
+				if (str[i] == 'r') {
+					word += str[i];
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S23;
+				}
+				else { currentsKeyWordState = KeyWordAndRelationsSignsStates::S1; word = ""; }
+				break;
+			case KeyWordAndRelationsSignsStates::S23:
+				if (str[i] == 'n') {
+					word += str[i];
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S3;
+				}
+				else { currentsKeyWordState = KeyWordAndRelationsSignsStates::S1; word = ""; }
+				break;
+			case KeyWordAndRelationsSignsStates::S24:
+				if (str[i] == 'h') {
+					word += str[i];
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S25;
+				}
+				else { currentsKeyWordState = KeyWordAndRelationsSignsStates::S1; word = ""; }
+				break;
+			case KeyWordAndRelationsSignsStates::S25:
+				if (str[i] == 'i') {
+					word += str[i];
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S26;
+				}
+				else { currentsKeyWordState = KeyWordAndRelationsSignsStates::S1; word = ""; }
+				break;
+			case KeyWordAndRelationsSignsStates::S26:
+				if (str[i] == 'l') {
+					word += str[i];
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S27;
+				}
+				else { currentsKeyWordState = KeyWordAndRelationsSignsStates::S1; word = ""; }
+				break;
+			case KeyWordAndRelationsSignsStates::S27:
+				if (str[i] == 'e') {
+					word += str[i];
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S3;
+				}
+				else { currentsKeyWordState = KeyWordAndRelationsSignsStates::S1; word = ""; }
+				break;
+			case KeyWordAndRelationsSignsStates::S28:
+				if (str[i] == 'o') {
+					word += str[i];
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S29;
+				}
+				else { currentsKeyWordState = KeyWordAndRelationsSignsStates::S1; word = ""; }
+				break;
+			case KeyWordAndRelationsSignsStates::S29:
+				if (str[i] == 'a') {
+					word += str[i];
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S30;
+				}
+				else { currentsKeyWordState = KeyWordAndRelationsSignsStates::S1; word = ""; }
+				break;
+			case KeyWordAndRelationsSignsStates::S30:
+				if (str[i] == 't') {
+					word += str[i];
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S3;
+				}
+				else { currentsKeyWordState = KeyWordAndRelationsSignsStates::S1; word = ""; }
+				break;
+			case KeyWordAndRelationsSignsStates::S31:
+				if (str[i] == 'h') {
+					word += str[i];
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S32;
+				}
+				else { currentsKeyWordState = KeyWordAndRelationsSignsStates::S1; word = ""; }
+				break;
+			case KeyWordAndRelationsSignsStates::S32:
+				if (str[i] == 'a') {
+					word += str[i];
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S33;
+				}
+				else { currentsKeyWordState = KeyWordAndRelationsSignsStates::S1; word = ""; }
+				break;
+			case KeyWordAndRelationsSignsStates::S33:
+				if (str[i] == 'r') {
+					word += str[i];
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S3;
+				}
+				else { currentsKeyWordState = KeyWordAndRelationsSignsStates::S1; word = ""; }
+				break;
+			case KeyWordAndRelationsSignsStates::S34:
+				if (str[i] == '=') {
+					word += str[i];
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S35;
+				}
+				else { currentsKeyWordState = KeyWordAndRelationsSignsStates::S1; word = ""; }
+				break;
+			case KeyWordAndRelationsSignsStates::S36:
+				if (str[i] == '=') {
+					word += str[i];
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S35;
+				}
+				else { currentsKeyWordState = KeyWordAndRelationsSignsStates::S35; }
+				break;
+			case KeyWordAndRelationsSignsStates::S37:
+				if (str[i] == '=') {
+					word += str[i];
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S35;
+				}
+				else { currentsKeyWordState = KeyWordAndRelationsSignsStates::S35; }
+				break;
+			case KeyWordAndRelationsSignsStates::S38:
+				if (str[i] == '=') {
+					word += str[i];
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S35;
+				}
+				else if (str[i] == '>' || str[i] == '<') {
+					word = "";
+					currentsKeyWordState = KeyWordAndRelationsSignsStates::S1;
+				}
+				else { currentsKeyWordState = KeyWordAndRelationsSignsStates::S35; }
 				break;
 			default:
 				break;
 			}
-			if (currentsKeyWordState == KeyWordStates::S3) {
+			if (currentsKeyWordState == KeyWordAndRelationsSignsStates::S3) {
 				if(i + 1 != str->Length) {
-					if (isNextSplit(str[i + 1]) && isContainInTable(keyWord) && isWordNext(str[i+1])) {
-						keyWordsTable->Rows[keyWordIndex]->Cells[0]->Value = keyWordIndex + 1;
-						keyWordsTable->Rows[keyWordIndex]->Cells[1]->Value = keyWord;
-						keyWordsTable->Rows[keyWordIndex]->Cells[2]->Value = keyWord;
+					if (isNextSplit(str[i + 1]) && isContainInTable(word) && !isWordNext(str[i+1])) {
+						WriteInTable(keyWordsTable, word, keyWordIndex);
 						keyWordIndex++;
 					}
 				}
 				else {
-					if (isContainInTable(keyWord)) {
-						keyWordsTable->Rows[keyWordIndex]->Cells[0]->Value = keyWordIndex + 1;
-						keyWordsTable->Rows[keyWordIndex]->Cells[1]->Value = keyWord;
-						keyWordsTable->Rows[keyWordIndex]->Cells[2]->Value = keyWord;
+					if (isContainInTable(word)) {
+						WriteInTable(keyWordsTable, word,  keyWordIndex);
 						keyWordIndex++;
 					}
 				}
-				keyWord = "";
-				currentsKeyWordState = KeyWordStates::S1;
+				word = "";
+				currentsKeyWordState = KeyWordAndRelationsSignsStates::S1;
+			}
+			else if (currentsKeyWordState == KeyWordAndRelationsSignsStates::S35) {
+				if (isContainInTable(word)) {
+					WriteInTable(relationsSignsTable, word, relationsSignsIndex);
+					relationsSignsIndex++;
+				}
+				word = "";
+				currentsKeyWordState = KeyWordAndRelationsSignsStates::S1;
 			}
 		}
+	}
+	private: void WriteInTable(DataGridView^ keyWordsTable, String^ keyWord, int keyWordIndex) {
+		keyWordsTable->Rows[keyWordIndex]->Cells[0]->Value = keyWordIndex + 1;
+		keyWordsTable->Rows[keyWordIndex]->Cells[1]->Value = keyWord;
+		keyWordsTable->Rows[keyWordIndex]->Cells[2]->Value = keyWord->ToUpper();
 	}
 	private: bool isWordNext(char ch) {
 		std::set<char> st = { ' ', '(', ')', '[', ']', '{', '}', ':', '\r', '\n', '\t' };
@@ -349,6 +620,11 @@ namespace Lexer {
 		bool bl = st.count(ch);
 		return bl;
    }
+
+	private: bool isNewWord(String^ str, int i) {
+		if (i == 2) return true;
+		return isNextSplit(str[i - 1]);
+	}
 	private: bool isContainInTable(String^ keyWord) {
 		for (int i = 0; i < keyWordsTable->Rows->Count; i++) {
 			if (keyWordsTable->Rows[i]->Cells[1]->Value == nullptr) return true;

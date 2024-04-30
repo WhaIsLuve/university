@@ -27,6 +27,7 @@ namespace Lr6
 		public static void CompressFile(string dataFile, string archFile)
 		{
 			int[] freqs = new int[256];
+			int fileSize = 0;
 
 			using(FileStream fs = new(dataFile, FileMode.Open))
 			{
@@ -36,10 +37,11 @@ namespace Lr6
 					
 					freqs[symbol]++;
 					symbol = fs.ReadByte();
+					fileSize++;
 				}
 			}
 			NormilizeFreqs(freqs);
-			ComressBytes(freqs, dataFile, archFile);
+			ComressBytes(freqs, dataFile, archFile, fileSize);
 		}
 
 		private static void NormilizeFreqs(int[] freqs)
@@ -55,9 +57,9 @@ namespace Lr6
 			}
 		}
 
-		private static void ComressBytes(int[] freqs, string dataFile, string archFile)
+		private static void ComressBytes(int[] freqs, string dataFile, string archFile, int fileSize)
 		{
-			CreateHeader(freqs, archFile, out int count);
+			CreateHeader(freqs, archFile, out int count, fileSize);
 			Node root = CreateHuffmanTree(freqs);
 			string[] codes = CreateHuffmanCode(root);
 			Compress(dataFile, codes, archFile, count);
@@ -66,16 +68,13 @@ namespace Lr6
 		private static void Compress(string dataFile, string[] codes, string archFile, int startIndex)
 		{
 			byte sum = 0;
-			var d = File.ReadAllBytes(dataFile);
-			var g = File.ReadAllBytes(archFile);
-			startIndex *= 2;
 			byte bit = 1;
 			using (FileStream fsData = new(dataFile, FileMode.Open, FileAccess.ReadWrite))
 			{
 				var symbol = fsData.ReadByte();
 				using(FileStream fcArch = new(archFile, FileMode.OpenOrCreate, FileAccess.Write))
 				{
-					fcArch.Position = startIndex+1;
+					fcArch.Position = startIndex;
 
 					while (symbol != -1)
 					{
@@ -98,10 +97,9 @@ namespace Lr6
 						}
 						symbol = fsData.ReadByte();
 					}
-				if(bit > 1) fcArch.WriteByte(sum);
+					if(bit > 1) fcArch.WriteByte(sum);
 				}
 			}
-			var y = File.ReadAllBytes(archFile);
 		}
 
 		private static string[] CreateHuffmanCode(Node root)
@@ -141,90 +139,96 @@ namespace Lr6
 			return priorityQueue.Dequeue();
 		}
 
-		private static void CreateHeader(int[] freqs, string archFile, out int count)
+		private static void CreateHeader(int[] freqs, string archFile, out int count, int fileSize)
 		{
 			count = 0;
-			using(FileStream fs = new FileStream(archFile, FileMode.OpenOrCreate, FileAccess.Write))
+			for (int i = 0; i < freqs.Length; i++)
 			{
-				for (int i = 0; i < freqs.Length; i++) 
+				if (freqs[i] > 0)
 				{
-						if (freqs[i] > 0)
-						{
-							fs.WriteByte((byte)i);
-							fs.WriteByte((byte)freqs[i]);
-							count++;
-						}
+					count++;
+				}
+			}
+			using (FileStream fs = new FileStream(archFile, FileMode.OpenOrCreate, FileAccess.Write))
+			{
+				fs.WriteByte((byte)(fileSize & 255));
+				fs.WriteByte((byte)((fileSize >> 8) & 255));
+				fs.WriteByte((byte)((fileSize >> 16) & 255));
+				fs.WriteByte((byte)((fileSize >> 24) & 255));
+				fs.WriteByte((byte)count);
+				count = count * 2 + 5;
+				for (int i = 0; i < freqs.Length; i++)
+				{
+					if (freqs[i] > 0)
+					{
+						fs.WriteByte((byte)i);
+						fs.WriteByte((byte)freqs[i]);
 					}
 				}
+			}
 		}
 
 		public static void DecompressFile(string archFile, string dataFile)
 		{
-			var arch = File.ReadAllBytes(archFile);
 			int[] freqs = new int[256];
-			ulong size = 0;
+			int startIndex = 0;
+			int countSymbols;
+			int size = 0;
 
 			using (FileStream fs = new(archFile, FileMode.Open, FileAccess.Read))
 			{
+				size = fs.ReadByte() | (fs.ReadByte() << 8) | (fs.ReadByte() << 16) | (fs.ReadByte() << 24);
+				countSymbols = fs.ReadByte();
 				var symbol = fs.ReadByte();
-				while (symbol != -1)
+				while (startIndex != (countSymbols*2))
 				{
 					freqs[symbol] = fs.ReadByte();
-					size += (ulong)freqs[symbol];
 					symbol = fs.ReadByte();
+					startIndex += 2;
 				}
 			}
-
-			byte[] data = DecomressBytes(arch, size);
-
-			File.WriteAllBytes(dataFile, data);
+			startIndex += 5;
+			DecomressBytes(freqs, size, startIndex, archFile, dataFile);
 		}
 
-		private static byte[] DecomressBytes(byte[] arch, ulong size)
+		private static void DecomressBytes(int[] freqs, int size, int startIndex, string archFile, string dataFile)
 		{
-			ParseHeader(arch,
-				out int startIndex, 
-				out int[] freqs);
 			Node root = CreateHuffmanTree(freqs);
-			byte[] data = Decomress(arch, startIndex, size, root);
-			return data;
+			Decomress(archFile, startIndex, size, root, dataFile);
 		}
 
-		private static byte[] Decomress(byte[] arch, int startIndex, ulong dataLength, Node root)
+		private static void Decomress(string archFile, int startIndex, int dataLength, Node root, string dataFile)
 		{
-			ulong size = 0;
+			int size = 0;
 			Node current = root;
-			byte[] data = new byte[dataLength];
-			for (int i = startIndex; i < arch.Length; i++)
+			using(FileStream fsArch = new(archFile, FileMode.OpenOrCreate, FileAccess.ReadWrite))
 			{
-				for(int bit = 1; bit <= 128; bit <<= 1)
+				fsArch.Position = startIndex;
+				var code = fsArch.ReadByte();
+				using (FileStream fsData = new(dataFile, FileMode.OpenOrCreate, FileAccess.ReadWrite))
 				{
-					if ((arch[i] & bit) == 0)
-						current = current.left;
-					else
-						current = current.right;
-					if(current.left == null)
+					while (code != -1) 
 					{
-						if(size < dataLength) 
-							data[size++] = current.symbol;
-						current = root;
+						for (int bit = 1; bit <= 128; bit <<= 1)
+						{
+								if ((code & bit) == 0)
+									current = current.left;
+								else
+									current = current.right;
+								if (current.left == null)
+								{
+									if (size < dataLength)
+									{
+										fsData.WriteByte(current.symbol);
+										size++;
+									}
+									current = root;
+								}
+							}
+						code = fsArch.ReadByte();
 					}
 				}
 			}
-			return data;
-		}
-
-		private static void ParseHeader(byte[] arch, out int startIndex, out int[] freqs)
-		{
-			freqs = new int[256];
-			int count = arch[4];
-			if (count == 0) count = 256;
-			for(int i = 0; i < count; i++)
-			{
-				byte symbol = arch[5 + i * 2];
-				freqs[symbol] = arch[5 + i * 2 + 1];
-			}
-			startIndex = 5 + 2 * count;
 		}
 	}
 }
