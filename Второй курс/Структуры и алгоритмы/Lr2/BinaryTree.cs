@@ -1,35 +1,145 @@
-﻿namespace Lr2
+﻿using System.Text;
+using System.Xml.Linq;
+
+namespace Lr2
 {
 	public class BinaryTree
 	{
-		public class NodeTree(int data)
+		public class NodeTree(string data)
 		{
-			public int value = data;
+			public string value = data;
 			public NodeTree? left;
 			public NodeTree? right;
+			public int count = 1;
 		}
 
 		public NodeTree? head;
 
-		public void Add(int data) => head = Add(head, data);
+		public BinaryTree()
+		{
+			File.WriteAllText(resultPathFile, "");
+		}
 
-		private NodeTree Add(NodeTree? tree, int data)
+		private readonly char[] splitter = { ' ', ',', '.', '!', ':', ';', '?', '–', '—', '―', '°', '*', '*', '[', '-', '\n', '\r', '\t', ']', '(', ')', '…', '«', '»', '“', '“', '\'', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '„', '‘', '’', ' ', '_', '\"', '/', '&', '=' };
+
+		public readonly string resultPathFile = @"C:\Users\Влад\Desktop\Университет\Второй курс\Структуры и алгоритмы\result.txt";
+
+		public void Add(string data) => head = Add(head, data);
+
+		private NodeTree Add(NodeTree? tree, string data)
 		{
 			var tmp = tree;
-			if(tree == null)
+			if (tree == null)
 			{
 				return new NodeTree(data);
 			}
-			else
-			{
-				var rand = new Random();
-				if(rand.Next() % 2 == 0)
-					tmp.left = Add(tree.left, data);
-				else
-					tmp.right = Add(tree.right, data);
-			}
-			return tmp;
+			var comparer = data.CompareTo(tree.value);
+			if (comparer < 0) tmp.left = Add(tree.left, data);
+			else if (comparer > 0) tmp.right = Add(tree.right, data);
+			else tree.count++;
+			return tmp!;
 		}
+
+		public void ReadFile(string path, PrintMode printMode, string? findWord = null, int? length = null)
+		{
+			var text = File.ReadAllText(path).Split(splitter);
+			foreach (var word in text)
+			{
+				if(word.Length > 0 && !word.All(c => splitter.Contains(c)))
+					Add(word.ToLower());
+			}
+			switch (printMode)
+			{
+				case PrintMode.PrintFrequencyByAlphabet:
+					PrintFrequencyByAlphabet();
+					break;
+				case PrintMode.PrintFrequencySorted:
+					PrintFrequencySorted();
+					break;
+				case PrintMode.FindWord:
+					FindWord(findWord!);
+					break;
+				case PrintMode.PrintFrequencyByLength:
+					PrintFrequencyByAlphabet(length);
+					break;
+			}
+		}
+
+		private void PrintFrequencySorted()
+		{
+			List<NodeTree> nodeTrees = [];
+			PrintFrequencySorted(nodeTrees, head);
+			nodeTrees.Sort((n1, n2) => n2.count - n1.count);
+			using(FileStream fs = new(resultPathFile, FileMode.Open))
+			{
+				foreach(var node in nodeTrees)
+				{
+					Span<byte> span = Encoding.Default.GetBytes($"{node.value} - {node.count}\r\n");
+					fs.Write(span);
+				}
+			}
+		}
+
+		private void PrintFrequencySorted(List<NodeTree> nodeTrees, NodeTree? node)
+		{
+			if (node is null) return;
+			PrintFrequencySorted(nodeTrees, node.left);
+			nodeTrees.Add(node);
+			PrintFrequencySorted(nodeTrees, node.right);
+
+		}
+
+		private void FindWord(string findWord)
+		{
+			bool flag = true;
+			FindWord(head, findWord.ToLower(), ref flag);
+			if (flag)
+			{
+				File.WriteAllText(resultPathFile, "Такого слова нет");
+			}
+		}
+
+		private void FindWord(NodeTree? node, string findWord, ref bool flag)
+		{
+			if(node == null) return;
+			if(node.value == findWord)
+			{
+				using(FileStream fs = new(resultPathFile, FileMode.Open))
+				{
+					Span<byte> span = Encoding.Default.GetBytes($"{node.value} - {node.count}\r\n");
+					fs.Write(span);
+				}
+				flag = false;
+			}
+			if(node.value.CompareTo(findWord) < 0) FindWord(node.left, findWord, ref flag);
+			else if(node.value.CompareTo(findWord) > 0) FindWord(node.right, findWord, ref flag);
+		}
+
+		private void PrintFrequencyByAlphabet(int? length = null)
+		{
+			using(FileStream fs = new(resultPathFile, FileMode.Open, FileAccess.Write))
+			{
+				PrintFrequencyByAlphabet(head, fs, length);
+			}
+		}
+
+		void PrintFrequencyByAlphabet(NodeTree node, FileStream fs, int? length = null)
+		{
+			if(node == null) return;
+			PrintFrequencyByAlphabet(node.right, fs, length);
+			if(length is null)
+			{
+				Span<byte> span = Encoding.Default.GetBytes($"{node.value} - {node.count}\r\n");
+				fs.Write(span);
+			}
+			else if(node.value.Length == length)
+			{
+				Span<byte> span = Encoding.Default.GetBytes($"{node.value} - {node.count}\r\n");
+				fs.Write(span);
+			}
+			PrintFrequencyByAlphabet(node.left, fs, length);
+		}
+
 
 		/// <summary>Прямой вывод дерева.</summary>
 		public void PrintTreeS()

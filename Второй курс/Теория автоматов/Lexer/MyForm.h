@@ -54,6 +54,15 @@ namespace Lexer {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ dataGridViewTextBoxColumn1;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ RelationsSigns;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ dataGridViewTextBoxColumn3;
+	private: System::Windows::Forms::Label^ label5;
+	private: System::Windows::Forms::DataGridView^ dataGridView1;
+
+
+
+	private: System::Windows::Forms::Button^ standartCode;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ dataGridViewTextBoxColumn2;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ OperationSigns;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ dataGridViewTextBoxColumn5;
 
 	private:
 		/// <summary>
@@ -83,8 +92,15 @@ namespace Lexer {
 			this->dataGridViewTextBoxColumn1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->RelationsSigns = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->dataGridViewTextBoxColumn3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->label5 = (gcnew System::Windows::Forms::Label());
+			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
+			this->standartCode = (gcnew System::Windows::Forms::Button());
+			this->dataGridViewTextBoxColumn2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->OperationSigns = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->dataGridViewTextBoxColumn5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->keyWordsTable))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->relationsSignsTable))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// input
@@ -98,7 +114,7 @@ namespace Lexer {
 			// 
 			// result
 			// 
-			this->result->Location = System::Drawing::Point(697, 31);
+			this->result->Location = System::Drawing::Point(576, 31);
 			this->result->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->result->Multiline = true;
 			this->result->Name = L"result";
@@ -129,7 +145,7 @@ namespace Lexer {
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(917, 9);
+			this->label2->Location = System::Drawing::Point(796, 9);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(39, 16);
 			this->label2->TabIndex = 4;
@@ -142,7 +158,7 @@ namespace Lexer {
 				this->Id, this->KeyWord,
 					this->Pseudocode
 			});
-			this->keyWordsTable->Location = System::Drawing::Point(1279, 31);
+			this->keyWordsTable->Location = System::Drawing::Point(1155, 31);
 			this->keyWordsTable->Name = L"keyWordsTable";
 			this->keyWordsTable->RowHeadersWidth = 51;
 			this->keyWordsTable->RowTemplate->Height = 24;
@@ -173,20 +189,20 @@ namespace Lexer {
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(1386, 9);
+			this->label3->Location = System::Drawing::Point(1262, 9);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(63, 16);
+			this->label3->Size = System::Drawing::Size(85, 16);
 			this->label3->TabIndex = 6;
-			this->label3->Text = L"KeyWord";
+			this->label3->Text = L"KeyWord(10)";
 			// 
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(1386, 220);
+			this->label4->Location = System::Drawing::Point(1262, 220);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(98, 16);
+			this->label4->Size = System::Drawing::Size(120, 16);
 			this->label4->TabIndex = 8;
-			this->label4->Text = L"RelationsSigns";
+			this->label4->Text = L"RelationsSigns(20)";
 			// 
 			// relationsSignsTable
 			// 
@@ -195,7 +211,7 @@ namespace Lexer {
 				this->dataGridViewTextBoxColumn1,
 					this->RelationsSigns, this->dataGridViewTextBoxColumn3
 			});
-			this->relationsSignsTable->Location = System::Drawing::Point(1279, 242);
+			this->relationsSignsTable->Location = System::Drawing::Point(1155, 242);
 			this->relationsSignsTable->Name = L"relationsSignsTable";
 			this->relationsSignsTable->RowHeadersWidth = 51;
 			this->relationsSignsTable->RowTemplate->Height = 24;
@@ -223,12 +239,70 @@ namespace Lexer {
 			this->dataGridViewTextBoxColumn3->Name = L"dataGridViewTextBoxColumn3";
 			this->dataGridViewTextBoxColumn3->Width = 125;
 			// 
+			// label5
+			// 
+			this->label5->AutoSize = true;
+			this->label5->Location = System::Drawing::Point(1262, 425);
+			this->label5->Name = L"label5";
+			this->label5->Size = System::Drawing::Size(122, 16);
+			this->label5->TabIndex = 10;
+			this->label5->Text = L"OperationSigns(30)";
+			// 
+			// dataGridView1
+			// 
+			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(3) {
+				this->dataGridViewTextBoxColumn2,
+					this->OperationSigns, this->dataGridViewTextBoxColumn5
+			});
+			this->dataGridView1->Location = System::Drawing::Point(1155, 447);
+			this->dataGridView1->Name = L"dataGridView1";
+			this->dataGridView1->RowHeadersWidth = 51;
+			this->dataGridView1->RowTemplate->Height = 24;
+			this->dataGridView1->Size = System::Drawing::Size(549, 175);
+			this->dataGridView1->TabIndex = 9;
+			// 
+			// standartCode
+			// 
+			this->standartCode->Location = System::Drawing::Point(176, 560);
+			this->standartCode->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->standartCode->Name = L"standartCode";
+			this->standartCode->Size = System::Drawing::Size(112, 62);
+			this->standartCode->TabIndex = 11;
+			this->standartCode->Text = L"add standart code";
+			this->standartCode->UseVisualStyleBackColor = true;
+			this->standartCode->Click += gcnew System::EventHandler(this, &MyForm::standartCode_Click);
+			// 
+			// dataGridViewTextBoxColumn2
+			// 
+			this->dataGridViewTextBoxColumn2->HeaderText = L"Id";
+			this->dataGridViewTextBoxColumn2->MinimumWidth = 6;
+			this->dataGridViewTextBoxColumn2->Name = L"dataGridViewTextBoxColumn2";
+			this->dataGridViewTextBoxColumn2->Width = 125;
+			// 
+			// OperationSigns
+			// 
+			this->OperationSigns->HeaderText = L"OperationSigns";
+			this->OperationSigns->MinimumWidth = 6;
+			this->OperationSigns->Name = L"OperationSigns";
+			this->OperationSigns->Width = 125;
+			// 
+			// dataGridViewTextBoxColumn5
+			// 
+			this->dataGridViewTextBoxColumn5->HeaderText = L"Pseudocode";
+			this->dataGridViewTextBoxColumn5->MinimumWidth = 6;
+			this->dataGridViewTextBoxColumn5->Name = L"dataGridViewTextBoxColumn5";
+			this->dataGridViewTextBoxColumn5->Width = 125;
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::HotTrack;
-			this->ClientSize = System::Drawing::Size(1895, 656);
+			this->ClientSize = System::Drawing::Size(1924, 656);
+			this->Controls->Add(this->standartCode);
+			this->Controls->Add(this->label5);
+			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->label4);
 			this->Controls->Add(this->relationsSignsTable);
 			this->Controls->Add(this->label3);
@@ -243,6 +317,7 @@ namespace Lexer {
 			this->Text = L"MyForm";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->keyWordsTable))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->relationsSignsTable))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -255,7 +330,12 @@ namespace Lexer {
 		LexerAnalyze();
 		ReadingKeyWords();
 	}
-
+		   // if_ int_ else_ for_ while_ string_ switch_ return_ float_ char_ 
+		   // double const do class enum struct using namespace static public 
+		   // private protected auto try catch throw case bool break continue
+		   // default delete true false friend goto long short template operator
+		   // typedef typename sizeof new this virtual void explicit inline nullptr
+		   // dynamic_cast extern mutable noexcept static_cast thread_local typeid wchar_t static_assert const_cast
 	private: void ReadingKeyWords() {
 		keyWordsTable->Rows->Clear();
 		keyWordsTable->RowCount = 60;
@@ -740,5 +820,8 @@ namespace Lexer {
 			}
 		}
 	}
-	};
+	private: System::Void standartCode_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->input->Text = "#include <iostream>\r\n#include <string>\r\n#include <algorithm>\r\n\r\n\tint main() {\r\n\tsetlocale(LC_ALL, \"rus\");\r\n\tstd::string str;\r\n\tstd::cout << \"Введите строку: \";\r\n\tstd::getline(std::cin, str);\r\n\tstd::string newStr;\r\n\tfor (int i = 0; i < str.length(); i++) {\r\n\tif (str[i] == ' ') {\r\n\t\tif (i > 0) {\r\n\t\t\tnewStr += std::toupper(str[++i]);\r\n\t\t}\r\n\t}\r\n\telse {\r\n\t\tnewStr += str[i];\r\n\t}\r\n\t}\r\n\tstd::cout << \"Обратная строка: \" << newStr << std::endl;\r\n\treturn 0;\r\n\t}";
+	}
+};
 	};

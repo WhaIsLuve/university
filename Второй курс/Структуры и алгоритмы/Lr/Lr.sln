@@ -15,9 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lr5", "..\Lab5\Lr5.csproj",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lr6", "..\Lr6\Lr6.csproj", "{964BE56C-59C8-45EA-8F87-7789E03A8C5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "acrhiver", "..\HuffmanTree\acrhiver.csproj", "{DCD97F22-794F-4E1D-882C-79C49E08D0DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "acrhiver", "..\HuffmanTree\acrhiver.csproj", "{DCD97F22-794F-4E1D-882C-79C49E08D0DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sort", "..\Sort\Sort.csproj", "{92139F37-0CCE-48E0-8A57-10943C792316}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sort", "..\Sort\Sort.csproj", "{92139F37-0CCE-48E0-8A57-10943C792316}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrequencyDict", "..\FrequencyDict\FrequencyDict.csproj", "{88E041D6-EC23-4E18-B0C5-77EDAD961743}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{92139F37-0CCE-48E0-8A57-10943C792316}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92139F37-0CCE-48E0-8A57-10943C792316}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92139F37-0CCE-48E0-8A57-10943C792316}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88E041D6-EC23-4E18-B0C5-77EDAD961743}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88E041D6-EC23-4E18-B0C5-77EDAD961743}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88E041D6-EC23-4E18-B0C5-77EDAD961743}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88E041D6-EC23-4E18-B0C5-77EDAD961743}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

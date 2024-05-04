@@ -54,7 +54,7 @@ namespace Lr
 			var rnd = new Random();
 			var countElementInTree = 10;//rnd.Next(5, 10);
 			for (int i = 0; i < countElementInTree; i++)
-				tree.Add(rnd.Next(1, 100));
+				tree.Add(rnd.Next(1, 100).ToString());
 			Console.WriteLine("Original tree:");
 			tree.PrintTreeS();
 			tree.PrintTreeR();
@@ -103,7 +103,7 @@ namespace Lr
 			Lab5.Variant5(array);
 		}
 
-		static void Main()
+		static void Main6()
 		{
 			int[] array = [4, 7, 1, 3, 0, -1];
 			int[] array2 = [4, 7, 1, 3, 0, -1];
@@ -145,6 +145,17 @@ namespace Lr
 			Sort.Sort.SetTimer([.. ints.Reverse().ToArray()], Sort.Sort.ShellSort, "Reverse Shell Sort");
 			Sort.Sort.SetTimer([.. ints.Reverse().ToArray()], Sort.Sort.InsertSort, "Reverse Insert Sort");
 			Sort.Sort.SetTimer([.. ints.Reverse().ToArray()], Sort.Sort.ShakerSort, "Reverse Shaker Sort");
+		}
+
+		public static void Main()
+		{
+			BinaryTree binaryTree = new();
+			binaryTree.Add("b");
+			binaryTree.Add("a");
+			binaryTree.Add("c");
+			binaryTree.Add("bb");
+			binaryTree.Add("bb");
+			binaryTree.PrintTreeC();
 		}
 	}
 }

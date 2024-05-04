@@ -32,34 +32,24 @@ namespace Lr5
 			Console.ForegroundColor = ConsoleColor.White;
 			Console.WriteLine($"Максимальная сумма чисел: {maxPathAndIndex[0]}");
 			int n1 = 0, n2 = maxPathAndIndex[1];
-			path[n1, n2] = 100;
-			var N1 = direction.GetLength(0);
-			var N2 = direction.GetLength(1);
-			while (n1 < N1 - 1)
+			while(n1 <= direction.GetLength(0) - 1)
 			{
-				int down = (n1 < N1 - 2) ? direction[n1 + 2, n2] : int.MinValue;
-				int left_down = (n2 > 0) ? direction[n1 + 1, n2 - 1] : int.MinValue;
-				int right_down = (n2 < N2 - 1) ? direction[n1 + 1, n2 + 1] : int.MinValue;
-
-				if (down > left_down && down > right_down)
+				var p = path[n1, n2];
+				path[n1, n2] = 100;
+				if (p == 1)
 				{
-					n1 += 2;
-				}
-				else if (left_down > down && left_down > right_down)
-				{
-					n1++;
 					n2--;
+					n1++;
 				}
-				else if (right_down > down && right_down > left_down)
+				else if (p == -1)
 				{
 					n1++;
 					n2++;
 				}
-				else
+				else if(p == 0)
 				{
 					n1 += 2;
 				}
-				path[n1, n2] = 100;
 			}
 			for (int i = 0; i < direction.GetLength(0); i++)
 			{
