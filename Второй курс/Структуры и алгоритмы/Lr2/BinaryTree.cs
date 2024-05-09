@@ -111,8 +111,9 @@ namespace Lr2
 				}
 				flag = false;
 			}
-			if(node.value.CompareTo(findWord) < 0) FindWord(node.left, findWord, ref flag);
-			else if(node.value.CompareTo(findWord) > 0) FindWord(node.right, findWord, ref flag);
+			
+			if(findWord.CompareTo(node.value) < 0) FindWord(node.left, findWord, ref flag);
+			else if(findWord.CompareTo(node.value) > 0) FindWord(node.right, findWord, ref flag);
 		}
 
 		private void PrintFrequencyByAlphabet(int? length = null)
@@ -126,7 +127,7 @@ namespace Lr2
 		void PrintFrequencyByAlphabet(NodeTree node, FileStream fs, int? length = null)
 		{
 			if(node == null) return;
-			PrintFrequencyByAlphabet(node.right, fs, length);
+			PrintFrequencyByAlphabet(node.left, fs, length);
 			if(length is null)
 			{
 				Span<byte> span = Encoding.Default.GetBytes($"{node.value} - {node.count}\r\n");
@@ -137,7 +138,7 @@ namespace Lr2
 				Span<byte> span = Encoding.Default.GetBytes($"{node.value} - {node.count}\r\n");
 				fs.Write(span);
 			}
-			PrintFrequencyByAlphabet(node.left, fs, length);
+			PrintFrequencyByAlphabet(node.right, fs, length);
 		}
 
 

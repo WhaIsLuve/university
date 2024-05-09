@@ -6,6 +6,7 @@ using Lr4;
 using Lr5;
 using Lr6;
 using Sort;
+using HashLr;
 using System.Diagnostics;
 
 namespace Lr
@@ -73,7 +74,7 @@ namespace Lr
 			Lab4.var1(input);
 		}
 
-		static void Main5() 
+		static void Main() 
 		{
 			var path = @"C:\Users\Влад\Desktop\Университет\Второй курс\Структуры и алгоритмы\input.txt";
 			var input = File.ReadAllText(path);
@@ -147,15 +148,16 @@ namespace Lr
 			Sort.Sort.SetTimer([.. ints.Reverse().ToArray()], Sort.Sort.ShakerSort, "Reverse Shaker Sort");
 		}
 
-		public static void Main()
+		public static void Main7()
 		{
-			BinaryTree binaryTree = new();
-			binaryTree.Add("b");
-			binaryTree.Add("a");
-			binaryTree.Add("c");
-			binaryTree.Add("bb");
-			binaryTree.Add("bb");
-			binaryTree.PrintTreeC();
+			Hash hash = new();
+			hash.AddA(4.5);
+			hash.AddA(4.8);
+			hash.AddA(10.234);
+			hash.AddA(102.234);
+			hash.AddA(1024.234);
+			hash.AddA(1028.234);
+			Console.WriteLine(hash.ToString());
 		}
 	}
-}
+}       

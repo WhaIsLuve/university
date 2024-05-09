@@ -28,7 +28,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="KeyWordAndRelationsSignsStates.cpp">
+    <None Include="States.cpp">
       <Filter>Исходные файлы</Filter>
     </None>
   </ItemGroup>
