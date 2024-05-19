@@ -2,10 +2,12 @@
 #include "LexerStates.cpp"
 #include "States.cpp"
 #include <set>
+#include <vector>
 
 namespace Lexer {
 
 	using namespace System;
+	using namespace System::Text;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
 	using namespace System::Windows::Forms;
@@ -585,7 +587,12 @@ namespace Lexer {
 	private: String^ resultWithoutNumbers = "";
 	private: States currentsKeyWordState = States::S1;
 	private: System::Void startProcessing_Click(System::Object^ sender, System::EventArgs^ e) {
-		LexerAnalyze();
+		int numbersString = LexerAnalyze();
+		if (currentLexerState == LexerStates::S3) {
+			this->result->Text = "";
+			MessageBox::Show("Error in line " + numbersString.ToString() + ". A multiline comment is not closed." "\n");
+			return;
+		}
 		ReadingKeyWords();
 	}
 		   // if_ int_ else_ for_ while_ string_ switch_ return_ float_ char_ 
@@ -614,6 +621,14 @@ namespace Lexer {
 		currentsKeyWordState = States::S1;
 		String^ str = resultWithoutNumbers;
 		String^ word = "";
+		int countOfDot = 0;
+		int numberLine = 1;
+		String^ listErrors;
+		String^ ERROR_IN_KEY_WORD = "Error in key word.";
+		String^ ERROR_IN_RELATIONS_SIGNS = "Error in relations signs.";
+		String^ ERROR_IN_OPERATIONS_SIGNS = "Error in operations signs.";
+		String^ ERROR_IN_CONST = "Error in constant.";
+		String^ ERROR_IN_ID = "Error in id.";
 		int keyWordIndex = 0;
 		int relationsSignsIndex = 0;
 		int operationsSignsIndex = 0;
@@ -672,7 +687,10 @@ namespace Lexer {
 				else if (str[i] == '%') {
 					currentsKeyWordState = States::S44;
 				}
-				else if (str[i] == '\r' || str[i] == '\n') continue;
+				else if (str[i] == '\r' || str[i] == '\n') {
+					if(str[i] == '\n') numberLine++;
+					continue;
+				}
 				else if (isSplitterForTable(str[i])) {
 					currentsKeyWordState = States::S46;
 				}
@@ -689,7 +707,12 @@ namespace Lexer {
 					if(i + 1 == str->Length)
 						currentsKeyWordState = States::S3;
 					else if (isWord(str[i+1])) {
-						currentsKeyWordState = States::S45;
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
 					}
 					else 
 						currentsKeyWordState = States::S3;
@@ -700,7 +723,7 @@ namespace Lexer {
 				else {
 					currentsKeyWordState = States::S45;
 				}
-				if (!isSplitterForTable(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -709,7 +732,12 @@ namespace Lexer {
 					if (i + 1 == str->Length)
 						currentsKeyWordState = States::S3;
 					else if (isWord(str[i + 1])) {
-						currentsKeyWordState = States::S45;
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
 					}
 					else
 						currentsKeyWordState = States::S3;
@@ -717,7 +745,7 @@ namespace Lexer {
 				else {
 					currentsKeyWordState = States::S45;
 				}
-				if (!isSplitterForTable(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -728,7 +756,7 @@ namespace Lexer {
 				else {
 					currentsKeyWordState = States::S45;
 				}
-				if (!isSplitterForTable(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -739,7 +767,7 @@ namespace Lexer {
 				else {
 					currentsKeyWordState = States::S45;
 				}
-				if (!isSplitterForTable(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -748,7 +776,12 @@ namespace Lexer {
 					if (i + 1 == str->Length)
 						currentsKeyWordState = States::S3;
 					else if (isWord(str[i + 1])) {
-						currentsKeyWordState = States::S45;
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
 					}
 					else
 						currentsKeyWordState = States::S3;
@@ -756,7 +789,7 @@ namespace Lexer {
 				else {
 					currentsKeyWordState = States::S45;
 				}
-				if (!isSplitterForTable(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -770,7 +803,7 @@ namespace Lexer {
 				else {
 					currentsKeyWordState = States::S45;
 				}
-				if (!isSplitterForTable(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -779,7 +812,12 @@ namespace Lexer {
 					if (i + 1 == str->Length)
 						currentsKeyWordState = States::S3;
 					else if (isWord(str[i + 1])) {
-						currentsKeyWordState = States::S45;
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
 					}
 					else
 						currentsKeyWordState = States::S3;
@@ -787,7 +825,7 @@ namespace Lexer {
 				else {
 					currentsKeyWordState = States::S45;
 				}
-				if (!isSplitterForTable(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -798,7 +836,7 @@ namespace Lexer {
 				else {
 					currentsKeyWordState = States::S45;
 				}
-				if (!isSplitterForTable(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -809,7 +847,7 @@ namespace Lexer {
 				else {
 					currentsKeyWordState = States::S45;
 				}
-				if (!isSplitterForTable(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -820,7 +858,7 @@ namespace Lexer {
 				else {
 					currentsKeyWordState = States::S45;
 				}
-				if (!isSplitterForTable(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -829,7 +867,12 @@ namespace Lexer {
 					if (i + 1 == str->Length)
 						currentsKeyWordState = States::S3;
 					else if (isWord(str[i + 1])) {
-						currentsKeyWordState = States::S45;
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
 					}
 					else
 						currentsKeyWordState = States::S3;
@@ -837,7 +880,7 @@ namespace Lexer {
 				else {
 					currentsKeyWordState = States::S45;
 				}
-				if (!isSplitterForTable(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -851,7 +894,7 @@ namespace Lexer {
 				else {
 					currentsKeyWordState = States::S45;
 				}
-				if (!isSplitterForTable(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -862,7 +905,7 @@ namespace Lexer {
 				else {
 					currentsKeyWordState = States::S45;
 				}
-				if (!isSplitterForTable(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -873,7 +916,7 @@ namespace Lexer {
 				else {
 					currentsKeyWordState = States::S45;
 				}
-				if (!isSplitterForTable(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -884,7 +927,7 @@ namespace Lexer {
 				else {
 					currentsKeyWordState = States::S45;
 				}
-				if (!isSplitterForTable(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -892,8 +935,13 @@ namespace Lexer {
 				if (str[i] == 'g') {
 					if (i + 1 == str->Length)
 						currentsKeyWordState = States::S3;
-					else if (isWord(str[i + 1])) {
-						currentsKeyWordState = States::S45;
+					else if (isWord(str[i + 1]) && str[i+1] != '>') {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
 					}
 					else
 						currentsKeyWordState = States::S3;
@@ -901,7 +949,7 @@ namespace Lexer {
 				else {
 					currentsKeyWordState = States::S45;
 				}
-				if (!isSplitterForTable(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -912,7 +960,7 @@ namespace Lexer {
 				else {
 					currentsKeyWordState = States::S45;
 				}
-				if (!isSplitterForTable(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -923,7 +971,7 @@ namespace Lexer {
 				else {
 					currentsKeyWordState = States::S45;
 				}
-				if (!isSplitterForTable(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -934,7 +982,7 @@ namespace Lexer {
 				else {
 					currentsKeyWordState = States::S45;
 				}
-				if (!isSplitterForTable(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -943,7 +991,12 @@ namespace Lexer {
 					if (i + 1 == str->Length)
 						currentsKeyWordState = States::S3;
 					else if (isWord(str[i + 1])) {
-						currentsKeyWordState = States::S45;
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
 					}
 					else
 						currentsKeyWordState = States::S3;
@@ -951,7 +1004,7 @@ namespace Lexer {
 				else {
 					currentsKeyWordState = States::S45;
 				}
-				if (!isSplitterForTable(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -962,7 +1015,7 @@ namespace Lexer {
 				else {
 					currentsKeyWordState = States::S45;
 				}
-				if (!isSplitterForTable(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -973,7 +1026,7 @@ namespace Lexer {
 				else {
 					currentsKeyWordState = States::S45;
 				}
-				if (!isSplitterForTable(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -984,7 +1037,7 @@ namespace Lexer {
 				else {
 					currentsKeyWordState = States::S45;
 				}
-				if (!isSplitterForTable(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -995,7 +1048,7 @@ namespace Lexer {
 				else {
 					currentsKeyWordState = States::S45;
 				}
-				if (!isSplitterForTable(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -1004,7 +1057,12 @@ namespace Lexer {
 					if (i + 1 == str->Length)
 						currentsKeyWordState = States::S3;
 					else if (isWord(str[i + 1])) {
-						currentsKeyWordState = States::S45;
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
 					}
 					else
 						currentsKeyWordState = States::S3;
@@ -1012,7 +1070,7 @@ namespace Lexer {
 				else {
 					currentsKeyWordState = States::S45;
 				}
-				if (!isSplitterForTable(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -1023,7 +1081,7 @@ namespace Lexer {
 				else {
 					currentsKeyWordState = States::S45;
 				}
-				if (!isSplitterForTable(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -1034,7 +1092,7 @@ namespace Lexer {
 				else {
 					currentsKeyWordState = States::S45;
 				}
-				if (!isSplitterForTable(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -1043,7 +1101,12 @@ namespace Lexer {
 					if (i + 1 == str->Length)
 						currentsKeyWordState = States::S3;
 					else if (isWord(str[i + 1])) {
-						currentsKeyWordState = States::S45;
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
 					}
 					else
 						currentsKeyWordState = States::S3;
@@ -1051,7 +1114,7 @@ namespace Lexer {
 				else {
 					currentsKeyWordState = States::S45;
 				}
-				if (!isSplitterForTable(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -1062,7 +1125,7 @@ namespace Lexer {
 				else {
 					currentsKeyWordState = States::S45;
 				}
-				if (!isSplitterForTable(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -1073,7 +1136,7 @@ namespace Lexer {
 				else {
 					currentsKeyWordState = States::S45;
 				}
-				if (!isSplitterForTable(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -1082,7 +1145,12 @@ namespace Lexer {
 					if (i + 1 == str->Length)
 						currentsKeyWordState = States::S3;
 					else if (isWord(str[i + 1])) {
-						currentsKeyWordState = States::S45;
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
 					}
 					else
 						currentsKeyWordState = States::S3;
@@ -1090,112 +1158,372 @@ namespace Lexer {
 				else {
 					currentsKeyWordState = States::S45;
 				}
-				if (!isSplitterForTable(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
 			case States::S34: // > >= >>
 				if (str[i] == '=') {
-					word += str[i];
-					currentsKeyWordState = States::S35;
+					if (i == str->Length - 1) {
+						word += str[i];
+						currentsKeyWordState = States::S35;
+					}
+					else if (isRelationsSigns(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_RELATIONS_SIGNS);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else {
+						word += str[i];
+						currentsKeyWordState = States::S35;
+					}
 				}
 				else if (str[i] == '>') {
-					word += str[i];
-					currentsKeyWordState = States::S39;
+					if (i == str->Length - 1) {
+						word += str[i];
+						currentsKeyWordState = States::S39;
+					}
+					else if (isOperationSigns(str[i + 1]) || isRelationsSigns(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_OPERATIONS_SIGNS);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else {
+						word += str[i];
+						currentsKeyWordState = States::S39;
+					}
 				}
 				else {
-					i--;
-					currentsKeyWordState = States::S35;
+					if (isRelationsSigns(str[i])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_RELATIONS_SIGNS);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else {
+						i--;
+						currentsKeyWordState = States::S35;
+					}
 				}
 				break;
 			case States::S36: // < <= <<
 				if (str[i] == '=') {
-					word += str[i];
-					currentsKeyWordState = States::S35;
+					if (i == str->Length - 1) {
+						word += str[i];
+						currentsKeyWordState = States::S35;
+					}
+					else if (isRelationsSigns(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_RELATIONS_SIGNS);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else {
+						word += str[i];
+						currentsKeyWordState = States::S35;
+					}
 				}
 				else if (str[i] == '<') {
-					word += str[i];
-					currentsKeyWordState = States::S39;
+					if (i == str->Length - 1) {
+						word += str[i];
+						currentsKeyWordState = States::S39;
+					}
+					else if (isOperationSigns(str[i + 1]) || isRelationsSigns(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_OPERATIONS_SIGNS);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else {
+						word += str[i];
+						currentsKeyWordState = States::S39;
+					}
 				}
 				else {
-					i--;
-					currentsKeyWordState = States::S35;
+					if (isRelationsSigns(str[i])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_RELATIONS_SIGNS);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else {
+						i--;
+						currentsKeyWordState = States::S35;
+					}
 				}
 				break;
 			case States::S37: // = ==
 				if (str[i] == '=') {
-					word += str[i];
-					currentsKeyWordState = States::S35;
+					if (i == str->Length - 1) {
+						word += str[i];
+						currentsKeyWordState = States::S35;
+					}
+					else if (isRelationsSigns(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_RELATIONS_SIGNS);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else {
+						word += str[i];
+						currentsKeyWordState = States::S35;
+					}
 				}
 				else {
+					if (isOperationSigns(str[i]) || isRelationsSigns(str[i])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_OPERATIONS_SIGNS);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
 					i--;
 					currentsKeyWordState = States::S39;
 				}
 				break;
 			case States::S38: // ! !=
 				if (str[i] == '=') {
-					word += str[i];
-					currentsKeyWordState = States::S35;
+					if (i == str->Length - 1) {
+						word += str[i];
+						currentsKeyWordState = States::S35;
+					}
+					else if (isRelationsSigns(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_RELATIONS_SIGNS);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else {
+						word += str[i];
+						currentsKeyWordState = States::S35;
+					}
 				}
 				else {
-					i--;
-					currentsKeyWordState = States::S30;
+					if (isRelationsSigns(str[i])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_RELATIONS_SIGNS);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else {
+						i--;
+						currentsKeyWordState = States::S35;
+					}
 				}
 				break;
 			case States::S40: // + += ++
 				if (str[i] == '=') {
-					word += str[i];
-					currentsKeyWordState = States::S39;
+					if (i == str->Length - 1) {
+						word += str[i];
+						currentsKeyWordState = States::S39;
+					}
+					else if (isOperationSigns(str[i+1]) || isRelationsSigns(str[i+1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_OPERATIONS_SIGNS);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else {
+						word += str[i];
+						currentsKeyWordState = States::S39;
+					}
 				}
 				else if (str[i] == '+') {
-					word += str[i];
-					currentsKeyWordState = States::S39;
+					if (i == str->Length - 1) {
+						word += str[i];
+						currentsKeyWordState = States::S39;
+					}
+					else if (isOperationSigns(str[i+1]) || isRelationsSigns(str[i+1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_OPERATIONS_SIGNS);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else {
+						word += str[i];
+						currentsKeyWordState = States::S39;
+					}
 				}
 				else {
+					if (isOperationSigns(str[i]) || isRelationsSigns(str[i])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_OPERATIONS_SIGNS);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
 					i--;
 					currentsKeyWordState = States::S39;
 				}
 				break;
 			case States::S41: // - -= --
 				if (str[i] == '=') {
-					word += str[i];
-					currentsKeyWordState = States::S39;
+					if (i == str->Length - 1) {
+						word += str[i];
+						currentsKeyWordState = States::S39;
+					}
+					else if (isOperationSigns(str[i+1]) || isRelationsSigns(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_OPERATIONS_SIGNS);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else {
+						word += str[i];
+						currentsKeyWordState = States::S39;
+					}
 				}
 				else if (str[i] == '-') {
-					word += str[i];
-					currentsKeyWordState = States::S39;
+					if (i == str->Length - 1) {
+						word += str[i];
+						currentsKeyWordState = States::S39;
+					}
+					else if (isOperationSigns(str[i + 1]) || isRelationsSigns(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_OPERATIONS_SIGNS);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else {
+						word += str[i];
+						currentsKeyWordState = States::S39;
+					}
 				}
 				else {
+					if (isOperationSigns(str[i]) || isRelationsSigns(str[i])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_OPERATIONS_SIGNS);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
 					i--;
 					currentsKeyWordState = States::S39;
 				}
 				break;
 			case States::S42: // * *=
 				if (str[i] == '=') {
-					word += str[i];
-					currentsKeyWordState = States::S39;
+					if (i == str->Length - 1) {
+						word += str[i];
+						currentsKeyWordState = States::S39;
+					}
+					else if (isOperationSigns(str[i + 1]) || isRelationsSigns(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_OPERATIONS_SIGNS);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else {
+						word += str[i];
+						currentsKeyWordState = States::S39;
+					}
 				}
 				else {
+					if (isOperationSigns(str[i]) || isRelationsSigns(str[i])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_OPERATIONS_SIGNS);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
 					i--;
 					currentsKeyWordState = States::S39;
 				}
 				break;
 			case States::S43: // / /=
 				if (str[i] == '=') {
-					word += str[i];
-					currentsKeyWordState = States::S39;
+					if (i == str->Length - 1) {
+						word += str[i];
+						currentsKeyWordState = States::S39;
+					}
+					else if (isOperationSigns(str[i + 1]) || isRelationsSigns(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_OPERATIONS_SIGNS);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else {
+						word += str[i];
+						currentsKeyWordState = States::S39;
+					}
 				}
 				else {
+					if (isOperationSigns(str[i]) || isRelationsSigns(str[i])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_OPERATIONS_SIGNS);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
 					i--;
 					currentsKeyWordState = States::S39;
 				}
 				break;
 			case States::S44: // % %=
 				if (str[i] == '=') {
-					word += str[i];
-					currentsKeyWordState = States::S39;
+					if (i == str->Length - 1) {
+						word += str[i];
+						currentsKeyWordState = States::S39;
+					}
+					else if (isOperationSigns(str[i + 1]) || isRelationsSigns(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_OPERATIONS_SIGNS);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else {
+						word += str[i];
+						currentsKeyWordState = States::S39;
+					}
 				}
 				else {
+					if (isOperationSigns(str[i]) || isRelationsSigns(str[i])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_OPERATIONS_SIGNS);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
 					i--;
 					currentsKeyWordState = States::S39;
 				}
@@ -1226,8 +1554,12 @@ namespace Lexer {
 					}
 				}
 				else {
-					if (isSplitterForTable(str[i])) {
+					if (isSplitter(str[i]) ||
+						isRelationsSigns(str[i]) ||
+						isOperationSigns(str[i])) {
 						i--;
+						currentsKeyWordState = States::S1;
+
 					}
 					else word += str[i];
 					if (!isContainInTable(word, idTable)) {
@@ -1241,11 +1573,30 @@ namespace Lexer {
 				}
 				break;
 			case States::S47: // constants
-				if (Char::IsDigit(str[i])) {
+				if (isConstant(str[i])) {
+					if (str[i] == '.') countOfDot++;
 					currentsKeyWordState = States::S47;
 					word += str[i];
 				}
-				else if (isSplitterForTable(str[i]) && str[i] != '.') {
+				else if (i != str->Length - 1) {
+					if (!isConstant(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_ID);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+				}
+				else if (isSplitterForTable(str[i]) && str[i] != '.' && str[i] != ' ') {
+					if (word[word->Length - 1] == '.' || countOfDot > 1) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_CONST);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
 					if (!isContainInTable(word, constTable)) {
 						WriteInConstTable(constTable, word, constTableIndex);
 						constTableIndex++;
@@ -1321,7 +1672,36 @@ namespace Lexer {
 				word = "";
 				currentsKeyWordState = States::S1;
 			}
+			if (i == str->Length - 1 && currentsKeyWordState == States::S47) {
+				if (word[word->Length - 1] == '.' || countOfDot > 1) {
+					array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_CONST);
+					listErrors += res[0];
+					i = Convert::ToInt32(res[1]);
+					word = "";
+					currentsKeyWordState = States::S1;
+					continue;
+				}
+				if (!isContainInTable(word, constTable)) {
+					WriteInConstTable(constTable, word, constTableIndex);
+					constTableIndex++;
+				}
+				this->descriptorCode->Text += getDescriptor(constTable, word);
+				this->pseudoCodes->Text += getPseudo(constTable, word);
+				word = "";
+				currentsKeyWordState = States::S1;
+			}
 		}
+		if(listErrors != nullptr)
+			MessageBox::Show(listErrors);
+	}
+	private: array<String^>^ addError(String^ listErrors, String^ word, String^ str, int i, int numberLine, String^ errorMessage) {
+		while (!isSplitter(str[i])) {
+			word += str[i];
+			i++;
+			if (i == str->Length) break;
+		}
+		array<String^>^ res = { ("Error in line " + numberLine.ToString() + " in word " + word + ". " + errorMessage + "\n") , i.ToString()};
+		return res;
 	}
 	private: String^ getDescriptor(DataGridView^ wordsTable, String^ word) {
 		if (word == " ") word = "_";
@@ -1406,7 +1786,7 @@ namespace Lexer {
 		}
 		return false;
 	}
-	private: void LexerAnalyze() {
+	private: int LexerAnalyze() {
 		this->result->Text = "";
 		String^ str = "";
 		currentLexerState = LexerStates::S0;
@@ -1514,6 +1894,7 @@ namespace Lexer {
 				this->result->Text += str[i];
 			}
 		}
+		return numberString;
 	}
 	private: System::Void standartCode_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->input->Text = "#include <iostream>\r\n#include <string>\r\n#include <algorithm>\r\n\r\n\tint main() {\r\n\tsetlocale(LC_ALL, \"rus\");\r\n\tstd::string str;\r\n\tstd::getline(std::cin, str);\r\n\tstd::string newStr;\r\n\tfor (int i = 0; i < str.length(); i++) {\r\n\tif (str[i] == ' ') {\r\n\t\tif (i > 0) {\r\n\t\t\tnewStr += std::toupper(str[++i]);\r\n\t\t}\r\n\t}\r\n\telse {\r\n\t\tnewStr += str[i];\r\n\t}\r\n\t}\r\n\tstd::cout << newStr << std::endl;\r\n\treturn 0;\r\n\t}";

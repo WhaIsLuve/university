@@ -145,6 +145,8 @@
     <ClInclude Include="CheckValidation.h" />
     <ClInclude Include="EngineAirTransport.h" />
     <ClInclude Include="IAirTransport.h" />
+    <ClInclude Include="List.h" />
+    <ClInclude Include="ListVoid.h" />
     <ClInclude Include="ManualAirTransport.h" />
     <ClInclude Include="Rotorcraft.h" />
     <ClInclude Include="Stack.h" />

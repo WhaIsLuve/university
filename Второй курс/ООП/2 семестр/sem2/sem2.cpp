@@ -5,6 +5,7 @@
 #include "Rotorcraft.h"
 #include "BallonTransport.h"
 #include "Stack.h"
+#include "List.h"
 
 using namespace std;
 
@@ -23,9 +24,13 @@ int main()
     Rotorcraft helicopter;
     BallonTransport ballon;
     Stack st;
+    List<AirTransport> list;
     st.Push(wingy);
+    list.PushFront(wingy);
     st.Push(helicopter);
+    list.PushFront(ballon);
     st.Push(ballon);
+    list.PushFront(helicopter);
     st.ToNull();
     /*getCapacity(wingy);
     getCapacity(helicopter);
