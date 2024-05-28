@@ -1,0 +1,17 @@
+{
+    "stack": [
+        {
+            "capacity" : 20,
+            "weight" : 21.234,
+            "additionalInformation" : 0
+        },
+        {
+            "capacity" : 20,
+            "weight" : 21.234,
+            "additionalInformation" : {
+                "cargoCapacity" : 32,
+                "enginePower" : 22
+            }
+        }
+    ]
+}

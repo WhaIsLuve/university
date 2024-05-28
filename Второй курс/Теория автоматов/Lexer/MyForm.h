@@ -630,6 +630,7 @@ namespace Lexer {
 		String^ ERROR_IN_CONST = "Error in constant.";
 		String^ ERROR_IN_ID = "Error in id.";
 		int keyWordIndex = 0;
+		if (str->Length < 3) str += " ";
 		int relationsSignsIndex = 0;
 		int operationsSignsIndex = 0;
 		int idTableIndex = 0;
@@ -696,6 +697,7 @@ namespace Lexer {
 				}
 				else if (isConstant(str[i])) {
 					currentsKeyWordState = States::S47;
+					str += " ";
 				}
 				else {
 					currentsKeyWordState = States::S45;
@@ -744,6 +746,7 @@ namespace Lexer {
 				}
 				else {
 					currentsKeyWordState = States::S45;
+					str += " ";
 				}
 				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
@@ -755,6 +758,7 @@ namespace Lexer {
 				}
 				else {
 					currentsKeyWordState = States::S45;
+					str += " ";
 				}
 				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
@@ -766,6 +770,7 @@ namespace Lexer {
 				}
 				else {
 					currentsKeyWordState = States::S45;
+					str += " ";
 				}
 				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
@@ -788,6 +793,7 @@ namespace Lexer {
 				}
 				else {
 					currentsKeyWordState = States::S45;
+					str += " ";
 				}
 				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
@@ -802,6 +808,7 @@ namespace Lexer {
 				}
 				else {
 					currentsKeyWordState = States::S45;
+					str += " ";
 				}
 				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
@@ -835,6 +842,7 @@ namespace Lexer {
 				}
 				else {
 					currentsKeyWordState = States::S45;
+					str += " ";
 				}
 				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
@@ -846,6 +854,7 @@ namespace Lexer {
 				}
 				else {
 					currentsKeyWordState = States::S45;
+					str += " ";
 				}
 				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
@@ -857,6 +866,7 @@ namespace Lexer {
 				}
 				else {
 					currentsKeyWordState = States::S45;
+					str += " ";
 				}
 				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
@@ -879,6 +889,7 @@ namespace Lexer {
 				}
 				else {
 					currentsKeyWordState = States::S45;
+					str += " ";
 				}
 				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
@@ -893,6 +904,7 @@ namespace Lexer {
 				}
 				else {
 					currentsKeyWordState = States::S45;
+					str += " ";
 				}
 				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
@@ -904,6 +916,7 @@ namespace Lexer {
 				}
 				else {
 					currentsKeyWordState = States::S45;
+					str += " ";
 				}
 				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
@@ -915,6 +928,7 @@ namespace Lexer {
 				}
 				else {
 					currentsKeyWordState = States::S45;
+					str += " ";
 				}
 				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
@@ -926,6 +940,7 @@ namespace Lexer {
 				}
 				else {
 					currentsKeyWordState = States::S45;
+					str += " ";
 				}
 				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
@@ -948,6 +963,7 @@ namespace Lexer {
 				}
 				else {
 					currentsKeyWordState = States::S45;
+					str += " ";
 				}
 				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
@@ -959,6 +975,7 @@ namespace Lexer {
 				}
 				else {
 					currentsKeyWordState = States::S45;
+					str += " ";
 				}
 				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
@@ -970,6 +987,7 @@ namespace Lexer {
 				}
 				else {
 					currentsKeyWordState = States::S45;
+					str += " ";
 				}
 				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
@@ -981,6 +999,7 @@ namespace Lexer {
 				}
 				else {
 					currentsKeyWordState = States::S45;
+					str += " ";
 				}
 				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
@@ -1003,6 +1022,7 @@ namespace Lexer {
 				}
 				else {
 					currentsKeyWordState = States::S45;
+					str += " ";
 				}
 				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
@@ -1014,6 +1034,7 @@ namespace Lexer {
 				}
 				else {
 					currentsKeyWordState = States::S45;
+					str += " ";
 				}
 				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
@@ -1025,6 +1046,7 @@ namespace Lexer {
 				}
 				else {
 					currentsKeyWordState = States::S45;
+					str += " ";
 				}
 				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
@@ -1036,6 +1058,7 @@ namespace Lexer {
 				}
 				else {
 					currentsKeyWordState = States::S45;
+					str += " ";
 				}
 				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
@@ -1047,6 +1070,7 @@ namespace Lexer {
 				}
 				else {
 					currentsKeyWordState = States::S45;
+					str += " ";
 				}
 				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
@@ -1069,6 +1093,7 @@ namespace Lexer {
 				}
 				else {
 					currentsKeyWordState = States::S45;
+					str += " ";
 				}
 				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
@@ -1080,6 +1105,7 @@ namespace Lexer {
 				}
 				else {
 					currentsKeyWordState = States::S45;
+					str += " ";
 				}
 				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
@@ -1091,6 +1117,7 @@ namespace Lexer {
 				}
 				else {
 					currentsKeyWordState = States::S45;
+					str += " ";
 				}
 				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
@@ -1113,6 +1140,7 @@ namespace Lexer {
 				}
 				else {
 					currentsKeyWordState = States::S45;
+					str += " ";
 				}
 				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
@@ -1135,6 +1163,7 @@ namespace Lexer {
 				}
 				else {
 					currentsKeyWordState = States::S45;
+					str += " ";
 				}
 				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
@@ -1157,6 +1186,7 @@ namespace Lexer {
 				}
 				else {
 					currentsKeyWordState = States::S45;
+					str += " ";
 				}
 				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
 					word += str[i];
@@ -1539,14 +1569,7 @@ namespace Lexer {
 						if (!isSplitterForTable(str[i]) && !isRelationsSigns(str[i]) && !isOperationSigns(str[i]))
 							word += str[i];
 						else i--;
-						if (!isContainInTable(word, idTable)) {
-							WriteInIdTable(idTable, word, idTableIndex);
-							idTableIndex++;
-						}
-						this->descriptorCode->Text += getDescriptor(idTable, word);
-						this->pseudoCodes->Text += getPseudo(idTable, word);
-						word = "";
-						currentsKeyWordState = States::S1;
+						currentsKeyWordState = States::S48;
 					}
 					else {
 						word += str[i];
@@ -1558,38 +1581,26 @@ namespace Lexer {
 						isRelationsSigns(str[i]) ||
 						isOperationSigns(str[i])) {
 						i--;
-						currentsKeyWordState = States::S1;
+						currentsKeyWordState = States::S48;
 
 					}
 					else word += str[i];
-					if (!isContainInTable(word, idTable)) {
-						WriteInIdTable(idTable, word, idTableIndex);
-						idTableIndex++;
-					}
-					this->descriptorCode->Text += getDescriptor(idTable, word);
-					this->pseudoCodes->Text += getPseudo(idTable, word);
-					word = "";
-					currentsKeyWordState = States::S1;
+					currentsKeyWordState = States::S48;
 				}
 				break;
 			case States::S47: // constants
 				if (isConstant(str[i])) {
-					if (str[i] == '.') countOfDot++;
+					if (str[i] == '.' && !word->Contains("\'") && !word->Contains("\"")) countOfDot++;
 					currentsKeyWordState = States::S47;
 					word += str[i];
 				}
-				else if (i != str->Length - 1) {
-					if (!isConstant(str[i + 1])) {
-						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_ID);
-						listErrors += res[0];
-						i = Convert::ToInt32(res[1]);
-						word = "";
-						currentsKeyWordState = States::S1;
+				else if (isSplitterForTable(str[i]) || isOperationSigns(str[i]) || isRelationsSigns(str[i])) {
+					if ((word->Contains("\'") || word->Contains("\"")) && !isEndStrOrChar(word))
+					{
+						word += str[i];
 						continue;
 					}
-				}
-				else if (isSplitterForTable(str[i]) && str[i] != '.' && str[i] != ' ') {
-					if (word[word->Length - 1] == '.' || countOfDot > 1) {
+					else if (word[word->Length - 1] == '.' || countOfDot > 1) {
 						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_CONST);
 						listErrors += res[0];
 						i = Convert::ToInt32(res[1]);
@@ -1597,15 +1608,7 @@ namespace Lexer {
 						currentsKeyWordState = States::S1;
 						continue;
 					}
-					if (!isContainInTable(word, constTable)) {
-						WriteInConstTable(constTable, word, constTableIndex);
-						constTableIndex++;
-					}
-					this->descriptorCode->Text += getDescriptor(constTable, word);
-					this->pseudoCodes->Text += getPseudo(constTable, word);
-					i--;
-					word = "";
-					currentsKeyWordState = States::S1;
+					currentsKeyWordState = States::S49;
 				}
 				else word += str[i];
 				break;
@@ -1652,19 +1655,15 @@ namespace Lexer {
 				word = "";
 				currentsKeyWordState = States::S1;
 			}
-			if (currentsKeyWordState == States::S45) {
+			if (currentsKeyWordState == States::S48) {
 				if (i != str->Length - 1) {
 					if (isWord(str[i + 1])) continue;
 				}
 				if (isSplitterForTable(str[i])) {
 					i--;
 				}
-				else if(i != 0) word = str[i].ToString();
 				if (!isContainInTable(word, idTable)) {
-					if(word->Length > 1)
-						WriteInIdTable(idTable, word->Substring(0, word->Length-1), idTableIndex);
-					else
-						WriteInIdTable(idTable, word, idTableIndex);
+					WriteInIdTable(idTable, word, idTableIndex);
 					idTableIndex++;
 				}
 				this->descriptorCode->Text += getDescriptor(idTable, word);
@@ -1672,7 +1671,7 @@ namespace Lexer {
 				word = "";
 				currentsKeyWordState = States::S1;
 			}
-			if (i == str->Length - 1 && currentsKeyWordState == States::S47) {
+			if (currentsKeyWordState == States::S49) {
 				if (word[word->Length - 1] == '.' || countOfDot > 1) {
 					array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_CONST);
 					listErrors += res[0];
@@ -1694,17 +1693,20 @@ namespace Lexer {
 		if(listErrors != nullptr)
 			MessageBox::Show(listErrors);
 	}
+	private: bool isEndStrOrChar(String^ word) {
+		return (word[0] == '\'' || word[0] == '\"') && ((word[word->Length - 1] == '\'' || word[word->Length - 1] == '\"')) && word->Length >= 2;
+	}
 	private: array<String^>^ addError(String^ listErrors, String^ word, String^ str, int i, int numberLine, String^ errorMessage) {
 		while (!isSplitter(str[i])) {
 			word += str[i];
 			i++;
 			if (i == str->Length) break;
 		}
-		array<String^>^ res = { ("Error in line " + numberLine.ToString() + " in word " + word + ". " + errorMessage + "\n") , i.ToString()};
+		array<String^>^ res = { ("Error in line " + numberLine.ToString() + " in word " + word + ". " + errorMessage + "\r\n") , i.ToString()};
 		return res;
 	}
 	private: String^ getDescriptor(DataGridView^ wordsTable, String^ word) {
-		if (word == " ") word = "_";
+		if (word == " ") return "";
 		String^ id = "";
 		for (int i = 0; i < wordsTable->Rows->Count; i++) {
 			if (wordsTable->Rows[i]->Cells[1]->Value->ToString() == word) {
@@ -1715,7 +1717,7 @@ namespace Lexer {
 		return "(" + wordsTable->Columns[0]->HeaderText + ", " + id + ") ";
 	}
 	private: String^ getPseudo(DataGridView^ wordsTable, String^ word) {
-		if (word == " ") word = "_";
+		if (word == " ") return "";
 		for (int i = 0; i < wordsTable->Rows->Count; i++) {
 			if (wordsTable->Rows[i]->Cells[1]->Value->ToString() == word) {
 				return wordsTable->Rows[i]->Cells[2]->Value->ToString();
@@ -1724,12 +1726,13 @@ namespace Lexer {
 		return "";
 	}
 	private: void WriteInTable(DataGridView^ wordsTable, String^ word, int wordIndex) {
-		wordsTable->Rows[wordIndex]->Cells[0]->Value = wordIndex + 1;
 		if (word != " ") {
+			wordsTable->Rows[wordIndex]->Cells[0]->Value = wordIndex + 1;
 			wordsTable->Rows[wordIndex]->Cells[1]->Value = word;
 			wordsTable->Rows[wordIndex]->Cells[2]->Value = word->ToUpper();
 		}
-		else {
+		else if (resultWithoutNumbers->Contains(" ")) {
+			wordsTable->Rows[wordIndex]->Cells[0]->Value = wordIndex + 1;
 			wordsTable->Rows[wordIndex]->Cells[1]->Value = "_";
 			wordsTable->Rows[wordIndex]->Cells[2]->Value = "_";
 		}
@@ -1742,12 +1745,10 @@ namespace Lexer {
 	private: void WriteInConstTable(DataGridView^ wordsTable, String^ word, int wordIndex) {
 		wordsTable->Rows[wordIndex]->Cells[0]->Value = wordIndex + 1;
 		wordsTable->Rows[wordIndex]->Cells[1]->Value = word;
-		wordsTable->Rows[wordIndex]->Cells[2]->Value = "const";
+		wordsTable->Rows[wordIndex]->Cells[2]->Value = "const" + (wordIndex + 1).ToString();
 	}
 	private: bool isWord(char ch) {
-		std::set<char> st = { ' ', '(', ')', '[', ']', '{', '}', ':', '\r', '\n', '\t' };
-		bool bl = st.count(ch);
-		return !bl;
+		return !isSplitterForTable(ch);
 	}
 	private: bool isSplitter(char ch) {
 		std::set<char> st = { ' ', '(', ')', '[', ']', '{', '}', ':', '\r', '\n', '\t'};
@@ -1897,7 +1898,7 @@ namespace Lexer {
 		return numberString;
 	}
 	private: System::Void standartCode_Click(System::Object^ sender, System::EventArgs^ e) {
-		this->input->Text = "#include <iostream>\r\n#include <string>\r\n#include <algorithm>\r\n\r\n\tint main() {\r\n\tsetlocale(LC_ALL, \"rus\");\r\n\tstd::string str;\r\n\tstd::getline(std::cin, str);\r\n\tstd::string newStr;\r\n\tfor (int i = 0; i < str.length(); i++) {\r\n\tif (str[i] == ' ') {\r\n\t\tif (i > 0) {\r\n\t\t\tnewStr += std::toupper(str[++i]);\r\n\t\t}\r\n\t}\r\n\telse {\r\n\t\tnewStr += str[i];\r\n\t}\r\n\t}\r\n\tstd::cout << newStr << std::endl;\r\n\treturn 0;\r\n\t}";
+		this->input->Text = "#include <iostream>\r\n#include <string>\r\n#include <algorithm>\r\nusing namespace std;\r\nint main() {\r\n    string str;\r\n    getline(cin, str);\r\n    string newStr;\r\n    int vowelCount = 0;\r\n    string vowels = \"aeiouAEIOU\";\r\n    for (int i = 0; i < str.length(); i++) {\r\n        for (int j = 0; j < vowels.length(); j++) {\r\n            if (str[i] == vowels[j]) {\r\n                vowelCount++;\r\n                break;\r\n            }\r\n        }\r\n        if (str[i] == \' \') {\r\n            if (i > 0) {\r\n                newStr += toupper(str[++i]);\r\n            }\r\n        }\r\n        else {\r\n            newStr += str[i];\r\n        }\r\n    }\r\n    cout << \"Number of vowels \" << vowelCount << endl;\r\n    cout << newStr << endl;\r\n    return 0;\r\n}\r\n";
 	}
 };
 	};

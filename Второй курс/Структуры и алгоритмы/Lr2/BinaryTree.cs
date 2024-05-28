@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using System.Xml.Linq;
 
 namespace Lr2
 {
@@ -15,14 +14,16 @@ namespace Lr2
 
 		public NodeTree? head;
 
+		public int D { get; set; }
+
 		public BinaryTree()
 		{
 			File.WriteAllText(resultPathFile, "");
 		}
 
-		private readonly char[] splitter = { ' ', ',', '.', '!', ':', ';', '?', '–', '—', '―', '°', '*', '*', '[', '-', '\n', '\r', '\t', ']', '(', ')', '…', '«', '»', '“', '“', '\'', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '„', '‘', '’', ' ', '_', '\"', '/', '&', '=' };
+		private readonly char[] splitter = [' ', ',', '.', '!', ':', ';', '?', '–', '—', ' ', '―', '°', '*', '*', '[', '-', '\n', '\r', '\t', ']', '(', ')', '…', '«', '»', '“', '“', '\'', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '„', '‘', '’', ' ', '_', '\"', '/', '&', '='];
 
-		public readonly string resultPathFile = @"C:\Users\Влад\Desktop\Университет\Второй курс\Структуры и алгоритмы\result.txt";
+		public readonly string resultPathFile = @"C:\Users\Влад\Desktop\Университет\Второй курс\Структуры и алгоритмы\resultLr4.txt";
 
 		public void Add(string data) => head = Add(head, data);
 
@@ -42,11 +43,24 @@ namespace Lr2
 
 		public void ReadFile(string path, PrintMode printMode, string? findWord = null, int? length = null)
 		{
-			var text = File.ReadAllText(path).Split(splitter);
-			foreach (var word in text)
-			{
-				if(word.Length > 0 && !word.All(c => splitter.Contains(c)))
-					Add(word.ToLower());
+			using(StreamReader sr = new(path))
+			{ 
+				StringBuilder word = new();
+				int numberSymbol = sr.Read();
+				while(sr.Peek() != -1)
+				{
+					char symbol = (char)numberSymbol;
+					if (splitter.Contains(symbol))
+					{
+						if(word.ToString() != "")
+							Add(word.ToString().ToLower());
+						word.Clear();
+						numberSymbol = sr.Read();
+						continue;
+					}
+					word.Append(symbol);
+					numberSymbol = sr.Read();
+				}
 			}
 			switch (printMode)
 			{

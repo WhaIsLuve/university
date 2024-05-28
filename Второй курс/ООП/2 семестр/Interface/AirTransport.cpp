@@ -14,8 +14,7 @@ AirTransport::AirTransport()
 	_isFlying = false;
 	_isLanding = true;
 }
-
-AirTransport::AirTransport(int capacity, double weight)
+AirTransport::AirTransport(int capacity = 50, double weight = 50)
 {
 	_capacity = CheckValidation::CheckNumber(capacity);
 	_weight = CheckValidation::CheckNumber(weight);

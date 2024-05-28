@@ -31,7 +31,7 @@ protected:
 	void _resize(int n) {
 		list.resize(n);
 		size = n;
-	 }
+	}
 
 	void _resize(int n, void* const& value) {
 		list.resize(n, value);

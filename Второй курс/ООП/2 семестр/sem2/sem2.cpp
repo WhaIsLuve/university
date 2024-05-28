@@ -17,7 +17,7 @@ void getEnginePower(EngineAirTransport tranport) {
     cout << "Мощность двигателя: " << tranport.GetEnginePower() << endl;
 }
 
-int main()
+int main234()
 {
     setlocale(LC_ALL, "rus");
     WingyTransport wingy;
