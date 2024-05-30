@@ -596,12 +596,12 @@ namespace Lexer {
 		ReadingKeyWords();
 	}
 		   // if_ int_ else_ for_ while_ string_ switch_ return_ float_ char_ 
-		   // double const do class enum struct using namespace static public 
-		   // private protected auto try catch throw case bool break continue
-		   // default delete true false friend goto long short template operator
-		   // typedef typename sizeof new this virtual void explicit inline nullptr
-		   // dynamic_cast extern mutable noexcept static_cast thread_local typeid wchar_t static_assert const_cast
-		   // + - * / % ++ -- = += -= *= /= %= >> << >>= <<=
+		   // double_ const_ do_ class_ enum_ struct_ using_ namespace_ static_ public_ 
+		   // private_ protected_ auto_ try_ catch_ throw_ case_ bool_ break_ continue_
+		   // default_ delete_ true_ false_ friend_ goto_ long_ short_ template_ operator_
+		   // typedef_ typename_ sizeof_ new_ this_ virtual_ void_ explicit_ inline_ nullptr_
+		   // and_ extern_ mutable_ noexcept_ xor_ or_ typeid_ wchar_t_ union_ not
+		   // + - * / % ++ -- = += -= *= /= %= >> <<
 		   // > < >= <= == !=
 	private: void ReadingKeyWords() {
 		keyWordsTable->Rows->Clear();
@@ -661,6 +661,45 @@ namespace Lexer {
 				else if (str[i] == 'c') {
 					currentsKeyWordState = States::S31;
 				}
+				else if (str[i] == 'd') {
+					currentsKeyWordState = States::S50;
+				}
+				else if (str[i] == 'u') {
+					currentsKeyWordState = States::S65;
+				}
+				else if (str[i] == 'n') {
+					currentsKeyWordState = States::S69;
+				}
+				else if (str[i] == 'p') {
+					currentsKeyWordState = States::S80;
+				}
+				else if (str[i] == 'a') {
+					currentsKeyWordState = States::S96;
+				}
+				else if (str[i] == 't') {
+					currentsKeyWordState = States::S99;
+				}
+				else if (str[i] == 'b') {
+					currentsKeyWordState = States::S108;
+				}
+				else if (str[i] == 'g') {
+					currentsKeyWordState = States::S134;
+				}
+				else if (str[i] == 'l') {
+					currentsKeyWordState = States::S137;
+				}
+				else if (str[i] == 'o') {
+					currentsKeyWordState = States::S149;
+				}
+				else if (str[i] == 'v') {
+					currentsKeyWordState = States::S170;
+				}
+				else if (str[i] == 'm') {
+					currentsKeyWordState = States::S196;
+				}
+				else if (str[i] == 'x') {
+					currentsKeyWordState = States::S208;
+				}
 				else if (str[i] == '>') {
 					currentsKeyWordState = States::S34;
 				}
@@ -704,7 +743,7 @@ namespace Lexer {
 				}
 				word += str[i];
 				break;
-			case States::S2: // if int
+			case States::S2: // if int inline
 				if (str[i] == 'f') {
 					if(i + 1 == str->Length)
 						currentsKeyWordState = States::S3;
@@ -725,7 +764,7 @@ namespace Lexer {
 				else {
 					currentsKeyWordState = States::S45;
 				}
-				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -744,23 +783,32 @@ namespace Lexer {
 					else
 						currentsKeyWordState = States::S3;
 				}
+				else if (str[i] == 'l') {
+					currentsKeyWordState = States::S184;
+				}
 				else {
 					currentsKeyWordState = States::S45;
 					str += " ";
 				}
-				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
-			case States::S5: // else
+			case States::S5: // else enum explicit extern
 				if (str[i] == 'l') {
 					currentsKeyWordState = States::S6;
+				}
+				else if (str[i] == 'n') {
+					currentsKeyWordState = States::S61;
+				}
+				else if (str[i] == 'x') {
+					currentsKeyWordState = States::S178;
 				}
 				else {
 					currentsKeyWordState = States::S45;
 					str += " ";
 				}
-				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -772,7 +820,7 @@ namespace Lexer {
 					currentsKeyWordState = States::S45;
 					str += " ";
 				}
-				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -795,22 +843,28 @@ namespace Lexer {
 					currentsKeyWordState = States::S45;
 					str += " ";
 				}
-				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
-			case States::S8: // for float
+			case States::S8: // for float false friend
 				if (str[i] == 'o') {
 					currentsKeyWordState = States::S9;
 				}
 				else if (str[i] == 'l') {
 					currentsKeyWordState = States::S28;
 				}
+				else if (str[i] == 'a') {
+					currentsKeyWordState = States::S127;
+				}
+				else if (str[i] == 'r') {
+					currentsKeyWordState = States::S130;
+				}
 				else {
 					currentsKeyWordState = States::S45;
 					str += " ";
 				}
-				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -832,19 +886,22 @@ namespace Lexer {
 				else {
 					currentsKeyWordState = States::S45;
 				}
-				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
-			case States::S10: // while
+			case States::S10: // while wchar_t
 				if (str[i] == 'h') {
 					currentsKeyWordState = States::S11;
+				}
+				else if (str[i] == 'c') {
+					currentsKeyWordState = States::S211;
 				}
 				else {
 					currentsKeyWordState = States::S45;
 					str += " ";
 				}
-				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -856,7 +913,7 @@ namespace Lexer {
 					currentsKeyWordState = States::S45;
 					str += " ";
 				}
-				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -868,7 +925,7 @@ namespace Lexer {
 					currentsKeyWordState = States::S45;
 					str += " ";
 				}
-				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -891,22 +948,28 @@ namespace Lexer {
 					currentsKeyWordState = States::S45;
 					str += " ";
 				}
-				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
-			case States::S14: // string switch
+			case States::S14: // string switch struct static short sizeof
 				if (str[i] == 't') {
 					currentsKeyWordState = States::S15;
 				}
 				else if (str[i] == 'w') {
 					currentsKeyWordState = States::S19;
 				}
+				else if (str[i] == 'h') {
+					currentsKeyWordState = States::S140;
+				}
+				else if (str[i] == 'i') {
+					currentsKeyWordState = States::S164;
+				}
 				else {
 					currentsKeyWordState = States::S45;
 					str += " ";
 				}
-				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -914,11 +977,14 @@ namespace Lexer {
 				if (str[i] == 'r') {
 					currentsKeyWordState = States::S16;
 				}
+				else if (str[i] == 'a') {
+					currentsKeyWordState = States::S77;
+				}
 				else {
 					currentsKeyWordState = States::S45;
 					str += " ";
 				}
-				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -926,11 +992,14 @@ namespace Lexer {
 				if (str[i] == 'i') {
 					currentsKeyWordState = States::S17;
 				}
+				else if (str[i] == 'u') {
+					currentsKeyWordState = States::S63;
+				}
 				else {
 					currentsKeyWordState = States::S45;
 					str += " ";
 				}
-				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -942,7 +1011,7 @@ namespace Lexer {
 					currentsKeyWordState = States::S45;
 					str += " ";
 				}
-				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -965,7 +1034,7 @@ namespace Lexer {
 					currentsKeyWordState = States::S45;
 					str += " ";
 				}
-				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -977,7 +1046,7 @@ namespace Lexer {
 					currentsKeyWordState = States::S45;
 					str += " ";
 				}
-				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -989,7 +1058,7 @@ namespace Lexer {
 					currentsKeyWordState = States::S45;
 					str += " ";
 				}
-				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -1001,7 +1070,7 @@ namespace Lexer {
 					currentsKeyWordState = States::S45;
 					str += " ";
 				}
-				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -1024,7 +1093,7 @@ namespace Lexer {
 					currentsKeyWordState = States::S45;
 					str += " ";
 				}
-				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -1036,7 +1105,7 @@ namespace Lexer {
 					currentsKeyWordState = States::S45;
 					str += " ";
 				}
-				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -1048,7 +1117,7 @@ namespace Lexer {
 					currentsKeyWordState = States::S45;
 					str += " ";
 				}
-				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -1060,7 +1129,7 @@ namespace Lexer {
 					currentsKeyWordState = States::S45;
 					str += " ";
 				}
-				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -1072,7 +1141,7 @@ namespace Lexer {
 					currentsKeyWordState = States::S45;
 					str += " ";
 				}
-				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -1095,7 +1164,7 @@ namespace Lexer {
 					currentsKeyWordState = States::S45;
 					str += " ";
 				}
-				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -1107,7 +1176,7 @@ namespace Lexer {
 					currentsKeyWordState = States::S45;
 					str += " ";
 				}
-				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -1119,7 +1188,7 @@ namespace Lexer {
 					currentsKeyWordState = States::S45;
 					str += " ";
 				}
-				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -1142,18 +1211,27 @@ namespace Lexer {
 					currentsKeyWordState = States::S45;
 					str += " ";
 				}
-				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
-			case States::S31: // char
+			case States::S31: // char const class catch case continue
 				if (str[i] == 'h') {
 					currentsKeyWordState = States::S32;
+				}
+				else if (str[i] == 'o') {
+					currentsKeyWordState = States::S55;
+				}
+				else if (str[i] == 'l') {
+					currentsKeyWordState = States::S58;
+				}
+				else if (str[i] == 'a') {
+					currentsKeyWordState = States::S101;
 				}
 				else {
 					currentsKeyWordState = States::S45;
 				}
-				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -1165,7 +1243,7 @@ namespace Lexer {
 					currentsKeyWordState = States::S45;
 					str += " ";
 				}
-				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -1188,7 +1266,7 @@ namespace Lexer {
 					currentsKeyWordState = States::S45;
 					str += " ";
 				}
-				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]))
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
 					word += str[i];
 				else i--;
 				break;
@@ -1612,6 +1690,2655 @@ namespace Lexer {
 				}
 				else word += str[i];
 				break;
+			case States::S50: // double do default delete
+				if (str[i] == 'o') {
+					if (i == str->Length - 1) {
+						currentsKeyWordState = States::S3;
+					}
+					else {
+						if (str[i + 1] == 'u') {
+							currentsKeyWordState = States::S51;
+						}
+						else if(isWord(str[i+1])) {
+							array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+							listErrors += res[0];
+							i = Convert::ToInt32(res[1]);
+							word = "";
+							currentsKeyWordState = States::S1;
+							continue;
+						}
+						else {
+							currentsKeyWordState = States::S3;
+						}
+					}
+				}
+				else if (str[i] == 'e') {
+					currentsKeyWordState = States::S118;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S51:
+				if (str[i] == 'u') {
+					currentsKeyWordState = States::S52;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S52:
+				if (str[i] == 'b') {
+					currentsKeyWordState = States::S53;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S53:
+				if (str[i] == 'l') {
+					currentsKeyWordState = States::S54;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S54:
+				if (str[i] == 'e') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S55:
+				if (str[i] == 'n') {
+					currentsKeyWordState = States::S56;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S56:
+				if (str[i] == 's') {
+					currentsKeyWordState = States::S57;
+				}
+				else if (str[i] == 't') {
+					currentsKeyWordState = States::S114;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S57:
+				if (str[i] == 't') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S58:
+				if (str[i] == 'a') {
+					currentsKeyWordState = States::S59;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S59:
+				if (str[i] == 's') {
+					currentsKeyWordState = States::S60;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S60:
+				if (str[i] == 's') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S61:
+				if (str[i] == 'u') {
+					currentsKeyWordState = States::S62;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S62:
+				if (str[i] == 'm') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S63:
+				if (str[i] == 'c') {
+					currentsKeyWordState = States::S64;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S64:
+				if (str[i] == 't') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S65: // using union
+				if (str[i] == 's') {
+					currentsKeyWordState = States::S66;
+				}
+				else if (str[i] == 'n') {
+					currentsKeyWordState = States::S216;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S66:
+				if (str[i] == 'i') {
+					currentsKeyWordState = States::S67;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S67:
+				if (str[i] == 'n') {
+					currentsKeyWordState = States::S68;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S68:
+				if (str[i] == 'g') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S69: // namespace new nullptr noexcept not
+				if (str[i] == 'a') { 
+					currentsKeyWordState = States::S70;
+				}
+				else if (str[i] == 'e') {
+					currentsKeyWordState = States::S168;
+				}
+				else if (str[i] == 'u') {
+					currentsKeyWordState = States::S187;
+				}
+				else if (str[i] == 'o') {
+					currentsKeyWordState = States::S202;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S70:
+				if (str[i] == 'm') {
+					currentsKeyWordState = States::S71;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S71:
+				if (str[i] == 'e') {
+					currentsKeyWordState = States::S72;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S72:
+				if (str[i] == 's') {
+					currentsKeyWordState = States::S73; 
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S73:
+				if (str[i] == 'p') {
+					currentsKeyWordState = States::S74;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S74:
+				if (str[i] == 'a') {
+					currentsKeyWordState = States::S75;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S75:
+				if (str[i] == 'c') {
+					currentsKeyWordState = States::S76;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S76:
+				if (str[i] == 'e') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S77:
+				if (str[i] == 't') {
+					currentsKeyWordState = States::S78;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S78:
+				if (str[i] == 'i') {
+					currentsKeyWordState = States::S79;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S79:
+				if (str[i] == 'c') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S80: // public private protected
+				if (str[i] == 'u') {
+					currentsKeyWordState = States::S81;
+				}
+				else if (str[i] == 'r') {
+					currentsKeyWordState = States::S85;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S81:
+				if (str[i] == 'b') {
+					currentsKeyWordState = States::S82;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S82:
+				if (str[i] == 'l') {
+					currentsKeyWordState = States::S83;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S83:
+				if (str[i] == 'i') {
+					currentsKeyWordState = States::S84;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S84:
+				if (str[i] == 'c') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S85:
+				if (str[i] == 'i') {
+					currentsKeyWordState = States::S86;
+				}
+				else if (str[i] == 'o') {
+					currentsKeyWordState = States::S90;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S86:
+				if (str[i] == 'v') {
+					currentsKeyWordState = States::S87;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S87:
+				if (str[i] == 'a') {
+					currentsKeyWordState = States::S88;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S88:
+				if (str[i] == 't') {
+					currentsKeyWordState = States::S89;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S89:
+				if (str[i] == 'e') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S90:
+				if (str[i] == 't') {
+					currentsKeyWordState = States::S91;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S91:
+				if (str[i] == 'e') {
+					currentsKeyWordState = States::S92;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S92:
+				if (str[i] == 'c') {
+					currentsKeyWordState = States::S93;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S93:
+				if (str[i] == 't') {
+					currentsKeyWordState = States::S94;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S94:
+				if (str[i] == 'e') {
+					currentsKeyWordState = States::S95;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S95:
+				if (str[i] == 'd') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S96: // auto and
+				if (str[i] == 'u') {
+					currentsKeyWordState = States::S97;
+				}
+				else if (str[i] == 'n') {
+					currentsKeyWordState = States::S192;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S97:
+				if (str[i] == 't') {
+					currentsKeyWordState = States::S98;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S98:
+				if (str[i] == 'o') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S99: // try throw true template typedef typename this typeid
+
+				if (str[i] == 'r') {
+					currentsKeyWordState = States::S100;
+				}
+				else if (str[i] == 'h') {
+					currentsKeyWordState = States::S104;
+				}
+				else if (str[i] == 'e') {
+					currentsKeyWordState = States::S143;
+				}
+				else if (str[i] == 'y') {
+					currentsKeyWordState = States::S156;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S100:
+				if (str[i] == 'y') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else if (str[i] == 'u') {
+					currentsKeyWordState = States::S126;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S101:
+				if (str[i] == 't') {
+					currentsKeyWordState = States::S102;
+				}
+				else if (str[i] == 's') {
+					currentsKeyWordState = States::S107;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S102:
+				if (str[i] == 'c') {
+					currentsKeyWordState = States::S103;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S103:
+				if (str[i] == 'h') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S104:
+				if (str[i] == 'r') {
+					currentsKeyWordState = States::S105;
+				}
+				else if (str[i] == 'i') {
+					currentsKeyWordState = States::S169;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S105:
+				if (str[i] == 'o') {
+					currentsKeyWordState = States::S106;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S106:
+				if (str[i] == 'w') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S107:
+				if (str[i] == 'e') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S108:
+				if (str[i] == 'o') {
+					currentsKeyWordState = States::S109;
+				}
+				else if (str[i] == 'r') {
+					currentsKeyWordState = States::S111;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S109:
+				if (str[i] == 'o') {
+					currentsKeyWordState = States::S110;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S110:
+				if (str[i] == 'l') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S111:
+				if (str[i] == 'e') {
+					currentsKeyWordState = States::S112;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S112:
+				if (str[i] == 'a') {
+					currentsKeyWordState = States::S113;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S113:
+				if (str[i] == 'k') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S114:
+				if (str[i] == 'i') {
+					currentsKeyWordState = States::S115;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S115:
+				if (str[i] == 'n') {
+					currentsKeyWordState = States::S116;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S116:
+				if (str[i] == 'u') {
+					currentsKeyWordState = States::S117;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S117:
+				if (str[i] == 'e') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S118:
+				if (str[i] == 'f') {
+					currentsKeyWordState = States::S119;
+				}
+				else if (str[i] == 'l') {
+					currentsKeyWordState = States::S123;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S119:
+				if (str[i] == 'a') {
+					currentsKeyWordState = States::S120;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S120:
+				if (str[i] == 'u') {
+					currentsKeyWordState = States::S121;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S121: 
+				if (str[i] == 'l') {
+					currentsKeyWordState = States::S122;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S122:
+				if (str[i] == 't') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S123:
+				if (str[i] == 'e') {
+					currentsKeyWordState = States::S124;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S124:
+				if (str[i] == 't') {
+					currentsKeyWordState = States::S125;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S125:
+				if (str[i] == 'e') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S126:
+				if (str[i] == 'e') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S127:
+				if (str[i] == 'l') {
+					currentsKeyWordState = States::S128;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S128:
+				if (str[i] == 's') {
+					currentsKeyWordState = States::S129;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S129:
+				if (str[i] == 'e') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S130:
+				if (str[i] == 'i') {
+					currentsKeyWordState = States::S131;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S131:
+				if (str[i] == 'e') {
+					currentsKeyWordState = States::S132;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S132:
+				if (str[i] == 'n') {
+					currentsKeyWordState = States::S133;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S133:
+				if (str[i] == 'd') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S134: // goto
+				if (str[i] == 'o') {
+					currentsKeyWordState = States::S135;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S135:
+				if (str[i] == 't') {
+					currentsKeyWordState = States::S136;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S136:
+				if (str[i] == 'o') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S137: // long
+				if (str[i] == 'o') {
+					currentsKeyWordState = States::S138;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S138:
+				if (str[i] == 'n') {
+					currentsKeyWordState = States::S139;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S139:
+				if (str[i] == 'g') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S140:
+				if (str[i] == 'o') {
+					currentsKeyWordState = States::S141;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S141:
+				if (str[i] == 'r') {
+					currentsKeyWordState = States::S142;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S142:
+				if (str[i] == 't') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S143:
+				if (str[i] == 'm') {
+					currentsKeyWordState = States::S144;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S144:
+				if (str[i] == 'p') {
+					currentsKeyWordState = States::S145;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S145:
+				if (str[i] == 'l') {
+					currentsKeyWordState = States::S146;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S146:
+				if (str[i] == 'a') {
+					currentsKeyWordState = States::S147;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S147:
+				if (str[i] == 't') {
+					currentsKeyWordState = States::S148;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S148:
+				if (str[i] == 'e') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S149:
+				if (str[i] == 'r') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else if (str[i] == 'p') {
+					currentsKeyWordState = States::S150;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S150:
+				if (str[i] == 'e') {
+					currentsKeyWordState = States::S151;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S151:
+				if (str[i] == 'r') {
+					currentsKeyWordState = States::S152;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S152:
+				if (str[i] == 'a') {
+					currentsKeyWordState = States::S153;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S153:
+				if (str[i] == 't') {
+					currentsKeyWordState = States::S154;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S154:
+				if (str[i] == 'o') {
+					currentsKeyWordState = States::S155;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S155:
+				if (str[i] == 'r') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S156:
+				if (str[i] == 'p') {
+					currentsKeyWordState = States::S157;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S157:
+				if (str[i] == 'e') {
+					currentsKeyWordState = States::S158;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S158:
+				if (str[i] == 'd') {
+					currentsKeyWordState = States::S159;
+				}
+				else if (str[i] == 'n') {
+					currentsKeyWordState = States::S161;
+				}
+				else if (str[i] == 'i') {
+					currentsKeyWordState = States::S210;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S159:
+				if (str[i] == 'e') {
+					currentsKeyWordState = States::S160;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S160:
+				if (str[i] == 'f') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S161:
+				if (str[i] == 'a') {
+					currentsKeyWordState = States::S162;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S162:
+				if (str[i] == 'm') {
+					currentsKeyWordState = States::S163;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S163:
+				if (str[i] == 'e') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S164:
+				if (str[i] == 'z') {
+					currentsKeyWordState = States::S165;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S165:
+				if (str[i] == 'e') {
+					currentsKeyWordState = States::S166;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S166:
+				if (str[i] == 'o') {
+					currentsKeyWordState = States::S167;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S167:
+				if (str[i] == 'f') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S168:
+				if (str[i] == 'w') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S169:
+				if (str[i] == 's') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S170: // virtual void
+				if (str[i] == 'i') {
+					currentsKeyWordState = States::S171;
+				}
+				else if (str[i] == 'o') {
+					currentsKeyWordState = States::S176;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S171:
+				if (str[i] == 'r') {
+					currentsKeyWordState = States::S172;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S172:
+				if (str[i] == 't') {
+					currentsKeyWordState = States::S173;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S173:
+				if (str[i] == 'u') {
+					currentsKeyWordState = States::S174;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S174:
+				if (str[i] == 'a') {
+					currentsKeyWordState = States::S175;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S175:
+				if (str[i] == 'l') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S176:
+				if (str[i] == 'i') {
+					currentsKeyWordState = States::S177;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S177:
+				if (str[i] == 'd') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S178:
+				if (str[i] == 'p') {
+					currentsKeyWordState = States::S179;
+				}
+				else if (str[i] == 't') {
+					currentsKeyWordState = States::S193;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S179:
+				if (str[i] == 'l') {
+					currentsKeyWordState = States::S180;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S180:
+				if (str[i] == 'i') {
+					currentsKeyWordState = States::S181;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S181:
+				if (str[i] == 'c') {
+					currentsKeyWordState = States::S182;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S182: 
+				if (str[i] == 'i') {
+					currentsKeyWordState = States::S183;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S183:
+				if (str[i] == 't') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S184:
+				if (str[i] == 'i') {
+					currentsKeyWordState = States::S185;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S185:
+				if (str[i] == 'n') {
+					currentsKeyWordState = States::S186;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S186:
+				if (str[i] == 'e') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S187:
+				if (str[i] == 'l') {
+					currentsKeyWordState = States::S188;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S188:
+				if (str[i] == 'l') {
+					currentsKeyWordState = States::S189;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S189:
+				if (str[i] == 'p') {
+					currentsKeyWordState = States::S190;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S190:
+				if (str[i] == 't') {
+					currentsKeyWordState = States::S191;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S191:
+				if (str[i] == 'r') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S192:
+				if (str[i] == 'd') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S193:
+				if (str[i] == 'e') {
+					currentsKeyWordState = States::S194;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S194:
+				if (str[i] == 'r') {
+					currentsKeyWordState = States::S195;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S195:
+				if (str[i] == 'n') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S196:
+				if (str[i] == 'u') {
+					currentsKeyWordState = States::S197;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S197:
+				if (str[i] == 't') {
+					currentsKeyWordState = States::S198;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S198:
+				if (str[i] == 'a') {
+					currentsKeyWordState = States::S199;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S199:
+				if (str[i] == 'b') {
+					currentsKeyWordState = States::S200;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S200:
+				if (str[i] == 'l') {
+					currentsKeyWordState = States::S201;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S201:
+				if (str[i] == 'e') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S202:
+				if (str[i] == 't') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else if (str[i] == 'e') {
+					currentsKeyWordState = States::S203;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S203:
+				if (str[i] == 'x') {
+					currentsKeyWordState = States::S204;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S204: 
+				if (str[i] == 'c') {
+					currentsKeyWordState = States::S205;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S205:
+				if (str[i] == 'e') {
+					currentsKeyWordState = States::S206;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S206:
+				if (str[i] == 'p') {
+					currentsKeyWordState = States::S207;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S207:
+				if (str[i] == 't') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S208:
+				if (str[i] == 'o') {
+					currentsKeyWordState = States::S209;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S209:
+				if (str[i] == 'r') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S210:
+				if (str[i] == 'd') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S211:
+				if (str[i] == 'h') {
+					currentsKeyWordState = States::S212;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S212:
+				if (str[i] == 'a') {
+					currentsKeyWordState = States::S213;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S213:
+				if (str[i] == 'r') {
+					currentsKeyWordState = States::S214;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S214:
+				if (str[i] == '_') {
+					currentsKeyWordState = States::S215;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S215:
+				if (str[i] == 't') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S216:
+				if (str[i] == 'i') {
+					currentsKeyWordState = States::S217;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S217:
+				if (str[i] == 'o') {
+					currentsKeyWordState = States::S218;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
+			case States::S218:
+				if (str[i] == 'n') {
+					if (i + 1 == str->Length)
+						currentsKeyWordState = States::S3;
+					else if (isWord(str[i + 1])) {
+						array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_KEY_WORD);
+						listErrors += res[0];
+						i = Convert::ToInt32(res[1]);
+						word = "";
+						currentsKeyWordState = States::S1;
+						continue;
+					}
+					else
+						currentsKeyWordState = States::S3;
+				}
+				else {
+					currentsKeyWordState = States::S45;
+					str += " ";
+				}
+				if (!isSplitterForTable(str[i]) && !isOperationSigns(str[i]) && !isRelationsSigns(str[i]))
+					word += str[i];
+				else i--;
+				break;
 			default:
 				break;
 			}
@@ -1657,7 +4384,7 @@ namespace Lexer {
 			}
 			if (currentsKeyWordState == States::S48) {
 				if (i != str->Length - 1) {
-					if (isWord(str[i + 1])) continue;
+					if (isWord(str[i + 1]) && !isOperationSigns(str[i+1]) && !isRelationsSigns(str[i+1])) continue;
 				}
 				if (isSplitterForTable(str[i])) {
 					i--;
@@ -1867,12 +4594,9 @@ namespace Lexer {
 				}
 				else if (this->input->Text[i] == '/')
 					currentLexerState = LexerStates::S1;
-				else if (this->input->Text[i] == '\t') {
-					currentLexerState = LexerStates::S6;
+				else if (this->input->Text[i] == '\t') {currentLexerState = LexerStates::S6;
 				}
-				else if (this->input->Text[i] == ' ') {
-					currentLexerState = LexerStates::S5;
-				}
+				else if (this->input->Text[i] == ' ') {currentLexerState = LexerStates::S5;}
 				else {
 					str += this->input->Text[i];
 					currentLexerState = LexerStates::S0;
@@ -1891,9 +4615,7 @@ namespace Lexer {
 				this->result->Text += str[i] + numberString.ToString() + " ";
 				numberString++;
 			}
-			else {
-				this->result->Text += str[i];
-			}
+			else {this->result->Text += str[i];}
 		}
 		return numberString;
 	}
