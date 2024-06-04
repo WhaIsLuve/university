@@ -128,6 +128,32 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="AirTransport.cpp" />
+    <ClCompile Include="BallonTransport.cpp" />
+    <ClCompile Include="CheckValidation.cpp" />
+    <ClCompile Include="EngineAirTransport.cpp" />
+    <ClCompile Include="GlideTransport.cpp" />
+    <ClCompile Include="ManualAirTransport.cpp" />
+    <ClCompile Include="Rotorcraft.cpp" />
+    <ClCompile Include="sem2.cpp" />
+    <ClCompile Include="Stack.cpp" />
+    <ClCompile Include="WingyTransport.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AirTransport.h" />
+    <ClInclude Include="BallonTransport.h" />
+    <ClInclude Include="CheckValidation.h" />
+    <ClInclude Include="EngineAirTransport.h" />
+    <ClInclude Include="GlideTransport.h" />
+    <ClInclude Include="IAirTransport.h" />
+    <ClInclude Include="List.h" />
+    <ClInclude Include="ListVoid.h" />
+    <ClInclude Include="ManualAirTransport.h" />
+    <ClInclude Include="Rotorcraft.h" />
+    <ClInclude Include="Stack.h" />
+    <ClInclude Include="WingyTransport.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
