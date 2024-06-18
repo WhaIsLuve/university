@@ -12,4 +12,3 @@ class ManualAirTransport : public AirTransport
 		void Show();
 		void SaveInFile(std::ofstream& f);
 };
-

@@ -1,6 +1,5 @@
 #pragma once
 #include "IAirTransport.h"
-
 class AirTransport : public IAirTransport
 {
 	private:

@@ -3,9 +3,7 @@
 #include<fstream>
 #include <stdexcept>
 #include <iostream>
-
 using namespace std;
-
 template<class T>
 class Stack
 {
@@ -32,13 +30,11 @@ class Stack
 		void SearchByWeight(double weight);
 		T& operator[](int index);
 };
-
 template<class T>
 Stack<T>::~Stack()
 {
 	ToNull();
 }
-
 template<class T>
 void Stack<T>::Push(T& airTransport)
 {
@@ -48,7 +44,6 @@ void Stack<T>::Push(T& airTransport)
 	head->element = airTransport;
 	size++;
 }
-
 template<class T>
 T& Stack<T>::Pop()
 {
@@ -60,13 +55,11 @@ T& Stack<T>::Pop()
 	size--;
 	return air;
 }
-
 template<class T>
 bool Stack<T>::IsEmpty()
 {
 	return size == 0 && head == nullptr;
 }
-
 template<class T>
 void Stack<T>::ToNull()
 {
@@ -74,7 +67,6 @@ void Stack<T>::ToNull()
 		Pop();
 	}
 }
-
 template<class T>
 void Stack<T>::Show()
 {
@@ -86,7 +78,6 @@ void Stack<T>::Show()
 		tmp = tmp->next;
 	}
 }
-
 template<class T>
 void Stack<T>::SaveInFile(ofstream& f)
 {
@@ -94,7 +85,6 @@ void Stack<T>::SaveInFile(ofstream& f)
 		this->operator[](i).SaveInFile(f);
 	}
 }
-
 template<class T>
 void Stack<T>::SortByCapacity()
 {
@@ -106,7 +96,6 @@ void Stack<T>::SortByCapacity()
 		}
 	}
 }
-
 template<class T>
 void Stack<T>::Sort()
 {
@@ -118,7 +107,6 @@ void Stack<T>::Sort()
 		}
 	}
 }
-
 template<class T>
 void Stack<T>::SortByWeight()
 {
@@ -130,7 +118,6 @@ void Stack<T>::SortByWeight()
 		}
 	}
 }
-
 template<class T>
 void Stack<T>::SearchByCapicity(int capacity)
 {
@@ -140,7 +127,6 @@ void Stack<T>::SearchByCapicity(int capacity)
 		}
 	}
 }
-
 template<class T>
 void Stack<T>::SearchByWeight(double weight) {
 	for (int i = 0; i < size; i++) {
@@ -149,7 +135,6 @@ void Stack<T>::SearchByWeight(double weight) {
 		}
 	}
 }
-
 template<class T>
 T& Stack<T>::operator[](int index)
 {
@@ -159,4 +144,3 @@ T& Stack<T>::operator[](int index)
 	}
 	return tmp->element;
 }
-

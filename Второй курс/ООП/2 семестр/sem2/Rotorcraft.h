@@ -1,6 +1,5 @@
 #pragma once
 #include "EngineAirTransport.h"
-
 class Rotorcraft : public EngineAirTransport
 {
 	private:
@@ -13,4 +12,3 @@ class Rotorcraft : public EngineAirTransport
 		void Show();
 		void SaveInFile(std::ofstream& f);
 };
-

@@ -9,10 +9,8 @@
 #include "List.h"
 #include "GlideTransport.h"
 #include <string>
-
 using namespace std;
-
-void showCommands() {
+void showCommands() { 
 	cout << "----------------" << endl;
 	cout << "Список действий." << endl;
 	cout << "----------------" << endl;
@@ -24,7 +22,6 @@ void showCommands() {
 	cout << "6.Сохранить в файл" << endl;
 	cout << "7.Закончить работу." << endl << endl;
 }
-
 void showEntity() {
 	cout << "-------------------------" << endl;
 	cout << "Виды транспорта." << endl;
@@ -34,7 +31,6 @@ void showEntity() {
 	cout << "3. Шариковый транспорт." << endl;
 	cout << "4. Парирующий транспорт." << endl << endl;
 }
-
 int main()
 {
 	setlocale(LC_ALL, "rus");
@@ -49,13 +45,10 @@ int main()
 	Stack<BallonTransport> balloonTransportStack;
 	Stack<GlideTransport> glideTransportStack;
 	List<IAirTransport> list;
-	
 	while (true) {
 		showCommands();
 		cout << "Выберите действие: ";
-
 		cin >> action;
-
 		if (action == 7) {
 			cout << "---------------------------Завершение работы---------------------------" << endl;
 			break;

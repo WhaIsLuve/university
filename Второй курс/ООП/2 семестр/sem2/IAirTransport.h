@@ -18,4 +18,3 @@ class IAirTransport
 		virtual bool operator<=(IAirTransport& transport) = 0;
 		virtual bool operator!=(IAirTransport& transport) = 0;
 };
-

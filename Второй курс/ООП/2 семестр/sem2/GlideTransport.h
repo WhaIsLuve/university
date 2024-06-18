@@ -1,6 +1,5 @@
 #pragma once
 #include "ManualAirTransport.h"
-
 class GlideTransport : public ManualAirTransport
 {
 private:

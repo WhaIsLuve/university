@@ -1659,8 +1659,6 @@ namespace Lexer {
 						isRelationsSigns(str[i]) ||
 						isOperationSigns(str[i])) {
 						i--;
-						currentsKeyWordState = States::S48;
-
 					}
 					else word += str[i];
 					currentsKeyWordState = States::S48;
@@ -1687,6 +1685,7 @@ namespace Lexer {
 						continue;
 					}
 					currentsKeyWordState = States::S49;
+					i--;
 				}
 				else word += str[i];
 				break;
@@ -4352,7 +4351,7 @@ namespace Lexer {
 				word = "";
 				currentsKeyWordState = States::S1;
 			}
-			if (currentsKeyWordState == States::S35) {
+			else if (currentsKeyWordState == States::S35) {
 				if (!isContainInTable(word, relationsSignsTable)) {
 					WriteInTable(relationsSignsTable, word, relationsSignsIndex);
 					relationsSignsIndex++;
@@ -4362,7 +4361,7 @@ namespace Lexer {
 				word = "";
 				currentsKeyWordState = States::S1;
 			}
-			if (currentsKeyWordState == States::S46) {
+			else if (currentsKeyWordState == States::S46) {
 				if (!isContainInTable(word, splitterTable)) {
 					WriteInTable(splitterTable, word, splitterTableIndex);
 					splitterTableIndex++;
@@ -4372,7 +4371,7 @@ namespace Lexer {
 				word = "";
 				currentsKeyWordState = States::S1;
 			}
-			if (currentsKeyWordState == States::S39) {
+			else if (currentsKeyWordState == States::S39) {
 				if (!isContainInTable(word, operationSignsTable)) {
 					WriteInTable(operationSignsTable, word, operationsSignsIndex);
 					operationsSignsIndex++;
@@ -4382,7 +4381,7 @@ namespace Lexer {
 				word = "";
 				currentsKeyWordState = States::S1;
 			}
-			if (currentsKeyWordState == States::S48) {
+			else if (currentsKeyWordState == States::S48) {
 				if (i != str->Length - 1) {
 					if (isWord(str[i + 1]) && !isOperationSigns(str[i+1]) && !isRelationsSigns(str[i+1])) continue;
 				}
@@ -4398,7 +4397,7 @@ namespace Lexer {
 				word = "";
 				currentsKeyWordState = States::S1;
 			}
-			if (currentsKeyWordState == States::S49) {
+			else if (currentsKeyWordState == States::S49) {
 				if (word[word->Length - 1] == '.' || countOfDot > 1) {
 					array<String^>^ res = addError(listErrors, word, str, i, numberLine, ERROR_IN_CONST);
 					listErrors += res[0];
@@ -4407,7 +4406,7 @@ namespace Lexer {
 					currentsKeyWordState = States::S1;
 					continue;
 				}
-				if (!isContainInTable(word, constTable)) {
+				else if (!isContainInTable(word, constTable)) {
 					WriteInConstTable(constTable, word, constTableIndex);
 					constTableIndex++;
 				}
@@ -4424,10 +4423,9 @@ namespace Lexer {
 		return (word[0] == '\'' || word[0] == '\"') && ((word[word->Length - 1] == '\'' || word[word->Length - 1] == '\"')) && word->Length >= 2;
 	}
 	private: array<String^>^ addError(String^ listErrors, String^ word, String^ str, int i, int numberLine, String^ errorMessage) {
-		while (!isSplitter(str[i])) {
+		while (!isSplitter(str[i]) || i == str->Length) {
 			word += str[i];
 			i++;
-			if (i == str->Length) break;
 		}
 		array<String^>^ res = { ("Error in line " + numberLine.ToString() + " in word " + word + ". " + errorMessage + "\r\n") , i.ToString()};
 		return res;
@@ -4620,7 +4618,7 @@ namespace Lexer {
 		return numberString;
 	}
 	private: System::Void standartCode_Click(System::Object^ sender, System::EventArgs^ e) {
-		this->input->Text = "#include <iostream>\r\n#include <string>\r\n#include <algorithm>\r\nusing namespace std;\r\nint main() {\r\n    string str;\r\n    getline(cin, str);\r\n    string newStr;\r\n    int vowelCount = 0;\r\n    string vowels = \"aeiouAEIOU\";\r\n    for (int i = 0; i < str.length(); i++) {\r\n        for (int j = 0; j < vowels.length(); j++) {\r\n            if (str[i] == vowels[j]) {\r\n                vowelCount++;\r\n                break;\r\n            }\r\n        }\r\n        if (str[i] == \' \') {\r\n            if (i > 0) {\r\n                newStr += toupper(str[++i]);\r\n            }\r\n        }\r\n        else {\r\n            newStr += str[i];\r\n        }\r\n    }\r\n    cout << \"Number of vowels \" << vowelCount << endl;\r\n    cout << newStr << endl;\r\n    return 0;\r\n}\r\n";
+		this->input->Text = "#include <iostream>\r\n#include <string>\r\n#include <algorithm>\r\nusing namespace std;\r\nint main() {\r\n    string str;\r\n    getline(cin, str);\r\n    string StrNew;\r\n    int vowelCount = 0;\r\n    string vowels = \"aeiouAEIOU\";\r\n    for (int i = 0; i < str.length(); i++) {\r\n        for (int j = 0; j < vowels.length(); j++) {\r\n            if (str[i] == vowels[j]) {\r\n                vowelCount++;\r\n                break;\r\n            }\r\n        }\r\n        if (str[i] == \' \') {\r\n            if (i > 0) {\r\n                StrNew += toupper(str[++i]);\r\n            }\r\n        }\r\n        else {\r\n            StrNew += str[i];\r\n        }\r\n    }\r\n    cout << \"Number of vowels \" << vowelCount << endl;\r\n    cout << StrNew << endl;\r\n    return 0;\r\n}\r\n";
 	}
 };
 	};

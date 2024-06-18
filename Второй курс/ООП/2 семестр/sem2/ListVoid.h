@@ -1,8 +1,6 @@
 #pragma once
 #include<forward_list>
-
 using namespace std;
-
 class ListVoid
 {
 protected:
@@ -29,17 +27,14 @@ protected:
 	bool _empty() {
 		return list.empty();
 	}
-
 	void _resize(int n) {
 		list.resize(n);
 		size = n;
 	}
-
 	void _resize(int n, void* const& value) {
 		list.resize(n, value);
 		size = n;
 	}
-
 	int _size() {
 		return size;
 	}
