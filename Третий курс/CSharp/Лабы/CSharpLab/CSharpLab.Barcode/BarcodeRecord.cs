@@ -1,0 +1,52 @@
+﻿using System.Text;
+
+namespace CSharpLab.Barcode;
+
+public record BarcodeRecord : IBarcode
+{
+	private string _text = string.Empty;
+	private string _barcode = string.Empty;
+
+	/// <inheritdoc />
+	public BarcodeType BarcodeType { get; set; } = BarcodeType.Full;
+
+	/// <inheritdoc />
+	public string Text
+	{
+		get => _text;
+		init
+		{
+			if (_text != value)
+			{
+				_text = $"*{value}*";
+				_barcode = BarcodeHelper.GetCode(value);
+			}
+		}
+	}
+
+	/// <inheritdoc />
+	public string GraphicalBarcode => _barcode;
+
+	public override string ToString()
+	{
+		switch (BarcodeType)
+		{
+			case BarcodeType.Text:
+				return _text;
+			case BarcodeType.Barcode:
+				return _barcode;
+			case BarcodeType.Full:
+				int index = (_barcode.Length / 6 - _text.Length) / 2;
+				StringBuilder result = new();
+				result.Append(_barcode + "\n");
+				for (int i = 0; i < index; i++)
+				{
+					result.Append(" ");
+				}
+				result.Append(_text);
+				return result.ToString();
+			default:
+				return string.Empty;
+		}
+	}
+}

@@ -11,8 +11,12 @@
             "id": "34aec23c56d1f069",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "Третий курс/ЭВМ/Лекция 15.10.2024.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -65,8 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "1d6ec60313367a1e",
@@ -82,6 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Третий курс/ЭВМ/Лекция 15.10.2024.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -98,6 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Третий курс/ЭВМ/Лекция 15.10.2024.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -119,7 +124,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "Третий курс/ЭВМ/Лекция 15.10.2024.md"
+              }
             }
           }
         ],
@@ -143,19 +150,31 @@
   },
   "active": "34aec23c56d1f069",
   "lastOpenFiles": [
+    "Третий курс/ЭВМ/Лекция 08.10.2024.md",
+    "Третий курс/ЭВМ/Лекция 15.10.2024.md",
+    "Третий курс/ЭВМ/Лекция 01.10.2024.md",
+    "Pasted image 20241008141410.png",
+    "Pasted image 20241008141400.png",
+    "Третий курс/ЭВМ/ДЗ 1.md",
+    "Третий курс/Базы данных/Лекция 06.09.2024.md",
+    "Третий курс/ЭВМ",
+    "Третий курс/Python/Лекция 06.09.2024.md",
+    "Третий курс/CSharp/Лекция 07.09.2024.md",
+    "Третий курс/CSharp/Лекция 05.09.2024.md",
+    "Третий курс/CSharp/Лабы/CSharpLab/MainApp/obj/Debug/net8.0/CSharpLab.MainApp.csproj.FileListAbsolute.txt",
+    "Третий курс/CSharp/Лабы/CSharpLab/MainApp/bin/Debug/net8.0/CSharpLab.MainApp.pdb",
+    "Третий курс/CSharp/Лабы/CSharpLab/MainApp/obj/Debug/net8.0/ref/CSharpLab.MainApp.dll",
+    "Третий курс/CSharp/Лабы/CSharpLab/MainApp/bin/Debug/net8.0/CSharpLab.MainApp.dll",
+    "Третий курс/CSharp/Лабы/CSharpLab/MainApp/bin/Debug/net8.0/CSharpLab.MainApp.runtimeconfig.json",
+    "Третий курс/CSharp/Лабы/CSharpLab/MainApp/obj/Debug/net8.0/CSharpLab.MainApp.genruntimeconfig.cache",
+    "Третий курс/CSharp/Лабы/CSharpLab/MainApp/bin/Debug/net8.0/CSharpLab.MainApp.deps.json",
+    "Третий курс/CSharp/Лабы/CSharpLab/MainApp/bin/Debug/net8.0/CSharpLab.MainApp.exe",
+    "Третий курс/CSharp/Лабы/CSharpLab/MainApp/obj/Debug/net8.0/CSharpLa.23DA934A.Up2Date",
+    "Третий курс/Третий курс.md",
+    "Третий курс/CSharp/CSharp.md",
     "Второй курс/Программирование графики и цифровая обработка изображений/реферат/План.md",
-    "Второй курс/Программирование графики и цифровая обработка изображений/реферат/Основы_компьютерной_графики_Зернов.pdf",
-    "Второй курс/Программирование графики и цифровая обработка изображений/реферат/Основы_компьютерной_графики_Зернов.pptx",
     "Pasted image 20240318202930.png",
     "Второй курс/Микроэлектроника/Лекции/00. Общая информация.md",
-    "Второй курс/_Структурное программирование/lu112802vtuvh.tmp",
-    "Второй курс/Теория автоматов/Regex/Regex/x64/Debug/Regex.tlog/link.secondary.1.tlog",
-    "Второй курс/Теория автоматов/Regex/Regex/x64/Debug/Regex.tlog/link.43940.write.1.tlog",
-    "Второй курс/Теория автоматов/Regex/Regex/x64/Debug/Regex.tlog/link.43940.read.1.tlog",
-    "Второй курс/Теория автоматов/Regex/Regex/x64/Debug/Regex.tlog/link.43940.read.2.tlog",
-    "Второй курс/Теория автоматов/Regex/Regex/x64/Debug/Regex.tlog/link.43940-cvtres.write.1.tlog",
-    "Второй курс/Теория автоматов/Regex/Regex/x64/Debug/Regex.tlog/link.43940-cvtres.read.1.tlog",
-    "Второй курс/Теория автоматов/Regex/Regex/x64/Debug/Regex.tlog/link.43940-rc.write.1.tlog",
     "Второй курс/Микроэлектроника/Лекции/03. Логические элементы.md",
     "Второй курс/Микроэлектроника/Лекции/09. Сумматоры.md",
     "Второй курс/Микроэлектроника/Лекции/07. Преобразователи кодов.md",
@@ -175,20 +194,9 @@
     "Изображения/Pasted image 20240216111724.png",
     "Изображения/Pasted image 20240216110055.png",
     "Изображения/Pasted image 20240216093103.png",
-    "Второй курс/Второй курс.md",
-    "Второй курс/Без названия.md",
-    "Второй курс/Теория автоматов/Лекции/Лекция 2.md",
-    "Второй курс/Теория автоматов/Лекции/Лекции 1.md",
-    "Второй курс/Теория автоматов/Теория автоматов.md",
-    "Второй курс/Структуры и алгоритмы/Лекции/Лекция 1.md",
-    "Второй курс/Структуры и алгоритмы/Лекции/Лекция 2.md",
-    "Второй курс/ООП/ООП.md",
-    "Второй курс/Теория автоматов/ЛР.md",
     "Без названия.canvas",
     "Изображения/photo_2023-10-24_13-20-25.jpg",
     "Изображения/photo_2023-10-24_13-00-15.jpg",
-    "Изображения/photo_2023-10-24_12-42-57.jpg",
-    "Изображения/photo_2023-10-24_12-23-42.jpg",
     "Без названия 1.canvas"
   ]
 }

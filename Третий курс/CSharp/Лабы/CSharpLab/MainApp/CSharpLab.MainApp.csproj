@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CSharpLab.AirTransport\CSharpLab.AirTransport.csproj" />
+    <ProjectReference Include="..\CSharpLab.Barcode\CSharpLab.Barcode.csproj" />
+    <ProjectReference Include="..\CSharpLab.Showcase\CSharpLab.Showcase.csproj" />
+  </ItemGroup>
+
+</Project>
