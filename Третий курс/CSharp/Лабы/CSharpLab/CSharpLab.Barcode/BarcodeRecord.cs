@@ -7,6 +7,11 @@ public record BarcodeRecord : IBarcode
 	private string _text = string.Empty;
 	private string _barcode = string.Empty;
 
+	public BarcodeRecord(string text)
+	{
+		Text = text;
+	}
+
 	/// <inheritdoc />
 	public BarcodeType BarcodeType { get; set; } = BarcodeType.Full;
 
@@ -14,11 +19,11 @@ public record BarcodeRecord : IBarcode
 	public string Text
 	{
 		get => _text;
-		init
+		set
 		{
 			if (_text != value)
 			{
-				_text = $"*{value}*";
+				_text = value;
 				_barcode = BarcodeHelper.GetCode(value);
 			}
 		}
@@ -32,7 +37,7 @@ public record BarcodeRecord : IBarcode
 		switch (BarcodeType)
 		{
 			case BarcodeType.Text:
-				return _text;
+				return $"* {Text} *";
 			case BarcodeType.Barcode:
 				return _barcode;
 			case BarcodeType.Full:
@@ -43,7 +48,7 @@ public record BarcodeRecord : IBarcode
 				{
 					result.Append(" ");
 				}
-				result.Append(_text);
+				result.Append($"* {Text} *");
 				return result.ToString();
 			default:
 				return string.Empty;

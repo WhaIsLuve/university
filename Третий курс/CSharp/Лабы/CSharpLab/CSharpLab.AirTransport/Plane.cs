@@ -26,6 +26,7 @@ public class Plane : AirTranportBase
 	/// <param name="id">Идентификатор самолета.</param>
 	/// <param name="capacity">Текущая вместимость самолета.</param>
 	/// <param name="maxCapacity">Максимальная вместимость самолета.</param>
+	/// <param name="name">Имя воздушного транспорта.</param>
 	public Plane(int id, int capacity, int maxCapacity, string name) : base(id, name)
 	{
 		Capacity = capacity;

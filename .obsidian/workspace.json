@@ -13,10 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Третий курс/ЭВМ/Лекция 15.10.2024.md",
+                "file": "Третий курс/ЭВМ/ЛР/Лр1.md",
                 "mode": "source",
                 "source": false
-              }
+              },
+              "icon": "lucide-file",
+              "title": "Лр1"
             }
           }
         ]
@@ -39,7 +41,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical"
-              }
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Файловый менеджер"
             }
           },
           {
@@ -54,7 +58,9 @@
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical"
-              }
+              },
+              "icon": "lucide-search",
+              "title": "Поиск"
             }
           },
           {
@@ -62,7 +68,9 @@
             "type": "leaf",
             "state": {
               "type": "bookmarks",
-              "state": {}
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Закладки"
             }
           }
         ]
@@ -85,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Третий курс/ЭВМ/Лекция 15.10.2024.md",
+                "file": "Третий курс/Экономика/Без названия.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -93,7 +101,9 @@
                 "searchQuery": "",
                 "backlinkCollapsed": false,
                 "unlinkedCollapsed": true
-              }
+              },
+              "icon": "links-coming-in",
+              "title": "Обратные ссылки для Без названия"
             }
           },
           {
@@ -102,10 +112,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Третий курс/ЭВМ/Лекция 15.10.2024.md",
+                "file": "Третий курс/Экономика/Без названия.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
-              }
+              },
+              "icon": "links-going-out",
+              "title": "Исходящие ссылки из Без названия"
             }
           },
           {
@@ -116,7 +128,9 @@
               "state": {
                 "sortOrder": "frequency",
                 "useHierarchy": true
-              }
+              },
+              "icon": "lucide-tags",
+              "title": "Теги"
             }
           },
           {
@@ -125,8 +139,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Третий курс/ЭВМ/Лекция 15.10.2024.md"
-              }
+                "file": "Третий курс/Экономика/Без названия.md"
+              },
+              "icon": "lucide-list",
+              "title": "Структура Без названия"
             }
           }
         ],
@@ -150,8 +166,11 @@
   },
   "active": "34aec23c56d1f069",
   "lastOpenFiles": [
-    "Третий курс/ЭВМ/Лекция 08.10.2024.md",
+    "Третий курс/Экономика/Без названия.md",
+    "Третий курс/ЭВМ/ЛР/Лр1.md",
+    "Третий курс/ЭВМ/ЛР",
     "Третий курс/ЭВМ/Лекция 15.10.2024.md",
+    "Третий курс/ЭВМ/Лекция 08.10.2024.md",
     "Третий курс/ЭВМ/Лекция 01.10.2024.md",
     "Pasted image 20241008141410.png",
     "Pasted image 20241008141400.png",
@@ -169,7 +188,6 @@
     "Третий курс/CSharp/Лабы/CSharpLab/MainApp/obj/Debug/net8.0/CSharpLab.MainApp.genruntimeconfig.cache",
     "Третий курс/CSharp/Лабы/CSharpLab/MainApp/bin/Debug/net8.0/CSharpLab.MainApp.deps.json",
     "Третий курс/CSharp/Лабы/CSharpLab/MainApp/bin/Debug/net8.0/CSharpLab.MainApp.exe",
-    "Третий курс/CSharp/Лабы/CSharpLab/MainApp/obj/Debug/net8.0/CSharpLa.23DA934A.Up2Date",
     "Третий курс/Третий курс.md",
     "Третий курс/CSharp/CSharp.md",
     "Второй курс/Программирование графики и цифровая обработка изображений/реферат/План.md",
@@ -187,8 +205,6 @@
     "Второй курс/Структуры и алгоритмы/Лекции/Лекция 3.md",
     "Второй курс/Структуры и алгоритмы/Лекции/Лекция 4.md",
     "Второй курс/Структуры и алгоритмы/Структуры и алгоритмы.md",
-    "Второй курс/Микроэлектроника/Лекции/Лекция 2.md",
-    "Второй курс/Микроэлектроника/Лекции/Лекция 1.md",
     "Pasted image 20240216113549.png",
     "Изображения/Pasted image 20240216112352.png",
     "Изображения/Pasted image 20240216111724.png",

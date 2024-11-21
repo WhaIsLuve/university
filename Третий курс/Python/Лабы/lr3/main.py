@@ -1,4 +1,5 @@
 from functools import partial
+import pickle
 from timeit import Timer
 
 
@@ -47,7 +48,7 @@ def dict_pop():
     
 def test(func):
     timer = Timer(partial(func)).timeit(number=1)
-    print(f"{func.__name__}: ", timer)
+    print(f"{func.__name__}: {'%.6f'%timer} sec")
 
 
 test(list_add)
@@ -62,3 +63,23 @@ test(list_merge)
 test(dict_merge)
 test(list_pop)
 test(dict_pop)
+
+print("-------------------------------------------------Работа с файлом-------------------------------------------------")
+
+def save_data_in_file():
+    """
+    Сохранение данных в файл
+    """
+    with open("lr3.pkl", "wb") as file:
+        pickle.dump((li[:1000], {i:i for i in range(1000)}), file)
+
+def get_collections_from_file():
+    """
+    Загрузка данных из файла
+    """
+    with open("lr3.pkl", "rb") as file:
+        loaded_a, loaded_b = pickle.load(file)
+    return loaded_a, loaded_b
+
+save_data_in_file()
+print(get_collections_from_file())

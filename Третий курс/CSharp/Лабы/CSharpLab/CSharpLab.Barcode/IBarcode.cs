@@ -1,6 +1,6 @@
 ﻿namespace CSharpLab.Barcode;
 
-internal interface IBarcode
+public interface IBarcode
 {
 	/// <summary>
 	/// Возвращает тип вывода штрикода.
@@ -10,7 +10,7 @@ internal interface IBarcode
 	/// <summary>
 	/// Возращает исходный текст штрихкода.
 	/// </summary>
-	string Text { get; }
+	string Text { get; set; }
 
 	/// <summary>
 	/// Возвращает штрикод в графическом преобразовании.

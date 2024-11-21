@@ -1,13 +1,15 @@
-﻿namespace CSharpLab.AirTransport;
+﻿using CSharpLab.Barcode;
+
+namespace CSharpLab.AirTransport;
 
 /// <summary>
 /// Представляет базовый воздушный транспорт.
 /// </summary>
-public abstract class AirTranportBase
+public abstract class AirTranportBase : IAirTransport
 {
-	/// <summary>
-	/// Возвращает идентификатор.
-	/// </summary>
+	protected IBarcode _barcode;
+
+	/// <inheritdoc />
 	public int Id 
 	{ 
 		get => _id; 
@@ -21,24 +23,16 @@ public abstract class AirTranportBase
 		} 
 	}
 
-	/// <summary>
-	/// Возвращает штрихкод идентификатора.
-	/// </summary>
-	public Barcode.Barcode Barcode { get; }
+	/// <inheritdoc />
+	public IBarcode Barcode => _barcode;
 
-	/// <summary>
-	/// Возвращает имя самолета.
-	/// </summary>
+	/// <inheritdoc />
 	public string Name { get; set; }
 
-	/// <summary>
-	/// Возвращает тип воздушного транспорта.
-	/// </summary>
+	/// <inheritdoc />
 	public abstract string Type { get; }
 
-	/// <summary>
-	/// Возвращает производные данные.
-	/// </summary>
+	/// <inheritdoc />
 	public abstract string Description { get; }
 
 	private int _id;
@@ -47,7 +41,7 @@ public abstract class AirTranportBase
 	{
 		_id = id;
 		Name = name;
-		Barcode = new Barcode.Barcode(id.ToString());
+		_barcode = new Barcode.Barcode(id.ToString());
 	}
 
 	public override string ToString()
