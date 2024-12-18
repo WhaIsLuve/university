@@ -13,9 +13,6 @@ public record BarcodeRecord : IBarcode
 	}
 
 	/// <inheritdoc />
-	public BarcodeType BarcodeType { get; set; } = BarcodeType.Full;
-
-	/// <inheritdoc />
 	public string Text
 	{
 		get => _text;
@@ -34,7 +31,7 @@ public record BarcodeRecord : IBarcode
 
 	public override string ToString()
 	{
-		switch (BarcodeType)
+		switch (IBarcode.BarcodeType)
 		{
 			case BarcodeType.Text:
 				return $"* {Text} *";

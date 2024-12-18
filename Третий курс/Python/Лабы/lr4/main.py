@@ -8,7 +8,7 @@ def main():
     do_smth(plane2)
     print(f"capacity: {plane.capacity}")
     try:
-        plane.set_capacity(int(input("Введите вместимость для самолета")))
+        plane.set_capacity(int(input("Введите вместимость для самолета ")))
         print(f"capacity after change: {plane.capacity}")
     except CapacityBiggerThanMaxCapacity:
         print("Вместимость не может быть больше маскмиальной вместимости.")

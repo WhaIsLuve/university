@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 class AirTransport(ABC):
     def __init__(self, id, name):
         super().__init__()
-        assert id < 0, "Идентификатор не может быть меньше 0"
+        assert id > 0, "Идентификатор не может быть меньше 0"
         self.id = id
         self.name = name
     
@@ -13,7 +13,7 @@ class AirTransport(ABC):
         return "Воздушный транспорт"
     
     def __str__(self) -> str:
-        return self._to_str()
+        return self._to_str()    
     
     def _to_str(self):
         return f"{self.id}\n{self.name}\n{self.get_type()}"

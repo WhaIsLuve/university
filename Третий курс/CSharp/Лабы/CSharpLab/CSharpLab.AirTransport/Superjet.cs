@@ -9,8 +9,10 @@ public sealed class Superjet : Plane, IAirTransport
 	/// </summary>
 	public double Power { get; set; }
 
+	private static IBarcode barcode => new Barcode.Barcode("1");
+
 	/// <inheritdoc />
-	IBarcode IAirTransport.Barcode => new BarcodeRecord(Id.ToString());
+	IBarcode IAirTransport.Barcode => barcode;
 
 	/// <summary>
 	/// Возвращает кол-во двигателей.

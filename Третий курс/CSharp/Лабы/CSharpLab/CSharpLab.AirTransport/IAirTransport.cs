@@ -7,7 +7,7 @@ public interface IAirTransport
 	/// <summary>
 	/// Возвращает идентификатор.
 	/// </summary>
-	int Id { get; }
+	int Id { get; set; }
 
 	/// <summary>
 	/// Возвращает штрихкод идентификатора.
@@ -19,13 +19,5 @@ public interface IAirTransport
 	/// </summary>
 	string Name { get; }
 
-	/// <summary>
-	/// Возвращает тип воздушного транспорта.
-	/// </summary>
-	abstract string Type { get; }
-
-	/// <summary>
-	/// Возвращает производные данные.
-	/// </summary>
-	abstract string Description { get; }
+	event EventHandler<TransportEventArgs> ChangeId;
 }

@@ -8,9 +8,6 @@ public class Barcode : IBarcode
 	private string _barcode;
 
 	/// <inheritdoc />
-	public BarcodeType BarcodeType { get; set; } = BarcodeType.Full;
-
-	/// <inheritdoc />
 	public string Text 
 	{
 		get => _text;
@@ -35,7 +32,7 @@ public class Barcode : IBarcode
 
 	public override string ToString()
 	{
-		switch (BarcodeType)
+		switch (IBarcode.BarcodeType)
 		{
 			case BarcodeType.Text:
 				return _text;

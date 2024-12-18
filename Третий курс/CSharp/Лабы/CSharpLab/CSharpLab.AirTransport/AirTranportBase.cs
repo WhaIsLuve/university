@@ -17,8 +17,10 @@ public abstract class AirTranportBase : IAirTransport
 		{
 			if(_id != value)
 			{
+				var lastId = _id;
 				_id = value;
 				Barcode.Text = value.ToString();
+				ChangeId?.Invoke(this, new TransportEventArgs(lastId, _id));
 			}
 		} 
 	}
@@ -34,6 +36,8 @@ public abstract class AirTranportBase : IAirTransport
 
 	/// <inheritdoc />
 	public abstract string Description { get; }
+
+	public event EventHandler<TransportEventArgs> ChangeId;
 
 	private int _id;
 

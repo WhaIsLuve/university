@@ -3,10 +3,14 @@ using System.Text;
 
 namespace CSharpLab.Showcase;
 
-public class Showcase<T> : IShowcase<T> where T : IAirTransport
+public class Showcase<T> : IShowcase<T> where T : class, IAirTransport
 {
 	private T?[] _airTranportBases;
 	private int _id;
+
+	public delegate void ChangeShowcaseId(IShowcase<T> showcase);
+
+	private ChangeShowcaseId _changeId;
 
 	/// <inheritdoc />
 	public int Id 
@@ -17,7 +21,7 @@ public class Showcase<T> : IShowcase<T> where T : IAirTransport
 			if (_id != value)
 			{
 				_id = value;
-				ChangeItemsBarcode();
+				_changeId?.Invoke(this);
 			}
 		}
 		}
@@ -38,10 +42,15 @@ public class Showcase<T> : IShowcase<T> where T : IAirTransport
 		{
 			if(index < 0 | index >= _airTranportBases.Length)
 			{
-				return default;
+				return null;
 			}
 			var value = _airTranportBases[index];
-			_airTranportBases[index] = default;
+			_airTranportBases[index] = null;
+			if(value != null)
+			{
+				_changeId -= value.UpdateBarcode;
+				value.ChangeId -= ChangeId;
+			}
 			return value;
 		}
 		set
@@ -51,7 +60,17 @@ public class Showcase<T> : IShowcase<T> where T : IAirTransport
 				return;
 			}
 			_airTranportBases[index] = value;
-			ChangeItemBarcode(value);
+			value?.UpdateBarcode(this);
+			_changeId += value.UpdateBarcode;
+			value.ChangeId += ChangeId;
+		}
+	}
+
+	private void ChangeId(object? sender, TransportEventArgs e)
+	{
+		if (sender is T product)
+		{
+			product.UpdateBarcode(this);
 		}
 	}
 
@@ -77,17 +96,17 @@ public class Showcase<T> : IShowcase<T> where T : IAirTransport
 			if (_airTranportBases[i] != null)
 			{
 				var value = _airTranportBases[i];
-				this[i] = default;
+				this[i] = null;
 				return value;
 			}
 		}
-		return default;
+		return null;
 	}
 
 	/// <inheritdoc />
 	public void Remove(int index)
 	{
-		this[index] = default;
+		this[index] = null;
 	}
 
 	/// <inheritdoc />
@@ -97,40 +116,42 @@ public class Showcase<T> : IShowcase<T> where T : IAirTransport
 	}
 
 	/// <inheritdoc />
-	public void OrderByName()
-	{
-		Array.Sort(_airTranportBases, (a, b) =>
-		{
-			if(a == null) return -1;
-			if(b == null) return 1;
-			return a.Name.CompareTo(b.Name);
-		});
-		ChangeItemsBarcode();
-	}
+	public void OrderByName() => OrderBy((a, b) => a.Name.CompareTo(b.Name));
 
-	/// <inheritdoc />
-	public void OrderById()
+	private void OrderBy(Func<T, T, int> func)
 	{
 		Array.Sort(_airTranportBases, (a, b) =>
 		{
 			if (a == null) return -1;
 			if (b == null) return 1;
-			return a.Id.CompareTo(b.Id);
+			return func(a, b);
 		});
-		ChangeItemsBarcode();
+		_changeId?.Invoke(this);
+	}
+
+	private int? FindBy(Predicate<T?> predicate)
+	{
+		for (int i = 0; i < _airTranportBases.Length; i++)
+		{
+			if (_airTranportBases[i] != null && predicate(_airTranportBases[i]))
+			{
+				return i;
+			}
+		}
+		return null;
+	}
+
+	public void OrderById() => OrderBy((a, b) => a.Id.CompareTo(b.Id));
+
+	/// <inheritdoc />
+	public int? FindById(int id)
+	{
+		
+		return FindBy((t) => t?.Id == id);
 	}
 
 	/// <inheritdoc />
-	public T? FindById(int id)
-	{
-		return _airTranportBases.FirstOrDefault(a => a?.Id == id);
-	}
-
-	/// <inheritdoc />
-	public T? FindByName(string name)
-	{
-		return _airTranportBases.FirstOrDefault(a => a?.Name == name);
-	}
+	public int? FindByName(string name) => FindBy(a => a?.Name == name);
 
 	/// <inheritdoc />
 	public override string ToString()
@@ -145,19 +166,5 @@ public class Showcase<T> : IShowcase<T> where T : IAirTransport
 
 		}
 		return sb.ToString();
-	}
-
-	private void ChangeItemBarcode(T airTranportBase)
-	{
-		if(airTranportBase == null) return;
-		airTranportBase.Barcode.Text = $"{airTranportBase.Id} {Id} {Array.IndexOf(_airTranportBases, airTranportBase)}";
-	}
-
-	private void ChangeItemsBarcode()
-	{
-		foreach(var a in _airTranportBases)
-		{
-			ChangeItemBarcode(a);
-		}
 	}
 }

@@ -2,14 +2,14 @@
 
 namespace CSharpLab.Showcase;
 
-public interface IShowcase<T> where T : IAirTransport
+public interface IShowcase<T> where T : class, IAirTransport
 {
 	/// <summary>
 	/// Возвращает идентификатор витрины.
 	/// </summary>
-	int Id { get; }
+	int Id { get; set; }
 
-	T? this[int index] { get; }
+	T? this[int index] { get; set; }
 
 	/// <summary>
 	/// Добавляет элемент в витрину.
@@ -51,12 +51,12 @@ public interface IShowcase<T> where T : IAirTransport
 	/// </summary>
 	/// <param name="id">ИД</param>
 	/// <returns>Элемент</returns>
-	T? FindById(int id);
+	int? FindById(int id);
 
 	/// <summary>
 	/// Поиск по имени.
 	/// </summary>
 	/// <param name="name">Имя.</param>
 	/// <returns>Элемент</returns>
-	T? FindByName(string name);
+	int? FindByName(string name);
 }
