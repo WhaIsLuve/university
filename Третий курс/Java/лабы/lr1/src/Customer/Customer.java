@@ -1,7 +1,5 @@
 package Customer;
 
-import java.util.Comparator;
-
 public class Customer implements Comparable<Customer> {
     private String lastName;
     private String firstName;
