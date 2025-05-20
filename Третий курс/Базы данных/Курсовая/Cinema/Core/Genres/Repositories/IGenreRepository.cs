@@ -2,5 +2,11 @@
 
 public interface IGenreRepository
 {
-    void Add(Genre genre);
+    Result Add(Genre genre);
+
+    IEnumerable<Genre> GetGenres();
+
+    Result Update(string oldName, Genre genre);
+
+    Result Delete(string genreName);
 }

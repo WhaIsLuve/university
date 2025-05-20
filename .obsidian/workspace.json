@@ -8,20 +8,45 @@
         "type": "tabs",
         "children": [
           {
-            "id": "15d97a62b0063286",
+            "id": "42be14ec7b055869",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "Третий курс/Базы данных/Курсовая/Документация/макет.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "макет.excalidraw"
+            }
+          },
+          {
+            "id": "8c95eff260b12164",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Третий курс/Базы данных/Ответы на вопросы.md",
+                "file": "Третий курс/Базы данных/Курсовая/Документация/Функционал.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Ответы на вопросы"
+              "title": "Функционал"
+            }
+          },
+          {
+            "id": "39d05df3a01f4b19",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "Третий курс/Базы данных/Курсовая/Документация/макет.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "макет.excalidraw"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -166,8 +191,23 @@
       "obsidian-excalidraw-plugin:Создать новый чертеж": false
     }
   },
-  "active": "15d97a62b0063286",
+  "active": "8c95eff260b12164",
   "lastOpenFiles": [
+    "Третий курс/Базы данных/Курсовая/Cinema/UI/UserControl1.resx",
+    "Третий курс/Базы данных/Курсовая/Cinema/UI/UserControl1.Designer.cs",
+    "Третий курс/Базы данных/Курсовая/Cinema/UI/UserControl1.cs",
+    "Третий курс/Базы данных/Курсовая/Документация/макет.excalidraw.md",
+    "Третий курс/Базы данных/Курсовая/Cinema/UI/obj/Debug/net8.0-windows/UI.ChangeData.ChangeGenreForm.resources",
+    "Третий курс/Базы данных/Курсовая/Cinema/UI/ChangeData/ChangeGenreForm.resx",
+    "Третий курс/Базы данных/Курсовая/Cinema/UI/ChangeData/ChangeGenreForm.Designer.cs",
+    "Третий курс/Базы данных/Курсовая/Cinema/UI/ChangeData/ChangeGenreForm.cs",
+    "Третий курс/Базы данных/Курсовая/Cinema/UI/obj/Debug/net8.0-windows/UI.ChangeData.ChangeMovieForm.resources",
+    "Третий курс/Базы данных/Курсовая/Cinema/UI/ChangeData/ChangeMovieForm.resx",
+    "Третий курс/Базы данных/Курсовая/Cinema/UI/ChangeData/ChangeMovieForm.Designer.cs",
+    "Третий курс/Базы данных/Курсовая/Cinema/UI/ChangeData/ChangeMovieForm.cs",
+    "Третий курс/Базы данных/Курсовая/Документация/Сущности.md",
+    "Третий курс/Базы данных/Курсовая/Документация/Функционал.md",
+    "Третий курс/Базы данных/Ответы на вопросы.md",
     "Третий курс/Базы данных/Лекция 24.02.2025.md",
     "Третий курс/ИИ/Ответы на вопросы.md",
     "Третий курс/Правоведение/Практическая 21.04.2025.md",
@@ -179,35 +219,20 @@
     "Изображения/Pasted image 20250404140253.png",
     "Изображения/Pasted image 20250228135323.png",
     "Третий курс/Базы данных/ЛР/Курсовая/Заметка 1.md",
-    "Третий курс/Правоведение",
     "Третий курс/ИИ/Лекция 28.02.2025.md",
-    "Третий курс/Базы данных/ЛР/Курсовая",
     "Изображения/Pasted image 20250228135232.png",
     "Третий курс/ОС/Лекция 12.02.2025.md",
-    "Третий курс/ИИ",
     "Третий курс/Java/Лекция 25.02.2025.md",
     "Третий курс/ЭВМ/Лекция 24.02.205.md",
     "Третий курс/ЭВМ/Лекция 17.02.2025.md",
     "Третий курс/Базы данных/Лекция 17.02.2025.md",
-    "Третий курс/Базы данных/Ответы на вопросы.md",
-    "Третий курс/Базы данных/ЛР/~WRL2159.tmp",
-    "Третий курс/Базы данных/ЛР/~WRD2057.tmp",
-    "Третий курс/Базы данных/ЛР/~$чет3лбБД.docx",
     "Третий курс/CSharp/Лекция 20.02.2025.md",
-    "Третий курс/Java/лабы/~WRL0849.tmp",
-    "Третий курс/Java/лабы/~WRD0830.tmp",
-    "Третий курс/Java/лабы/lr1/out/production/lr1/Customer/Customer.class",
-    "Третий курс/Java/лабы/lr1/out/production/lr1/Customer",
     "Третий курс/Java/Лекция 18.02.2025.md",
     "Третий курс/Java/Лекция 11.02.2025.md",
     "Третий курс/ЭВМ/Лекция 15.10.2024.md",
     "Excalidraw/Лекция 17.02.2025 2025-02-17 09.55.47.excalidraw.md",
     "Третий курс/Третий курс.md",
-    "Второй курс/Второй курс.md",
-    "README.MD",
-    "Третий курс/CSharp/Лекция 13.02.2025.md",
     "Изображения/Pasted image 20250212111900.png",
-    "Третий курс/Базы данных/Лекция 10.02.2025.md",
     "Изображения/Pasted image 20250212110713.png",
     "Изображения/Pasted image 20241008141400.png",
     "Изображения/Pasted image 20250212110312.png",
