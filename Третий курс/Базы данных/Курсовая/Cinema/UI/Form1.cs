@@ -4,10 +4,15 @@ using Core.MenuItems;
 using Core.MenuItems.Repositories;
 using Core.Movies;
 using Core.Movies.Repositories;
+using Core.Promotions.Repositories;
+using Core.Screenings;
+using Core.Screenings.Repositories;
 using Infrastructure.Genres;
 using Infrastructure.Halls;
 using Infrastructure.MenuItems;
 using Infrastructure.Movies;
+using Infrastructure.Promotions;
+using Infrastructure.Screenings;
 using System.Data;
 using UI.AddData;
 using UI.ChangeData;
@@ -21,6 +26,9 @@ public partial class Form1 : Form
 	private readonly IGenreRepository _genreRepository;
 	private readonly IHallRepository _hallRepository;
 	private readonly IMenuItemRepository _menuItemRepository;
+	private readonly IPromotionRepository _promotionRepository;
+	private readonly IScreeningRepository _screeningRepository;
+	private IEnumerable<Screening> _screenings;
 	private Table? _table;
 
 	public Form1()
@@ -31,6 +39,8 @@ public partial class Form1 : Form
 		_genreRepository = new GenreRepository(connectionStrings);
 		_hallRepository = new HallRepository(connectionStrings);
 		_menuItemRepository = new MenuItemRepository(connectionStrings);
+		_promotionRepository = new PromotionRepository(connectionStrings);
+		_screeningRepository = new ScreeningRepository(connectionStrings);
 	}
 
 	private void moviesToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -124,6 +134,16 @@ public partial class Form1 : Form
 				addMenuForm.ShowDialog();
 				UpatedMenuTable();
 				break;
+			case Table.Promotions:
+				var addPromForm = new AddPromotionForm();
+				addPromForm.ShowDialog();
+				UpatedPromotionTable();
+				break;
+			case Table.Screening:
+				var addScr = new AddScreeningForm();
+				addScr.ShowDialog();
+				UpatedScreeningTable();
+				break;
 			default:
 				MessageBox.Show("Как вы нажали на кнопку?");
 				break;
@@ -165,6 +185,12 @@ public partial class Form1 : Form
 				addMenuForm.ShowDialog();
 				UpatedMenuTable();
 				break;
+			case Table.Screening:
+				var scr = _screenings.First(s => s.MovieName == selectedRow[0].Value.ToString()! && s.HallName == selectedRow[1].Value.ToString()!);
+				var form = new ChangeScreeningForm(scr);
+				form.ShowDialog();
+				UpatedScreeningTable();
+				break;
 			default:
 				MessageBox.Show("Как вы нажали на кнопку?");
 				break;
@@ -202,6 +228,14 @@ public partial class Form1 : Form
 			case Table.Menu:
 				_menuItemRepository.Delete(selectedRow[0].Value.ToString()!);
 				UpatedMenuTable();
+				break;
+			case Table.Promotions:
+				_promotionRepository.Delete(selectedRow[0].Value.ToString()!);
+				UpatedPromotionTable();
+				break;
+			case Table.Screening:
+				_screeningRepository.Delete(_screenings.First(s => s.MovieName == selectedRow[0].Value.ToString()! && s.HallName == selectedRow[1].Value.ToString()!));
+				UpatedScreeningTable();
 				break;
 			default:
 				MessageBox.Show("Как вы нажали на кнопку?");
@@ -242,9 +276,48 @@ public partial class Form1 : Form
 		mainTable.DataSource = dataTable;
 	}
 
+	private void UpatedPromotionTable()
+	{
+		var dataTable = InitialTable("Наименование", "Процент скидки", "Начало скидки", "Конец скидки");
+		var promotions = _promotionRepository.GetPromotions();
+		foreach (var promotion in promotions)
+		{
+			dataTable.Rows.Add(promotion.DisplayName, promotion.DiscountPercent, promotion.StartDateTime, promotion.EndDateTime);
+		}
+		mainTable.DataSource = dataTable;
+	}
+
 	private void promotionToolStripMenuItem_Click(object sender, EventArgs e)
 	{
+		mainTable.Visible = true;
+		createButton.Visible = true;
+		updateAndShowSeatsButton.Visible = false;
+		deleteButton.Visible = true;
+		_table = Table.Promotions;
+		UpatedPromotionTable();
+	}
 
+	private void screeningToolStripMenuItem_Click(object sender, EventArgs e)
+	{
+		mainTable.Visible = true;
+		createButton.Visible = true;
+		updateAndShowSeatsButton.Visible = true;
+		updateAndShowSeatsButton.Text = "Изменить";
+		deleteButton.Visible = true;
+		_table = Table.Screening;
+		UpatedScreeningTable();
+	}
+
+	private void UpatedScreeningTable()
+	{
+		var dataTable = InitialTable("Фильм", "Зал", "Стоимость", "Дата начало", "Дата конец");
+		_screenings = _screeningRepository.GetScreenings();
+
+		foreach (var screening in _screenings)
+		{
+			dataTable.Rows.Add(screening.MovieName, screening.HallName, screening.Price, screening.StartDateTime, screening.EndDateTime);
+		}
+		mainTable.DataSource = dataTable;
 	}
 
 	private enum Table
@@ -252,6 +325,8 @@ public partial class Form1 : Form
 		Movie,
 		Genres,
 		HallManager,
-		Menu
+		Menu,
+		Promotions,
+		Screening
 	}
 }

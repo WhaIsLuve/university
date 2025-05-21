@@ -108,6 +108,7 @@
 			расписаниеСеансовToolStripMenuItem.Name = "расписаниеСеансовToolStripMenuItem";
 			расписаниеСеансовToolStripMenuItem.Size = new Size(165, 24);
 			расписаниеСеансовToolStripMenuItem.Text = "Расписание сеансов";
+			расписаниеСеансовToolStripMenuItem.Click += screeningToolStripMenuItem_Click;
 			// 
 			// кассаToolStripMenuItem
 			// 

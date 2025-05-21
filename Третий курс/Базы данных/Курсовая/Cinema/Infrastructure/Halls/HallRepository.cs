@@ -81,14 +81,17 @@ public class HallRepository : IHallRepository
 
 			if (remainingSeats > 0)
 			{
-				connection.Execute(insertSeatsByHall,
-								   new
-								   {
-									   HallId = newId,
-									   Row = totalRows,
-									   SeatNumber = remainingSeats
-								   },
-								   transaction: transaction);
+				for (var i = 1; i <= remainingSeats; i++)
+				{
+					connection.Execute(insertSeatsByHall,
+									   new
+									   {
+										   HallId = newId,
+										   Row = totalRows,
+										   SeatNumber = i
+									   },
+									   transaction: transaction);
+				}
 			}
 
 			transaction.Commit();
