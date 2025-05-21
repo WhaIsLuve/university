@@ -38,12 +38,12 @@
 			genresToolStripMenuItem1 = new ToolStripMenuItem();
 			расписаниеСеансовToolStripMenuItem = new ToolStripMenuItem();
 			кассаToolStripMenuItem = new ToolStripMenuItem();
-			управлениеЗаламиToolStripMenuItem = new ToolStripMenuItem();
+			hallManagerToolStripMenuItem = new ToolStripMenuItem();
 			менюToolStripMenuItem = new ToolStripMenuItem();
 			акцииToolStripMenuItem = new ToolStripMenuItem();
 			mainTable = new DataGridView();
 			createButton = new Button();
-			updateButton = new Button();
+			updateAndShowSeatsButton = new Button();
 			deleteButton = new Button();
 			mediaLibrary.SuspendLayout();
 			menuStrip1.SuspendLayout();
@@ -75,7 +75,7 @@
 			// menuStrip1
 			// 
 			menuStrip1.ImageScalingSize = new Size(20, 20);
-			menuStrip1.Items.AddRange(new ToolStripItem[] { mediaLibraryToolStripMenuItem, расписаниеСеансовToolStripMenuItem, кассаToolStripMenuItem, управлениеЗаламиToolStripMenuItem, менюToolStripMenuItem, акцииToolStripMenuItem });
+			menuStrip1.Items.AddRange(new ToolStripItem[] { mediaLibraryToolStripMenuItem, расписаниеСеансовToolStripMenuItem, кассаToolStripMenuItem, hallManagerToolStripMenuItem, менюToolStripMenuItem, акцииToolStripMenuItem });
 			menuStrip1.Location = new Point(0, 0);
 			menuStrip1.Name = "menuStrip1";
 			menuStrip1.Size = new Size(1121, 28);
@@ -115,23 +115,26 @@
 			кассаToolStripMenuItem.Size = new Size(62, 24);
 			кассаToolStripMenuItem.Text = "Касса";
 			// 
-			// управлениеЗаламиToolStripMenuItem
+			// hallManagerToolStripMenuItem
 			// 
-			управлениеЗаламиToolStripMenuItem.Name = "управлениеЗаламиToolStripMenuItem";
-			управлениеЗаламиToolStripMenuItem.Size = new Size(163, 24);
-			управлениеЗаламиToolStripMenuItem.Text = "Управление залами";
+			hallManagerToolStripMenuItem.Name = "hallManagerToolStripMenuItem";
+			hallManagerToolStripMenuItem.Size = new Size(163, 24);
+			hallManagerToolStripMenuItem.Text = "Управление залами";
+			hallManagerToolStripMenuItem.Click += hallManagerToolStripMenuItem_Click;
 			// 
 			// менюToolStripMenuItem
 			// 
 			менюToolStripMenuItem.Name = "менюToolStripMenuItem";
 			менюToolStripMenuItem.Size = new Size(65, 24);
 			менюToolStripMenuItem.Text = "Меню";
+			менюToolStripMenuItem.Click += menuToolStripMenuItem_Click;
 			// 
 			// акцииToolStripMenuItem
 			// 
 			акцииToolStripMenuItem.Name = "акцииToolStripMenuItem";
 			акцииToolStripMenuItem.Size = new Size(67, 24);
 			акцииToolStripMenuItem.Text = "Акции";
+			акцииToolStripMenuItem.Click += promotionToolStripMenuItem_Click;
 			// 
 			// mainTable
 			// 
@@ -161,17 +164,17 @@
 			createButton.Visible = false;
 			createButton.Click += createButton_Click;
 			// 
-			// updateButton
+			// updateAndShowSeatsButton
 			// 
-			updateButton.Anchor = AnchorStyles.None;
-			updateButton.Location = new Point(447, 58);
-			updateButton.Name = "updateButton";
-			updateButton.Size = new Size(170, 46);
-			updateButton.TabIndex = 4;
-			updateButton.Text = "Изменить";
-			updateButton.UseVisualStyleBackColor = true;
-			updateButton.Visible = false;
-			updateButton.Click += updateButton_Click;
+			updateAndShowSeatsButton.Anchor = AnchorStyles.None;
+			updateAndShowSeatsButton.Location = new Point(447, 58);
+			updateAndShowSeatsButton.Name = "updateAndShowSeatsButton";
+			updateAndShowSeatsButton.Size = new Size(170, 46);
+			updateAndShowSeatsButton.TabIndex = 4;
+			updateAndShowSeatsButton.Text = "Изменить";
+			updateAndShowSeatsButton.UseVisualStyleBackColor = true;
+			updateAndShowSeatsButton.Visible = false;
+			updateAndShowSeatsButton.Click += updateButton_Click;
 			// 
 			// deleteButton
 			// 
@@ -192,7 +195,7 @@
 			BackColor = Color.Teal;
 			ClientSize = new Size(1121, 600);
 			Controls.Add(deleteButton);
-			Controls.Add(updateButton);
+			Controls.Add(updateAndShowSeatsButton);
 			Controls.Add(createButton);
 			Controls.Add(mainTable);
 			Controls.Add(menuStrip1);
@@ -217,12 +220,12 @@
 		private ToolStripMenuItem genresToolStripMenuItem1;
 		private ToolStripMenuItem расписаниеСеансовToolStripMenuItem;
 		private ToolStripMenuItem кассаToolStripMenuItem;
-		private ToolStripMenuItem управлениеЗаламиToolStripMenuItem;
+		private ToolStripMenuItem hallManagerToolStripMenuItem;
 		private ToolStripMenuItem менюToolStripMenuItem;
 		private ToolStripMenuItem акцииToolStripMenuItem;
 		private DataGridView mainTable;
 		private Button createButton;
-		private Button updateButton;
+		private Button updateAndShowSeatsButton;
 		private Button deleteButton;
 	}
 }

@@ -163,7 +163,7 @@ public class MovieRepository : IMovieRepository
 					movie.Rating
 				},
 				transaction: transaction);
-			if(check.HasValue)
+			if(check.HasValue && check.Value != existingId.Value)
 			{
 				transaction.Commit();
 				return Result.Failure();
