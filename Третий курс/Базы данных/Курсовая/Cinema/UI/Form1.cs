@@ -320,6 +320,12 @@ public partial class Form1 : Form
 		mainTable.DataSource = dataTable;
 	}
 
+	private void cassaToolStripMenuItem_Click(object sender, EventArgs e)
+	{
+		var form = new CassaForm();
+		form.ShowDialog();
+	}
+
 	private enum Table
 	{
 		Movie,

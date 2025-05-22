@@ -208,4 +208,14 @@ public class ScreeningRepository : IScreeningRepository
 			connection.Close();
 		}
 	}
+
+	public IEnumerable<(int Row, int SeatNumber, int TicketId)> GetSeatTickets(int scrId)
+	{
+		using var connection = new OleDbConnection(_connectionString);
+		connection.Open();
+		var result = connection.Query<(int, int, int)>(
+			$"SELECT s.Row, s.SeatNumber, t.Id FROM (Tickets t INNER JOIN Seats s ON t.SeatId = s.Id) WHERE t.ScreeningId = {scrId} AND t.PurchaseDateTime IS NULL");
+		connection.Close();
+		return result;
+	}
 }

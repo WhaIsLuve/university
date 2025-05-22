@@ -115,6 +115,7 @@
 			кассаToolStripMenuItem.Name = "кассаToolStripMenuItem";
 			кассаToolStripMenuItem.Size = new Size(62, 24);
 			кассаToolStripMenuItem.Text = "Касса";
+			кассаToolStripMenuItem.Click += cassaToolStripMenuItem_Click;
 			// 
 			// hallManagerToolStripMenuItem
 			// 

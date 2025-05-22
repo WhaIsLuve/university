@@ -9,4 +9,6 @@ public interface IScreeningRepository
 	Result Update(Screening screening);
 
 	Result Delete(Screening screening);
+
+	IEnumerable<(int Row, int SeatNumber, int TicketId)> GetSeatTickets(int scrId);
 }
