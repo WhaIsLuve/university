@@ -133,7 +133,6 @@ public class GenreRepository : IGenreRepository
 				genre.DisplayName
 			},
 			transaction: transaction);
-
 			if (existingId.HasValue)
 			{
 				transaction.Commit();

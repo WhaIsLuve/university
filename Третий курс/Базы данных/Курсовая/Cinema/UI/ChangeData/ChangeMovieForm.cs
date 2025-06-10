@@ -25,6 +25,7 @@ namespace UI.ChangeData
 		public ChangeMovieForm(Movie movie)
 		{
 			InitializeComponent();
+			Text =  $"Изменение фильма «{movie.DisplayName}»";
 			Name.Text = movie.DisplayName;
 			textBox1.Text = movie.Country;
 			textBox2.Text = movie.Duration.ToString();

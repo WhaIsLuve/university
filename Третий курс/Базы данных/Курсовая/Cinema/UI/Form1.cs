@@ -34,6 +34,7 @@ public partial class Form1 : Form
 	public Form1()
 	{
 		InitializeComponent();
+		Text = "Кинотеатр";
 		var connectionStrings = ConnectionStringGetter.ConnectionStrings;
 		_movieRepository = new MovieRepository(connectionStrings);
 		_genreRepository = new GenreRepository(connectionStrings);

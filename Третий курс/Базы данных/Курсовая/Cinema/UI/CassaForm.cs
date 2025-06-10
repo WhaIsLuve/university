@@ -41,6 +41,7 @@ namespace UI
 		public CassaForm()
 		{
 			InitializeComponent();
+			Text = "Касса";
 			var connectionStrings = ConnectionStringGetter.ConnectionStrings;
 			_movieRepository = new MovieRepository(connectionStrings);
 			_hallRepository = new HallRepository(connectionStrings);

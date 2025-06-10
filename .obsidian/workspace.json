@@ -4,49 +4,24 @@
     "type": "split",
     "children": [
       {
-        "id": "e4d7c7fb2ebb159f",
+        "id": "c3fcef2f00dbb73d",
         "type": "tabs",
         "children": [
           {
-            "id": "42be14ec7b055869",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "Третий курс/Базы данных/Курсовая/Документация/макет.excalidraw.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "макет.excalidraw"
-            }
-          },
-          {
-            "id": "8c95eff260b12164",
+            "id": "d34941de6f01071a",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Третий курс/Базы данных/Курсовая/Документация/Функционал.md",
+                "file": "Третий курс/Базы данных/Курсовая/Документация/Сущности.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Функционал"
-            }
-          },
-          {
-            "id": "39d05df3a01f4b19",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "Третий курс/Базы данных/Курсовая/Документация/макет.excalidraw.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "макет.excalidraw"
+              "title": "Сущности"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -191,8 +166,17 @@
       "obsidian-excalidraw-plugin:Создать новый чертеж": false
     }
   },
-  "active": "8c95eff260b12164",
+  "active": "0d0e17f64aaf4623",
   "lastOpenFiles": [
+    "Третий курс/Базы данных/Курсовая/Документация/erd.erwin.lock_file",
+    "Третий курс/Базы данных/Курсовая/Документация/erd.erwin",
+    "Третий курс/Базы данных/Курсовая/Документация/макет.excalidraw.md",
+    "Третий курс/Базы данных/Курсовая/Документация/Функционал.md",
+    "Третий курс/Базы данных/Курсовая/Документация/Сущности.md",
+    "Третий курс/РИАТ/Вопросы 24-46.md",
+    "Pasted image 20250531073436.png",
+    "Pasted image 20250531073418.png",
+    "Третий курс/РИАТ",
     "Третий курс/Базы данных/Курсовая/Cinema/Core/Purchases/Purchase.cs~",
     "Третий курс/Базы данных/Курсовая/Cinema/UI/obj/Debug/net8.0-windows/UI.CassaForm.resources",
     "Третий курс/Базы данных/Курсовая/Cinema/Infrastructure/Screenings/ScreeningRepository.cs~",
@@ -201,12 +185,6 @@
     "Третий курс/Базы данных/Курсовая/Cinema/UI/CassaForm.cs",
     "Третий курс/Базы данных/Курсовая/Cinema/Infrastructure/Purchases/PurchaseRepository.cs~",
     "Третий курс/Базы данных/Курсовая/Cinema/Infrastructure/Purchases/PurchaseRepository.cs",
-    "Третий курс/Базы данных/Курсовая/Cinema/Infrastructure/Purchases",
-    "Третий курс/Базы данных/Курсовая/Cinema/Core/Purchases/Repositories/IPurchaseRepository.cs~",
-    "Третий курс/Базы данных/Курсовая/Cinema/Core/Purchases/Repositories/IPurchaseRepository.cs",
-    "Третий курс/Базы данных/Курсовая/Документация/Сущности.md",
-    "Третий курс/Базы данных/Курсовая/Документация/Функционал.md",
-    "Третий курс/Базы данных/Курсовая/Документация/макет.excalidraw.md",
     "Третий курс/Базы данных/Ответы на вопросы.md",
     "Третий курс/Базы данных/Лекция 24.02.2025.md",
     "Третий курс/ИИ/Ответы на вопросы.md",
@@ -231,14 +209,11 @@
     "Третий курс/Java/Лекция 11.02.2025.md",
     "Третий курс/ЭВМ/Лекция 15.10.2024.md",
     "Excalidraw/Лекция 17.02.2025 2025-02-17 09.55.47.excalidraw.md",
-    "Третий курс/Третий курс.md",
     "Изображения/Pasted image 20250212111900.png",
     "Изображения/Pasted image 20250212110713.png",
     "Изображения/Pasted image 20241008141400.png",
     "Изображения/Pasted image 20250212110312.png",
     "Изображения/Pasted image 20250212104527.png",
-    "Изображения/Pasted image 20250212103327.png",
-    "Изображения/Pasted image 20250212102936.png",
     "Без названия.canvas",
     "Без названия 1.canvas"
   ]
