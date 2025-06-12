@@ -145,14 +145,23 @@
               "icon": "lucide-list",
               "title": "Структура Без названия"
             }
+          },
+          {
+            "id": "5d433756b83718fe",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -163,7 +172,8 @@
       "templates:Вставить шаблон": false,
       "command-palette:Открыть палитру команд": false,
       "random-note:Открыть случайную заметку": false,
-      "obsidian-excalidraw-plugin:Создать новый чертеж": false
+      "obsidian-excalidraw-plugin:Создать новый чертеж": false,
+      "obsidian-git:Open Git source control": false
     }
   },
   "active": "0d0e17f64aaf4623",
